@@ -4,3 +4,9 @@
   border-radius: 10px 10px 0 0;
   border: 1px solid red;
 }
+
+@media screen and (max-width: 650px) {
+  .post__picture {
+    margin-bottom: 14px;
+  }
+}
