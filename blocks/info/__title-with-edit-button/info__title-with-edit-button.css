@@ -1,0 +1,6 @@
+.info__title-with-edit-button {
+  display: flex;
+  flex-direction: row;
+
+  border: 1px solid violet;
+}

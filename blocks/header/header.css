@@ -1,0 +1,15 @@
+.header {
+  max-width: 880px;
+  max-height: 74px;
+  margin: 0 auto;
+  border-bottom: 1px solid #545454;
+  margin-bottom: 35px;
+  border: 1px solid red;
+}
+
+@media screen and (max-width: 1150px) {
+  .header {
+    margin-bottom: 38.25px;
+    border: 1px solid teal;
+  }
+}

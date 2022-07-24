@@ -1,0 +1,12 @@
+.info__edit-button {
+  align-self: center;
+  border: 1px solid gold;
+}
+
+@media screen {
+  .info__edit-button {
+    width: 18px;
+    height: 18px;
+    margin-left: 10px;
+  }
+}

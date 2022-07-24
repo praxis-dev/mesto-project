@@ -1,0 +1,8 @@
+.post__fit-title {
+  display: flex;
+  max-width: 246px;
+  justify-content: space-between;
+  align-content: center;
+  border: 1px solid red;
+  margin: 0 auto 31px;
+}

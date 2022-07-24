@@ -1,0 +1,6 @@
+.post__picture {
+  max-width: 288px;
+  margin-bottom: 18px;
+  border-radius: 10px 10px 0 0;
+  border: 1px solid red;
+}
