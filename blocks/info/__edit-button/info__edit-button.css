@@ -1,5 +1,8 @@
 .info__edit-button {
   align-self: center;
+  padding: 0;
+  border: none;
+  background: none;
   border: 1px solid gold;
 }
 

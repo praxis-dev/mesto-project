@@ -25,94 +25,113 @@
         <div class="info">
           <div class="info__title-with-edit-button">
             <h1 class="info__title">Жак-Ив Кусто</h1>
-            <img
-              src="./images/edit-button.svg"
-              alt="кнопка редактирование профиля"
-              class="info__edit-button"
-            />
+
+            <button class="info__edit-button">
+              <a href="#popup">
+                <svg
+                  class="info__edit-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect x="0.5" y="0.5" width="23" height="23" stroke="white" />
+                  <path
+                    d="M17 8.32827L9.60377 15.7666L8.28302 14.4194L15.6604 7L17 8.32827ZM7 17L8.96226 16.4118L7.58491 15.0835L7 17Z"
+                    fill="white"
+                  />
+                </svg>
+              </a>
+            </button>
           </div>
           <p class="info__subtitle">Исследователь океана</p>
         </div>
         <div class="profile__add-button"></div>
+        <div class="edit-form" id="popup">
+          <a href="#">close</a>
+          <h2 class="edit-form__title">Редактировать профиль</h2>
+          <p>Исследователь океана</p>
+        </div>
+      </section>
+
+      <section class="post-grid">
+        <article class="post">
+          <img
+            src="./images/karachaevsk.jpg"
+            alt="Карачаевск"
+            class="post__picture"
+          />
+          <div class="post__fit-title">
+            <h2 class="post__title">Карачаевск</h2>
+            <img
+              class="post__like-button"
+              alt="Кнопка лайк"
+              src="./images/like-button.svg"
+            />
+          </div>
+        </article>
+        <article class="post">
+          <img src="./images/elbrus.jpg" alt="Эльбрус" class="post__picture" />
+          <div class="post__fit-title">
+            <h2 class="post__title">Гора Эльбрус</h2>
+            <img
+              class="post__like-button"
+              alt="Кнопка лайк"
+              src="./images/like-button.svg"
+            />
+          </div>
+        </article>
+        <article class="post">
+          <img src="./images/dombai.jpg" alt="Домбай" class="post__picture" />
+          <div class="post__fit-title">
+            <h2 class="post__title">Домбай</h2>
+            <img
+              class="post__like-button"
+              alt="Кнопка лайк"
+              src="./images/like-button.svg"
+            />
+          </div>
+        </article>
+        <article class="post">
+          <img src="./images/elbrus.jpg" alt="Эльбрус" class="post__picture" />
+          <div class="post__fit-title">
+            <h2 class="post__title">Гора Эльбрус</h2>
+            <img
+              class="post__like-button"
+              alt="Кнопка лайк"
+              src="./images/like-button.svg"
+            />
+          </div>
+        </article>
+        <article class="post">
+          <img src="./images/dombai.jpg" alt="Домбай" class="post__picture" />
+          <div class="post__fit-title">
+            <h2 class="post__title">Домбай</h2>
+            <img
+              class="post__like-button"
+              alt="Кнопка лайк"
+              src="./images/like-button.svg"
+            />
+          </div>
+        </article>
+        <article class="post">
+          <img
+            src="./images/karachaevsk.jpg"
+            alt="Карачаевск"
+            class="post__picture"
+          />
+          <div class="post__fit-title">
+            <h2 class="post__title">Карачаево-Черкесия</h2>
+            <img
+              class="post__like-button"
+              alt="Кнопка лайк"
+              src="./images/like-button.svg"
+            />
+          </div>
+        </article>
       </section>
     </main>
-
-    <section class="post-grid">
-      <article class="post">
-        <img
-          src="./images/karachaevsk.jpg"
-          alt="Карачаевск"
-          class="post__picture"
-        />
-        <div class="post__fit-title">
-          <h2 class="post__title">Карачаевск</h2>
-          <img
-            class="post__like-button"
-            alt="Кнопка лайк"
-            src="./images/like-button.svg"
-          />
-        </div>
-      </article>
-      <article class="post">
-        <img src="./images/elbrus.jpg" alt="Эльбрус" class="post__picture" />
-        <div class="post__fit-title">
-          <h2 class="post__title">Гора Эльбрус</h2>
-          <img
-            class="post__like-button"
-            alt="Кнопка лайк"
-            src="./images/like-button.svg"
-          />
-        </div>
-      </article>
-      <article class="post">
-        <img src="./images/dombai.jpg" alt="Домбай" class="post__picture" />
-        <div class="post__fit-title">
-          <h2 class="post__title">Домбай</h2>
-          <img
-            class="post__like-button"
-            alt="Кнопка лайк"
-            src="./images/like-button.svg"
-          />
-        </div>
-      </article>
-      <article class="post">
-        <img src="./images/elbrus.jpg" alt="Эльбрус" class="post__picture" />
-        <div class="post__fit-title">
-          <h2 class="post__title">Гора Эльбрус</h2>
-          <img
-            class="post__like-button"
-            alt="Кнопка лайк"
-            src="./images/like-button.svg"
-          />
-        </div>
-      </article>
-      <article class="post">
-        <img src="./images/dombai.jpg" alt="Домбай" class="post__picture" />
-        <div class="post__fit-title">
-          <h2 class="post__title">Домбай</h2>
-          <img
-            class="post__like-button"
-            alt="Кнопка лайк"
-            src="./images/like-button.svg"
-          />
-        </div>
-      </article>
-      <article class="post">
-        <img
-          src="./images/karachaevsk.jpg"
-          alt="Карачаевск"
-          class="post__picture"
-        />
-        <div class="post__fit-title">
-          <h2 class="post__title">Карачаево-Черкесия</h2>
-          <img
-            class="post__like-button"
-            alt="Кнопка лайк"
-            src="./images/like-button.svg"
-          />
-        </div>
-      </article>
-    </section>
     <footer></footer>
   </body>
 </html>

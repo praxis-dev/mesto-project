@@ -1,0 +1,17 @@
+.edit-form {
+  background-color: white;
+  height: 330px;
+  width: 430px;
+  border-radius: 10px;
+  opacity: 0;
+  visibility: hidden;
+  border: 1px solid red;
+  position: fixed;
+  z-index: 999;
+  top: 17.1%;
+  left: 33%;
+}
+.edit-form:target {
+  opacity: 1;
+  visibility: visible;
+}
