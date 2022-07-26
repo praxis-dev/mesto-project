@@ -1,0 +1,32 @@
+.edit-window__input-form {
+  width: 358px;
+  border: none;
+  height: 27px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid #000;
+}
+
+.edit-window__input-form::placeholder {
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #000000;
+}
+
+input[classtype="submit"] {
+  margin-top: 21px;
+  width: 355px;
+  height: 50px;
+  border: 0;
+  background-color: black;
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #ffffff;
+}

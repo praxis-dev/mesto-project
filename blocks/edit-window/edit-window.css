@@ -1,7 +1,7 @@
-.edit-form {
+.edit-window {
   background-color: white;
-  height: 330px;
-  width: 430px;
+  height: 260px;
+  width: 358px;
   border-radius: 10px;
   opacity: 0;
   visibility: hidden;
@@ -9,9 +9,11 @@
   position: fixed;
   z-index: 999;
   top: 17.1%;
-  left: 33%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 34px 36px 37px;
 }
-.edit-form:target {
+.edit-window:target {
   opacity: 1;
   visibility: visible;
 }
