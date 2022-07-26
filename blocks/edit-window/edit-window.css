@@ -1,6 +1,7 @@
 .edit-window {
   background-color: white;
-  height: 260px;
+  display: flex;
+  flex-direction: column;
   width: 358px;
   border-radius: 10px;
   opacity: 0;
@@ -12,15 +13,10 @@
   transform: translateX(-50%);
   padding: 34px 36px 37px;
 }
-.edit-window:target {
-  opacity: 1;
-  visibility: visible;
-}
 
 @media screen and (max-width: 520px) {
   .edit-window {
     width: 238px;
-    height: 260px;
     padding: 22px 23px 33px 23px;
   }
 }

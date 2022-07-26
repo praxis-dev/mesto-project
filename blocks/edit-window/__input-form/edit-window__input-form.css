@@ -1,7 +1,7 @@
 .edit-window__input-form {
   width: 100%;
   border: none;
-  height: 27px;
+  height: fit-content;
   margin-bottom: 28px;
   border-bottom: 1px solid #000;
 }

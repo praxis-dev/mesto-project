@@ -1,0 +1,4 @@
+.edit-window:target {
+  opacity: 1;
+  visibility: visible;
+}
