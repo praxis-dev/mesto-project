@@ -11,8 +11,6 @@
 
   max-height: 39px;
   max-width: 294px;
-
-  border: 1px solid green;
 }
 
 @media screen and (max-width: 650px) {

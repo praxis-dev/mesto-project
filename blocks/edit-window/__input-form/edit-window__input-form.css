@@ -1,5 +1,5 @@
 .edit-window__input-form {
-  width: 358px;
+  width: 100%;
   border: none;
   height: 27px;
   margin-bottom: 28px;
@@ -18,7 +18,7 @@
 
 input[classtype="submit"] {
   margin-top: 21px;
-  width: 355px;
+  width: 100%;
   height: 50px;
   border: 0;
   background-color: black;
@@ -29,4 +29,10 @@ input[classtype="submit"] {
   letter-spacing: 0em;
   text-align: center;
   color: #ffffff;
+}
+
+@media screen and (max-width: 520px) {
+  input[classtype="submit"] {
+    height: 46px;
+  }
 }

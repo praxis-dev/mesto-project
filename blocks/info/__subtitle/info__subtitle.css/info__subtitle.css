@@ -11,8 +11,6 @@
   max-width: 336px;
 
   margin: 0;
-
-  border: 1px solid yellow;
 }
 
 @media screen and (max-width: 650px) {
