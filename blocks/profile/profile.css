@@ -5,8 +5,13 @@
   justify-content: space-between;
   margin: 0 auto 51px;
 }
-
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 1005px) {
+  .profile {
+    margin-left: 4%;
+    margin-right: 4%;
+  }
+}
+@media screen and (max-width: 700px) {
   .profile {
     grid-template-columns: 282px;
     justify-content: center;

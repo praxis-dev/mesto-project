@@ -3,7 +3,7 @@
   width: 100%;
   border: none;
   height: fit-content;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
   border-bottom: 1px solid rgba(0, 0, 0, 1);
 }
 
@@ -13,4 +13,10 @@
   line-height: 17px;
   text-align: left;
   color: #000000;
+}
+
+@media screen and (max-width: 320px) {
+  .edit-window__input-form {
+    margin-bottom: 36px;
+  }
 }

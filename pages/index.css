@@ -32,9 +32,11 @@
 
 /* edit-window */
 
+@import url(../blocks/edit-window/__popup/popup.css);
 @import url(../blocks/edit-window/edit-window.css);
 @import url(../blocks/edit-window/__title/edit-window__title.css);
 @import url(../blocks/edit-window/__close-button/edit-window__close-button.css);
+@import url(../blocks/edit-window/__close-button-icon/edit-window__close-button-icon.css);
 @import url(../blocks/edit-window/__input-form/edit-window__input-form.css);
 @import url(../blocks/edit-window/_active/edit-window_active.css);
 @import url(../blocks/edit-window/__submit/edit-window__submit.css);
@@ -49,4 +51,9 @@
 @import url(../blocks/post/__picture/post__picture.css);
 @import url(../blocks/post/__title/post__title.css);
 @import url(../blocks/post/__like-button/post__like-button.css);
+@import url(../blocks/post/__like-button-container/post__like-button-container.css);
 @import url(../blocks/post/__fit-title/post__fit-title.css);
+
+/* footer */
+
+@import url(../blocks/footer/footer.css);

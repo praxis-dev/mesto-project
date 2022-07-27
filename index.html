@@ -26,28 +26,19 @@
           <div class="info__title-with-edit-button">
             <h1 class="info__title">Жак-Ив Кусто</h1>
 
-            <div class="info__edit-button">
+            <button class="info__edit-button" type="submit">
               <a href="#popup">
-                <svg
+                <img
                   class="info__edit-icon"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect x="0.5" y="0.5" width="23" height="23" stroke="white" />
-                  <path
-                    d="M17 8.32827L9.60377 15.7666L8.28302 14.4194L15.6604 7L17 8.32827ZM7 17L8.96226 16.4118L7.58491 15.0835L7 17Z"
-                    fill="white"
-                  />
-                </svg>
+                  src="./images/edit-button.svg"
+                  alt="кнопка редактирования"
+                />
               </a>
-            </div>
+            </button>
           </div>
           <p class="info__subtitle">Исследователь океана</p>
         </div>
-        <div class="profile__add-button"></div>
+        <button class="profile__add-button" type="submit"></button>
       </section>
 
       <section class="post-grid">
@@ -59,55 +50,65 @@
           />
           <div class="post__fit-title">
             <h2 class="post__title">Карачаевск</h2>
-            <img
-              class="post__like-button"
-              alt="Кнопка лайк"
-              src="./images/like-button.svg"
-            />
+            <button class="post__like-button-container" type="submit">
+              <img
+                class="post__like-button"
+                alt="Кнопка лайк"
+                src="./images/like-button.svg"
+              />
+            </button>
           </div>
         </article>
         <article class="post">
           <img src="./images/elbrus.jpg" alt="Эльбрус" class="post__picture" />
           <div class="post__fit-title">
             <h2 class="post__title">Гора Эльбрус</h2>
-            <img
-              class="post__like-button"
-              alt="Кнопка лайк"
-              src="./images/like-button.svg"
-            />
+            <button class="post__like-button-container" type="submit">
+              <img
+                class="post__like-button"
+                alt="Кнопка лайк"
+                src="./images/like-button.svg"
+              />
+            </button>
           </div>
         </article>
         <article class="post">
           <img src="./images/dombai.jpg" alt="Домбай" class="post__picture" />
           <div class="post__fit-title">
             <h2 class="post__title">Домбай</h2>
-            <img
-              class="post__like-button"
-              alt="Кнопка лайк"
-              src="./images/like-button.svg"
-            />
+            <button class="post__like-button-container" type="submit">
+              <img
+                class="post__like-button"
+                alt="Кнопка лайк"
+                src="./images/like-button.svg"
+              />
+            </button>
           </div>
         </article>
         <article class="post">
           <img src="./images/elbrus.jpg" alt="Эльбрус" class="post__picture" />
           <div class="post__fit-title">
             <h2 class="post__title">Гора Эльбрус</h2>
-            <img
-              class="post__like-button"
-              alt="Кнопка лайк"
-              src="./images/like-button.svg"
-            />
+            <button class="post__like-button-container" type="submit">
+              <img
+                class="post__like-button"
+                alt="Кнопка лайк"
+                src="./images/like-button.svg"
+              />
+            </button>
           </div>
         </article>
         <article class="post">
           <img src="./images/dombai.jpg" alt="Домбай" class="post__picture" />
           <div class="post__fit-title">
             <h2 class="post__title">Домбай</h2>
-            <img
-              class="post__like-button"
-              alt="Кнопка лайк"
-              src="./images/like-button.svg"
-            />
+            <button class="post__like-button-container" type="submit">
+              <img
+                class="post__like-button"
+                alt="Кнопка лайк"
+                src="./images/like-button.svg"
+              />
+            </button>
           </div>
         </article>
         <article class="post">
@@ -118,46 +119,54 @@
           />
           <div class="post__fit-title">
             <h2 class="post__title">Карачаево-Черкесия</h2>
-            <img
-              class="post__like-button"
-              alt="Кнопка лайк"
-              src="./images/like-button.svg"
-            />
+            <button class="post__like-button-container" type="submit">
+              <img
+                class="post__like-button"
+                alt="Кнопка лайк"
+                src="./images/like-button.svg"
+              />
+            </button>
           </div>
         </article>
       </section>
     </main>
-    <footer></footer>
+    <footer class="footer">&copy 2022 Mesto Russia</footer>
 
-    <div class="edit-window edit-window_active" id="popup">
-      <a href="#">
-        <img
-          class="edit-window__close-button"
-          src="./images/close-icon.svg"
-          alt="Иконка закрыть окно"
-        />
-      </a>
+    <div class="popup">
+      <div class="edit-window edit-window_active" id="popup">
+        <button class="edit-window__close-button" type="submit">
+          <img
+            src="./images/close-icon.svg"
+            alt="Иконка закрыть окно"
+            class="edit-window__close-button-icon"
+          />
+        </button>
 
-      <h2 class="edit-window__title">Редактировать профиль</h2>
-      <form action="/some_recipient_page.php" class="edit-window__input-form">
-        <label for="profile-name"></label>
-        <input
+        <h2 class="edit-window__title">Редактировать профиль</h2>
+        <form
+          action="/some_recipient_page.php"
           class="edit-window__input-form"
-          type="text"
-          id="profile-name"
-          name="profile-name"
-          placeholder="Ваше имя"
-        />
-        <label for="profile-subtitle"></label>
-        <input
-          class="edit-window__input-form"
-          type="text"
-          id="profile-subtitle"
-          name="profile-subtitle"
-          placeholder="Исследователь океана"
-        />
-        <button type="submit" class="edit-window__submit">Сохранить</button>
-      </form>
+          name="user_title_subtitle"
+        >
+          <label for="profile-name"></label>
+          <input
+            class="edit-window__input-form"
+            type="text"
+            id="profile-name"
+            name="profile-name"
+            placeholder="Ваше имя"
+          />
+          <label for="profile-subtitle"></label>
+          <input
+            class="edit-window__input-form"
+            type="text"
+            id="profile-subtitle"
+            name="profile-subtitle"
+            placeholder="Опишите себя"
+          />
+          <button type="submit" class="edit-window__submit">Сохранить</button>
+        </form>
+      </div>
     </div>
   </body>
 </html>

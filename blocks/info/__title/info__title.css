@@ -9,7 +9,7 @@
   max-width: 294px;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 700px) {
   .info__title {
     font-size: 27px;
     line-height: 33px;

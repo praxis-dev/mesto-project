@@ -11,12 +11,12 @@
   top: 17.1%;
   left: 50%;
   transform: translateX(-50%);
-  padding: 34px 36px 37px;
+  padding: 34px 36px 6px;
 }
 
 @media screen and (max-width: 520px) {
   .edit-window {
     width: 238px;
-    padding: 22px 23px 33px 23px;
+    padding: 22px 23px 0 23px;
   }
 }
