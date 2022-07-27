@@ -10,7 +10,6 @@
   .profile {
     grid-template-columns: 282px;
     justify-content: center;
-    max-height: fit-content;
     margin: 0 auto 34px;
   }
 }

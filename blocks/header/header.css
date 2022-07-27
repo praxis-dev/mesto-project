@@ -1,8 +1,7 @@
 .header {
   max-width: 880px;
-  max-height: 74px;
   margin: 0 auto;
-  border-bottom: 1px solid #545454;
+  border-bottom: 1px solid rgba(84, 84, 84, 1);
   margin-bottom: 35px;
 }
 

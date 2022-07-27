@@ -12,21 +12,21 @@
 
   <body class="root">
     <header class="header">
-      <img class="header__logo" src="./images/logo.svg" />
+      <img class="header__logo" src="./images/logo.svg" alt="Лого" />
     </header>
 
     <main>
       <section class="profile">
         <img
           src="./images/avatar.jpg"
-          alt="аватар Жак Кусто"
+          alt="пользовательский аватар"
           class="profile__avatar"
         />
         <div class="info">
           <div class="info__title-with-edit-button">
             <h1 class="info__title">Жак-Ив Кусто</h1>
 
-            <button class="info__edit-button">
+            <div class="info__edit-button">
               <a href="#popup">
                 <svg
                   class="info__edit-icon"
@@ -43,53 +43,11 @@
                   />
                 </svg>
               </a>
-            </button>
+            </div>
           </div>
           <p class="info__subtitle">Исследователь океана</p>
         </div>
         <div class="profile__add-button"></div>
-        <div class="edit-window edit-window_active" id="popup">
-          <a href="#">
-            <svg
-              class="edit-window__close-button"
-              width="32"
-              height="32"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M32 28.8L19.2 16L32 3.2L28.8 0L16 12.8L3.2 0L0 3.2L12.8 16L0 28.8L3.2 32L16 19.2L28.8 32L32 28.8Z"
-                fill="white"
-              />
-            </svg>
-          </a>
-
-          <h2 class="edit-window__title">Редактировать профиль</h2>
-          <form action="" class="edit-window__input-form">
-            <label for="profile-name"></label>
-            <input
-              class="edit-window__input-form"
-              type="text"
-              id="profile-name"
-              name="profile-name"
-              placeholder="Жак-Ив Кусто"
-            />
-            <label for="profile-subtitle"></label>
-            <input
-              class="edit-window__input-form"
-              type="text"
-              id="profile-subtitle"
-              name="profile-subtitle"
-              placeholder="Исследователь океана"
-            />
-            <input
-              class="edit-window__submit"
-              classtype="submit"
-              value="Сохранить"
-            />
-          </form>
-        </div>
       </section>
 
       <section class="post-grid">
@@ -170,5 +128,36 @@
       </section>
     </main>
     <footer></footer>
+
+    <div class="edit-window edit-window_active" id="popup">
+      <a href="#">
+        <img
+          class="edit-window__close-button"
+          src="./images/close-icon.svg"
+          alt="Иконка закрыть окно"
+        />
+      </a>
+
+      <h2 class="edit-window__title">Редактировать профиль</h2>
+      <form action="/some_recipient_page.php" class="edit-window__input-form">
+        <label for="profile-name"></label>
+        <input
+          class="edit-window__input-form"
+          type="text"
+          id="profile-name"
+          name="profile-name"
+          placeholder="Ваше имя"
+        />
+        <label for="profile-subtitle"></label>
+        <input
+          class="edit-window__input-form"
+          type="text"
+          id="profile-subtitle"
+          name="profile-subtitle"
+          placeholder="Исследователь океана"
+        />
+        <button type="submit" class="edit-window__submit">Сохранить</button>
+      </form>
+    </div>
   </body>
 </html>

@@ -1,24 +1,18 @@
 .info__title {
-  font-family: Inter;
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
   font-size: 42px;
   font-weight: 500;
   line-height: 40px;
-  letter-spacing: 0em;
   text-align: left;
   color: #ffffff;
-
   margin: 0 11px 6px 0;
-
   max-width: 294px;
 }
 
 @media screen and (max-width: 650px) {
   .info__title {
-    font-family: Inter;
     font-size: 27px;
-    font-weight: 500;
     line-height: 33px;
-    letter-spacing: 0em;
     margin-left: 15px;
     margin-right: 0px;
   }

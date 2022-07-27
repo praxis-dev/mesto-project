@@ -1,38 +1,16 @@
 .edit-window__input-form {
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
   width: 100%;
   border: none;
   height: fit-content;
   margin-bottom: 28px;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
 }
 
 .edit-window__input-form::placeholder {
-  font-family: Inter;
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
-  letter-spacing: 0em;
   text-align: left;
   color: #000000;
-}
-
-input[classtype="submit"] {
-  margin-top: 21px;
-  width: 100%;
-  height: 50px;
-  border: 0;
-  background-color: black;
-  font-family: Inter;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 22px;
-  letter-spacing: 0em;
-  text-align: center;
-  color: #ffffff;
-}
-
-@media screen and (max-width: 520px) {
-  input[classtype="submit"] {
-    height: 46px;
-  }
 }
