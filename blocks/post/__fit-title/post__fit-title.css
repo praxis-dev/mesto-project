@@ -8,7 +8,6 @@
 
 @media screen and (max-width: 320px) {
   .post__fit-title {
-    margin: 5px 5px 25px 20px;
-    border: 1px solid red;
+    margin: 7px 5px 25px 20px;
   }
 }

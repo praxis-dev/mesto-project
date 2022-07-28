@@ -1,8 +1,15 @@
 .post__like-button {
+  background: none;
+  border: none;
+  cursor: pointer;
   background-image: url(../../../images/like-button.svg);
   background: cover;
   background-repeat: no-repeat;
-  min-width: 22px;
-  min-height: 22px;
-  cursor: pointer;
+  width: 25px;
+  height: 19px;
+  align-self: center;
+  margin-right: 4px;
+}
+.post__like-button:hover {
+  opacity: 0.5;
 }
