@@ -1,4 +1,6 @@
-.edit-window__close-button-icon {
-  width: 20px;
-  height: 20px;
+@media screen and (max-width: 520px) {
+  .edit-window__close-button-icon {
+    width: 20px;
+    height: 20px;
+  }
 }

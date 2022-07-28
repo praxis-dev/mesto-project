@@ -1,4 +1,4 @@
-.info__subtitle {
+.profile__subtitle {
   font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
   font-size: 18px;
   font-weight: 400;
@@ -10,7 +10,7 @@
 }
 
 @media screen and (max-width: 700px) {
-  .info__subtitle {
+  .profile__subtitle {
     font-size: 14px;
     line-height: 17px;
     text-align: center;

@@ -3,7 +3,7 @@
   display: grid;
   grid-template-columns: 120px 1fr 150px;
   justify-content: space-between;
-  margin: 0 auto 51px;
+  margin: 0 auto 47px;
 }
 @media screen and (max-width: 1005px) {
   .profile {
@@ -15,6 +15,6 @@
   .profile {
     grid-template-columns: 282px;
     justify-content: center;
-    margin: 0 auto 34px;
+    margin: 0 auto 38px;
   }
 }

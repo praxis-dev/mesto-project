@@ -1,9 +1,9 @@
-.info {
+.profile__info {
   display: flex;
   flex-direction: column;
   justify-content: start;
   max-width: fit-content;
   margin-top: 26px;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
   margin-left: 30px;
 }

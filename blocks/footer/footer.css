@@ -6,11 +6,23 @@
   text-align: left;
   color: #545454;
   max-width: 880px;
-  margin: 0 auto;
+  margin: 0 auto 60px;
+  display: flex;
 }
 
 @media screen and (max-width: 920px) {
   .footer {
+    max-width: 581px;
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 36px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .footer {
     max-width: 282px;
+    font-size: 14px;
+    line-height: 17px;
   }
 }

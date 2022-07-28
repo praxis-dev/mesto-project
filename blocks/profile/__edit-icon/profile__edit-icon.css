@@ -1,0 +1,12 @@
+.profile__edit-icon {
+  position: relative;
+  right: 5px;
+  align-self: center;
+}
+@media screen and (max-width: 520px) {
+  .profile__edit-icon {
+    width: 18px;
+    height: 18px;
+    bottom: 2px;
+  }
+}

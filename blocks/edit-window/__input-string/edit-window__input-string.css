@@ -1,0 +1,23 @@
+.edit-window__input-string {
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  text-align: left;
+  width: 100%;
+  border: none;
+  height: fit-content;
+  margin-bottom: 35px;
+  border-bottom: 1px solid RGBA(0, 0, 0, 0.2);
+}
+
+.edit-window__input-string::placeholder {
+  color: #000000;
+}
+
+@media screen and (max-width: 320px) {
+  .edit-window__input-string {
+    margin-bottom: 22px;
+    line-height: 30px;
+  }
+}

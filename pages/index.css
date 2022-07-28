@@ -20,25 +20,26 @@
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__title-with-edit-button/profile__title-with-edit-button.css);
+@import url(../blocks/profile/__edit-button/profile__edit-button.css);
+@import url(../blocks/profile/__title/profile__title.css);
+@import url(../blocks/profile/__subtitle/profile__subtitle.css);
+@import url(../blocks/profile/__edit-icon/profile__edit-icon.css);
 
-/* info */
+/* popup */
 
-@import url(../blocks/info/info.css);
-@import url(../blocks/info/__title/info__title.css);
-@import url(../blocks/info/__subtitle/info__subtitle.css);
-@import url(../blocks/info/__title-with-edit-button/info__title-with-edit-button.css);
-@import url(../blocks/info/__edit-button/info__edit-button.css);
-@import url(../blocks/info/__edit-icon/info__edit-icon.css);
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_active/popup_active.css);
 
 /* edit-window */
 
-@import url(../blocks/edit-window/__popup/popup.css);
 @import url(../blocks/edit-window/edit-window.css);
 @import url(../blocks/edit-window/__title/edit-window__title.css);
 @import url(../blocks/edit-window/__close-button/edit-window__close-button.css);
 @import url(../blocks/edit-window/__close-button-icon/edit-window__close-button-icon.css);
 @import url(../blocks/edit-window/__input-form/edit-window__input-form.css);
-@import url(../blocks/edit-window/_active/edit-window_active.css);
+@import url(../blocks/edit-window/__input-string/edit-window__input-string.css);
 @import url(../blocks/edit-window/__submit/edit-window__submit.css);
 
 /* post-grid */

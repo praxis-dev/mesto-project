@@ -22,21 +22,19 @@
           alt="пользовательский аватар"
           class="profile__avatar"
         />
-        <div class="info">
-          <div class="info__title-with-edit-button">
-            <h1 class="info__title">Жак-Ив Кусто</h1>
+        <div class="profile__info">
+          <div class="profile__title-with-edit-button">
+            <h1 class="profile__title">Жак-Ив Кусто</h1>
 
-            <button class="info__edit-button" type="submit">
-              <a href="#popup">
-                <img
-                  class="info__edit-icon"
-                  src="./images/edit-button.svg"
-                  alt="кнопка редактирования"
-                />
-              </a>
+            <button class="profile__edit-button" type="reset">
+              <img
+                class="profile__edit-icon"
+                src="./images/edit-button.svg"
+                alt="кнопка редактирования"
+              />
             </button>
           </div>
-          <p class="info__subtitle">Исследователь океана</p>
+          <p class="profile__subtitle">Исследователь океана</p>
         </div>
         <button class="profile__add-button" type="submit"></button>
       </section>
@@ -50,7 +48,7 @@
           />
           <div class="post__fit-title">
             <h2 class="post__title">Карачаевск</h2>
-            <button class="post__like-button-container" type="submit">
+            <button class="post__like-button-container" type="reset">
               <img
                 class="post__like-button"
                 alt="Кнопка лайк"
@@ -63,7 +61,7 @@
           <img src="./images/elbrus.jpg" alt="Эльбрус" class="post__picture" />
           <div class="post__fit-title">
             <h2 class="post__title">Гора Эльбрус</h2>
-            <button class="post__like-button-container" type="submit">
+            <button class="post__like-button-container" type="reset">
               <img
                 class="post__like-button"
                 alt="Кнопка лайк"
@@ -76,7 +74,7 @@
           <img src="./images/dombai.jpg" alt="Домбай" class="post__picture" />
           <div class="post__fit-title">
             <h2 class="post__title">Домбай</h2>
-            <button class="post__like-button-container" type="submit">
+            <button class="post__like-button-container" type="reset">
               <img
                 class="post__like-button"
                 alt="Кнопка лайк"
@@ -89,7 +87,7 @@
           <img src="./images/elbrus.jpg" alt="Эльбрус" class="post__picture" />
           <div class="post__fit-title">
             <h2 class="post__title">Гора Эльбрус</h2>
-            <button class="post__like-button-container" type="submit">
+            <button class="post__like-button-container" type="reset">
               <img
                 class="post__like-button"
                 alt="Кнопка лайк"
@@ -102,7 +100,7 @@
           <img src="./images/dombai.jpg" alt="Домбай" class="post__picture" />
           <div class="post__fit-title">
             <h2 class="post__title">Домбай</h2>
-            <button class="post__like-button-container" type="submit">
+            <button class="post__like-button-container" type="reset">
               <img
                 class="post__like-button"
                 alt="Кнопка лайк"
@@ -119,7 +117,7 @@
           />
           <div class="post__fit-title">
             <h2 class="post__title">Карачаево-Черкесия</h2>
-            <button class="post__like-button-container" type="submit">
+            <button class="post__like-button-container" type="reset">
               <img
                 class="post__like-button"
                 alt="Кнопка лайк"
@@ -130,11 +128,11 @@
         </article>
       </section>
     </main>
-    <footer class="footer">&copy 2022 Mesto Russia</footer>
+    <footer class="footer">&copy; 2022 Mesto Russia</footer>
 
     <div class="popup">
-      <div class="edit-window edit-window_active" id="popup">
-        <button class="edit-window__close-button" type="submit">
+      <div class="edit-window">
+        <button class="edit-window__close-button" type="reset">
           <img
             src="./images/close-icon.svg"
             alt="Иконка закрыть окно"
@@ -150,7 +148,7 @@
         >
           <label for="profile-name"></label>
           <input
-            class="edit-window__input-form"
+            class="edit-window__input-string"
             type="text"
             id="profile-name"
             name="profile-name"
@@ -158,7 +156,7 @@
           />
           <label for="profile-subtitle"></label>
           <input
-            class="edit-window__input-form"
+            class="edit-window__input-string"
             type="text"
             id="profile-subtitle"
             name="profile-subtitle"

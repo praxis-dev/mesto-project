@@ -1,3 +1,9 @@
 .post__like-button {
   min-width: 22px;
+  cursor: pointer;
+}
+
+.post__like-button:checked {
+  background-color: RGBA(0, 0, 0, 0.8);
+  transition: 0.2s ease;
 }
