@@ -52,6 +52,7 @@
 @import url(../blocks/post/__picture/post__picture.css);
 @import url(../blocks/post/__title/post__title.css);
 @import url(../blocks/post/__like-button/post__like-button.css);
+@import url(../blocks/post/__like-button/_active/post__like-button_active.css);
 @import url(../blocks/post/__like-button-container/post__like-button-container.css);
 @import url(../blocks/post/__fit-title/post__fit-title.css);
 

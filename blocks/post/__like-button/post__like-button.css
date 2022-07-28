@@ -1,9 +1,8 @@
 .post__like-button {
+  background-image: url(../../../images/like-button.svg);
+  background: cover;
+  background-repeat: no-repeat;
   min-width: 22px;
+  min-height: 22px;
   cursor: pointer;
-}
-
-.post__like-button:checked {
-  background-color: RGBA(0, 0, 0, 0.8);
-  transition: 0.2s ease;
 }

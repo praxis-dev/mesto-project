@@ -1,7 +1,14 @@
 .post__fit-title {
   display: flex;
-  max-width: 246px;
+  max-width: 248px;
   justify-content: space-between;
   align-content: center;
-  margin: 2px auto 31px;
+  margin: 2px 5px 27px 20px;
+}
+
+@media screen and (max-width: 320px) {
+  .post__fit-title {
+    margin: 5px 5px 25px 20px;
+    border: 1px solid red;
+  }
 }
