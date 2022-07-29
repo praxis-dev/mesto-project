@@ -9,6 +9,7 @@
   height: 19px;
   align-self: center;
   margin-right: 4px;
+  cursor: pointer;
 }
 .post__like-button:hover {
   opacity: 0.5;
