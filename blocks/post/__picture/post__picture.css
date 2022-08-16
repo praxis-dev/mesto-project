@@ -1,7 +1,8 @@
 .post__picture {
-  max-width: 288px;
+  max-width: 282px;
   margin-bottom: 15px;
   border-radius: 10px 10px 0 0;
+  aspect-ratio: 1 / 1;
 }
 
 @media screen and (max-width: 650px) {

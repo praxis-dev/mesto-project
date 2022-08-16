@@ -22,25 +22,32 @@
           alt="пользовательский аватар"
           class="profile__avatar"
         />
-        <div class="profile__info">
+        <div class="profile__info" id="">
           <div class="profile__title-with-edit-button">
-            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <h1 class="profile__title" id="profile__title">Жак-Ив Кусто</h1>
 
             <button class="profile__edit-button" type="button">
               <img
                 class="profile__edit-icon"
                 src="./images/edit-button.svg"
                 alt="кнопка редактирования"
+                id="profile__edit-icon"
               />
             </button>
           </div>
-          <p class="profile__subtitle">Исследователь океана</p>
+          <p class="profile__subtitle" id="profile__subtitle">
+            Исследователь океана
+          </p>
         </div>
-        <button class="profile__add-button" type="button"></button>
+        <button
+          class="profile__add-button"
+          type="button"
+          id="profile__add-button"
+        ></button>
       </section>
 
-      <section class="post-grid">
-        <article class="post">
+      <section class="post-grid" id="post-grid">
+        <article class="post" id="post">
           <img
             src="./images/karachaevsk.jpg"
             alt="Карачаевск"
@@ -94,9 +101,27 @@
     </main>
     <footer class="footer">&copy; 2022 Mesto Russia</footer>
 
-    <div class="popup popup_active">
+    <template id="post-template">
+      <article class="post">
+        <img
+          src="./images/karachaevsk.jpg"
+          alt="Карачаевск"
+          class="post__picture"
+        />
+        <div class="post__fit-title">
+          <h2 class="post__title">Карачаево-Черкесия</h2>
+          <button class="post__like-button" type="button"></button>
+        </div>
+      </article>
+    </template>
+
+    <div class="popup" id="popup">
       <div class="edit-window">
-        <button class="edit-window__close-button" type="button">
+        <button
+          class="edit-window__close-button"
+          type="button"
+          id="edit-window__close-button"
+        >
           <img
             src="./images/close-icon.svg"
             alt="Иконка закрыть окно"
@@ -106,8 +131,8 @@
 
         <h2 class="edit-window__title">Редактировать профиль</h2>
         <form
-          action="/some_recipient_page.php"
           class="edit-window__input-form"
+          id="edit-window__input-form"
           name="user_title_subtitle"
         >
           <label for="profile-name"></label>
@@ -130,5 +155,47 @@
         </form>
       </div>
     </div>
+
+    <div class="popup" id="popup2">
+      <div class="edit-window">
+        <button
+          class="edit-window__close-button"
+          type="button"
+          id="add-pic-window__close-button"
+        >
+          <img
+            src="./images/close-icon.svg"
+            alt="Иконка закрыть окно"
+            class="edit-window__close-button-icon"
+          />
+        </button>
+
+        <h2 class="edit-window__title">Новое место</h2>
+        <form
+          class="edit-window__input-form"
+          id="edit-window__input-form"
+          name="user_title_subtitle"
+        >
+          <label for="profile-name"></label>
+          <input
+            class="edit-window__input-string"
+            type="text"
+            id="profile-name"
+            name="profile-name"
+            placeholder="Название"
+          />
+          <label for="profile-subtitle"></label>
+          <input
+            class="edit-window__input-string"
+            type="text"
+            id="profile-subtitle"
+            name="profile-subtitle"
+            placeholder="Ссылка на картинку"
+          />
+          <button type="submit" class="edit-window__submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <script src="./js/script.js"></script>
   </body>
 </html>
