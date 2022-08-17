@@ -1,0 +1,26 @@
+.picture-viewer__close-button {
+  float: right;
+  border: none;
+  background: none;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: -37px;
+  right: -37px;
+  cursor: pointer;
+  border: 1px solid red;
+}
+
+@media screen and (max-width: 520px) {
+  .picture-viewer__close-button {
+    top: -38px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.picture-viewer__close-button:hover {
+  opacity: 0.6;
+}

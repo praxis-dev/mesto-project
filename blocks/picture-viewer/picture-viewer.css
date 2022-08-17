@@ -1,0 +1,7 @@
+.picture-viewer {
+  display: flex;
+  overflow: visible;
+  position: relative;
+  flex-direction: column;
+  border: 1px solid yellow;
+}

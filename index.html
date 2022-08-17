@@ -173,29 +173,56 @@
         <h2 class="edit-window__title">Новое место</h2>
         <form
           class="edit-window__input-form"
-          id="edit-window__input-form"
+          id="add-pic-window__input-form"
           name="user_title_subtitle"
         >
-          <label for="profile-name"></label>
+          <label for="place-name"></label>
           <input
             class="edit-window__input-string"
             type="text"
-            id="profile-name"
-            name="profile-name"
+            id="place-name"
+            name="place-name"
             placeholder="Название"
           />
-          <label for="profile-subtitle"></label>
+          <label for="place-link"></label>
           <input
             class="edit-window__input-string"
             type="text"
-            id="profile-subtitle"
-            name="profile-subtitle"
+            id="place-link"
+            name="place-link"
             placeholder="Ссылка на картинку"
           />
           <button type="submit" class="edit-window__submit">Сохранить</button>
         </form>
       </div>
     </div>
+
+    <div class="viewer-popup viewer-popup_active" id="popup3">
+      <div class="picture-viewer">
+        <button
+          class="picture-viewer__close-button"
+          type="button"
+          id="picture-viewer__close-button"
+        >
+          <img
+            src="./images/close-icon.svg"
+            alt="Иконка закрыть окно"
+            class="edit-window__close-button-icon"
+          />
+        </button>
+        <figure class="picture-viewer__figcaption">
+          <img
+            class="picture-viewer__pic"
+            src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
+            alt="Фото в режиме просмотра"
+          />
+          <figcaption class="picture-viewer__caption">
+            some text here
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
     <script src="./js/script.js"></script>
   </body>
 </html>

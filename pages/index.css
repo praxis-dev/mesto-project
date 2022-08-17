@@ -52,8 +52,22 @@
 @import url(../blocks/post/__picture/post__picture.css);
 @import url(../blocks/post/__title/post__title.css);
 @import url(../blocks/post/__like-button/post__like-button.css);
+@import url(../blocks/post/__like-button/_active/post__like-button_active.css);
 @import url(../blocks/post/__fit-title/post__fit-title.css);
 
 /* footer */
 
 @import url(../blocks/footer/footer.css);
+
+/* viewer-popup */
+
+@import url(../blocks/viewer-popup/viewer-popup.css);
+@import url(../blocks/viewer-popup/_active/viewer-popup_active.css);
+
+/* picture-viewer */
+
+@import url(../blocks/picture-viewer/picture-viewer.css);
+@import url(../blocks/picture-viewer/__figcaption/picture-viewer__figcaption.css);
+@import url(../blocks/picture-viewer/__pic/picture-viewer__pic.css);
+@import url(../blocks/picture-viewer/__caption/picture-viewer__caption.css);
+@import url(../blocks/picture-viewer/__close-button/picture-viewer__close-button.css);

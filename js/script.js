@@ -63,6 +63,7 @@ const post = document.querySelector("#post");
 const posts = document.getElementsByClassName("post");
 
 postGrid.innerHTML = "";
+
 function createCard(name, link) {
   const postTemplate = document.querySelector("#post-template").content;
   const postElement = postTemplate.querySelector(".post").cloneNode(true);
@@ -70,10 +71,10 @@ function createCard(name, link) {
   postElement.querySelector(".post__picture").src = link;
   postElement.querySelector(".post__title").textContent = name;
 
-  postGrid.append(postElement);
+  postGrid.prepend(postElement);
 }
 
-initialCards.forEach((cardinfo) => {
+initialCards.reverse().forEach((cardinfo) => {
   createCard(cardinfo.name, cardinfo.link);
 });
 
@@ -96,3 +97,26 @@ addPicCloseButton.addEventListener("click", function handleClick(event) {
 });
 
 // add new card
+
+const addPicFormElement = document.getElementById("add-pic-window__input-form");
+const placeInput = document.getElementById("place-name");
+const placeLinkInput = document.getElementById("place-link");
+
+function addPicFormSubmitHandler(evt) {
+  evt.preventDefault();
+
+  createCard(placeInput.value, placeLinkInput.value);
+  popup2.classList.remove("popup_active");
+}
+addPicFormElement.addEventListener("submit", addPicFormSubmitHandler);
+
+// dynamic likes for cards
+
+document.querySelectorAll(".post__like-button").forEach((item) => {
+  item.addEventListener("click", (event) => {
+    console.log("user clicked: ", event.target);
+    item.classList.toggle("post__like-button_active");
+  });
+});
+
+// viewing posts
