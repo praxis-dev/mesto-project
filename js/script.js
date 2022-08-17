@@ -59,7 +59,6 @@ const initialCards = [
   },
 ];
 const postGrid = document.querySelector("#post-grid");
-const post = document.querySelector("#post");
 const posts = document.getElementsByClassName("post");
 
 postGrid.innerHTML = "";
@@ -119,4 +118,35 @@ document.querySelectorAll(".post__like-button").forEach((item) => {
   });
 });
 
+// deleting posts
+
+document.querySelectorAll(".post__trash-icon").forEach((item) => {
+  item.addEventListener("click", (event) => {
+    console.log("user clicked: ", event.target);
+    console.log(event.target.parentNode);
+    console.log(event.target.parentNode.parentNode);
+    event.target.parentNode.parentNode.removeChild(event.target.parentNode);
+  });
+});
+
 // viewing posts
+
+const pictureViewer = document.getElementById("popup3");
+const pictureViewerCloseButton = document.getElementById(
+  "picture-viewer__close-button"
+);
+
+document.querySelectorAll(".post__picture").forEach((item) => {
+  item.addEventListener("click", (event) => {
+    console.log("user clicked: ", event.target);
+    pictureViewer.classList.add("viewer-popup_active");
+    document.getElementById("picture-viewer-picture").src = event.target.src;
+    document.getElementById("picture-viewer-caption").innerText =
+      event.target.parentNode.innerText;
+  });
+});
+
+pictureViewerCloseButton.addEventListener("click", function handleClick(event) {
+  console.log("user clicked: ", event.target);
+  pictureViewer.classList.remove("viewer-popup_active");
+});

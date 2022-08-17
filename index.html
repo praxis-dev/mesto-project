@@ -103,9 +103,10 @@
 
     <template id="post-template">
       <article class="post">
+        <img src="./images/trash-icon.svg" class="post__trash-icon" />
         <img
           src="./images/karachaevsk.jpg"
-          alt="Карачаевск"
+          alt="Иллюстрация"
           class="post__picture"
         />
         <div class="post__fit-title">
@@ -197,7 +198,7 @@
       </div>
     </div>
 
-    <div class="viewer-popup viewer-popup_active" id="popup3">
+    <div class="viewer-popup" id="popup3">
       <div class="picture-viewer">
         <button
           class="picture-viewer__close-button"
@@ -213,10 +214,15 @@
         <figure class="picture-viewer__figcaption">
           <img
             class="picture-viewer__pic"
-            src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
+            src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg"
             alt="Фото в режиме просмотра"
+            id="picture-viewer-picture"
+            ;
           />
-          <figcaption class="picture-viewer__caption">
+          <figcaption
+            class="picture-viewer__caption"
+            id="picture-viewer-caption"
+          >
             some text here
           </figcaption>
         </figure>

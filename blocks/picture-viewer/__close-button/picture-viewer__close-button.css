@@ -9,7 +9,6 @@
   top: -37px;
   right: -37px;
   cursor: pointer;
-  border: 1px solid red;
 }
 
 @media screen and (max-width: 520px) {
