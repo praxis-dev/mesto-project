@@ -3,6 +3,14 @@
 const popup = document.getElementById("popup");
 const popupOpenButton = document.getElementById("profile__edit-icon");
 const popupCloseButton = document.getElementById("edit-window__close-button");
+let userName = document.querySelector("#profile__title");
+let userJob = document.querySelector("#profile__subtitle");
+const formElement = document.querySelector("#edit-window__input-form");
+const nameInput = document.querySelector("#profile-name");
+const jobInput = document.querySelector("#profile-subtitle");
+
+nameInput.defaultValue = userName.innerText;
+jobInput.defaultValue = userJob.innerText;
 
 popupOpenButton.addEventListener("click", function handleClick(event) {
   console.log("user clicked: ", event.target);
@@ -16,17 +24,12 @@ popupCloseButton.addEventListener("click", function handleClick(event) {
 
 // popup update details
 
-const formElement = document.querySelector("#edit-window__input-form");
-let userName = document.querySelector("#profile__title");
-let userJob = document.querySelector("#profile__subtitle");
-const nameInput = document.querySelector("#profile-name");
-const jobInput = document.querySelector("#profile-subtitle");
-
 function formSubmitHandler(evt) {
   evt.preventDefault();
 
   userName.textContent = nameInput.value;
   userJob.textContent = jobInput.value;
+  popup.classList.remove("popup_active");
 }
 formElement.addEventListener("submit", formSubmitHandler);
 

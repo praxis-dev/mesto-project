@@ -2,4 +2,8 @@
   position: absolute;
   top: 17px;
   right: 19px;
+  cursor: pointer;
+}
+.post__trash-icon:hover {
+  opacity: 0.6;
 }
