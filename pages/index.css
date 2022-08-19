@@ -31,6 +31,7 @@
 
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_active/popup_active.css);
+@import url(../blocks/popup/_dark/popup_dark.css);
 
 /* edit-window */
 
@@ -59,11 +60,6 @@
 /* footer */
 
 @import url(../blocks/footer/footer.css);
-
-/* viewer-popup */
-
-@import url(../blocks/viewer-popup/viewer-popup.css);
-@import url(../blocks/viewer-popup/_active/viewer-popup_active.css);
 
 /* picture-viewer */
 
