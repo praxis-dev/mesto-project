@@ -1,16 +1,22 @@
 const profileUpdaterPopup = document.querySelector(".profile-edit-popup");
 const placeAdderPopup = document.querySelector(".place-add-popup");
 const pictureViewerPopup = document.querySelector(".popup_dark");
-const popupOpenButton = document.getElementById("profile__edit-icon");
-const popupCloseButton = document.getElementById("edit-window__close-button");
+const pictureViewerPicture = document.getElementById("picture-viewer-picture");
+const pictureViewerCaption = document.getElementById("picture-viewer-caption");
+const profileUpdaterPopupOpenButton =
+  document.getElementById("profile__edit-icon");
+const profileUpdaterPopupCloseButton = document.getElementById(
+  "edit-window__close-button"
+);
 const userName = document.querySelector("#profile__title");
 const userJob = document.querySelector("#profile__subtitle");
-const inputForm = document.querySelector("#edit-window__input-form");
+const profileUpdaterInputForm = document.querySelector(
+  "#edit-window__input-form"
+);
 const nameInput = document.querySelector("#profile-name");
 const jobInput = document.querySelector("#profile-subtitle");
 const postTemplate = document.querySelector("#post-template").content;
 const postGrid = document.querySelector("#post-grid");
-const posts = document.getElementsByClassName("post");
 const picAdderOpenButton = document.getElementById("profile__add-button");
 const picAdderCloseButton = document.getElementById(
   "add-pic-window__close-button"
@@ -47,14 +53,14 @@ const initialCards = [
 
 // popup open/close
 
-nameInput.defaultValue = userName.textContent;
-jobInput.defaultValue = userJob.textContent.replace(/\s{2,}/g, " ").trim();
+nameInput.value = userName.textContent;
+jobInput.value = userJob.textContent.replace(/\s{2,}/g, " ").trim();
 
-function openPopup(profileUpdaterPopup) {
-  profileUpdaterPopup.classList.add("popup_active");
+function openPopup(popup) {
+  popup.classList.add("popup_active");
 }
-function closePopup(profileUpdaterPopup) {
-  profileUpdaterPopup.classList.remove("popup_active");
+function closePopup(popup) {
+  popup.classList.remove("popup_active");
 }
 
 // popup update details
@@ -72,50 +78,42 @@ function updateProfile(evt) {
 function createCard(name, link) {
   const postElement = postTemplate.querySelector(".post").cloneNode(true);
 
-  postElement.querySelector(".post__picture").src = link;
-  postElement.querySelector(".post__title").textContent = name;
-  postElement.querySelector(".post__picture").alt = name;
+  const postImage = postElement.querySelector(".post__picture");
+  const postName = postElement.querySelector(".post__title");
+
+  postImage.src = link;
+  postName.textContent = name;
+  postImage.alt = name;
 
   const trashIcon = postElement.querySelector(".post__trash-icon");
 
   trashIcon.addEventListener("click", (event) => {
-    console.log("user clicked: ", event.target);
     event.target.closest(".post").remove(event.target.closest(".post"));
   });
 
   const likeButton = postElement.querySelector(".post__like-button");
 
   likeButton.addEventListener("click", (event) => {
-    console.log("user clicked: ", event.target);
     likeButton.classList.toggle("post__like-button_active");
   });
 
-  const clickablePicture = postElement.querySelector(".post__picture");
-
-  clickablePicture.addEventListener("click", (event) => {
-    console.log("user clicked: ", event.target);
-
-    console.log(
-      event.target.parentNode.textContent.replace(/\s{2,}/g, " ").trim()
-    );
-    console.log(document.getElementById("picture-viewer-picture").alt);
+  postImage.addEventListener("click", (event) => {
     openPopup(pictureViewerPopup);
-    document.getElementById("picture-viewer-picture").src = event.target.src;
-    document.getElementById("picture-viewer-picture").alt =
-      event.target.parentNode.textContent.replace(/\s{2,}/g, " ").trim();
-    document.getElementById("picture-viewer-caption").textContent =
-      event.target.parentNode.textContent;
+    pictureViewerPicture.src = link;
+    pictureViewerPicture.alt = name;
+    pictureViewerCaption.textContent = name;
   });
 
-  renderCard(postElement);
+  return postElement;
 }
 
-function renderCard(postElement) {
+function renderCard(name, link) {
+  const postElement = createCard(name, link);
   postGrid.prepend(postElement);
 }
 
 initialCards.reverse().forEach((cardinfo) => {
-  createCard(cardinfo.name, cardinfo.link);
+  renderCard(cardinfo.name, cardinfo.link);
 });
 
 // add new card
@@ -129,27 +127,24 @@ const placeLinkInput = document.getElementById("place-link");
 function addPicFormSubmitHandler(evt) {
   evt.preventDefault();
 
-  createCard(placeInput.value, placeLinkInput.value);
-  placeAdderPopup.classList.remove("popup_active");
+  renderCard(placeInput.value, placeLinkInput.value);
+  closePopup(placeAdderPopup);
   picAdderFormElement.reset();
 }
 
 // viewing posts listents
 
 pictureViewerCloseButton.addEventListener("click", function handleClick(event) {
-  console.log("user clicked: ", event.target);
   closePopup(pictureViewerPopup);
 });
 
 // add pic form listeners
 
 picAdderOpenButton.addEventListener("click", function handleClick(event) {
-  console.log("user clicked: ", event.target);
   openPopup(placeAdderPopup);
 });
 
 picAdderCloseButton.addEventListener("click", function handleClick(event) {
-  console.log("user clicked: ", event.target);
   closePopup(placeAdderPopup);
 });
 
@@ -157,14 +152,18 @@ picAdderFormElement.addEventListener("submit", addPicFormSubmitHandler);
 
 // profile edit listeners
 
-popupOpenButton.addEventListener("click", function handleClick(event) {
-  console.log("user clicked: ", event.target);
-  openPopup(profileUpdaterPopup);
-});
+profileUpdaterPopupOpenButton.addEventListener(
+  "click",
+  function handleClick(event) {
+    openPopup(profileUpdaterPopup);
+  }
+);
 
-popupCloseButton.addEventListener("click", function handleClick(event) {
-  console.log("user clicked: ", event.target);
-  closePopup(profileUpdaterPopup);
-});
+profileUpdaterPopupCloseButton.addEventListener(
+  "click",
+  function handleClick(event) {
+    closePopup(profileUpdaterPopup);
+  }
+);
 
-inputForm.addEventListener("submit", updateProfile);
+profileUpdaterInputForm.addEventListener("submit", updateProfile);
