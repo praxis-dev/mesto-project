@@ -53,9 +53,6 @@ const initialCards = [
 
 // popup open/close
 
-nameInput.value = userName.textContent;
-jobInput.value = userJob.textContent.replace(/\s{2,}/g, " ").trim();
-
 function openPopup(popup) {
   popup.classList.add("popup_active");
 }
@@ -88,7 +85,7 @@ function createCard(name, link) {
   const trashIcon = postElement.querySelector(".post__trash-icon");
 
   trashIcon.addEventListener("click", (event) => {
-    event.target.closest(".post").remove(event.target.closest(".post"));
+    event.target.closest(".post").remove();
   });
 
   const likeButton = postElement.querySelector(".post__like-button");
@@ -155,6 +152,8 @@ picAdderFormElement.addEventListener("submit", addPicFormSubmitHandler);
 profileUpdaterPopupOpenButton.addEventListener(
   "click",
   function handleClick(event) {
+    nameInput.value = userName.textContent;
+    jobInput.value = userJob.textContent;
     openPopup(profileUpdaterPopup);
   }
 );
