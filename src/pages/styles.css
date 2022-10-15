@@ -1,0 +1,70 @@
+/* vendor */
+
+@import "../vendor/normalize.css";
+
+/* fonts */
+
+@import "../vendor/fonts.css";
+
+/* root */
+
+@import "../blocks/root/root.css";
+
+/* header */
+
+@import "../blocks/header/header.css";
+@import "../blocks/header/__logo/header__logo.css";
+
+/* profile */
+
+@import "../blocks/profile/profile.css";
+@import "../blocks/profile/__avatar/profile__avatar.css";
+@import "../blocks/profile/__add-button/profile__add-button.css";
+@import "../blocks/profile/__info/profile__info.css";
+@import "../blocks/profile/__title-with-edit-button/profile__title-with-edit-button.css";
+@import "../blocks/profile/__edit-button/profile__edit-button.css";
+@import "../blocks/profile/__title/profile__title.css";
+@import "../blocks/profile/__subtitle/profile__subtitle.css";
+@import "../blocks/profile/__edit-icon/profile__edit-icon.css";
+
+/* popup */
+
+@import "../blocks/popup/popup.css";
+@import "../blocks/popup/_active/popup_active.css";
+@import "../blocks/popup/_dark/popup_dark.css";
+
+/* edit-window */
+
+@import "../blocks/edit-window/edit-window.css";
+@import "../blocks/edit-window/__title/edit-window__title.css";
+@import "../blocks/edit-window/__close-button/edit-window__close-button.css";
+@import "../blocks/edit-window/__close-button-icon/edit-window__close-button-icon.css";
+@import "../blocks/edit-window/__input-form/edit-window__input-form.css";
+@import "../blocks/edit-window/__input-string/edit-window__input-string.css";
+@import "../blocks/edit-window/__submit/edit-window__submit.css";
+
+/* post-grid */
+
+@import "../blocks/post-grid/post-grid.css";
+
+/* post */
+
+@import "../blocks/post/post.css";
+@import "../blocks/post/__picture/post__picture.css";
+@import "../blocks/post/__title/post__title.css";
+@import "../blocks/post/__like-button/post__like-button.css";
+@import "../blocks/post/__like-button/_active/post__like-button_active.css";
+@import "../blocks/post/__fit-title/post__fit-title.css";
+@import "../blocks/post/__trash-icon/post__trash-icon.css";
+
+/* footer */
+
+@import "../blocks/footer/footer.css";
+
+/* picture-viewer */
+
+@import "../blocks/picture-viewer/picture-viewer.css";
+@import "../blocks/picture-viewer/__figcaption/picture-viewer__figcaption.css";
+@import "../blocks/picture-viewer/__pic/picture-viewer__pic.css";
+@import "../blocks/picture-viewer/__caption/picture-viewer__caption.css";
+@import "../blocks/picture-viewer/__close-button/picture-viewer__close-button.css";

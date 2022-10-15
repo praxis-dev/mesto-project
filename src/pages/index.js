@@ -1,3 +1,5 @@
+import "./styles.css";
+
 const profileUpdaterPopup = document.querySelector(".profile-edit-popup");
 const placeAdderPopup = document.querySelector(".place-add-popup");
 const pictureViewerPopup = document.querySelector(".popup_dark");
