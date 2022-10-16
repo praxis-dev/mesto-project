@@ -9,6 +9,12 @@ import {
   openPopup,
   closePopup,
   updateProfile,
+  profileUpdaterPopupOpenButton,
+  profileUpdaterPopupCloseButton,
+  profileUpdaterInputForm,
+  picAdderOpenButton,
+  picAdderCloseButton,
+  pictureViewerCloseButton,
 } from "../components/modal";
 
 import {
@@ -18,26 +24,7 @@ import {
   pictureViewerPopup,
 } from "../components/card";
 
-const profileUpdaterPopupOpenButton =
-  document.getElementById("profile__edit-icon");
-
-const profileUpdaterPopupCloseButton = document.getElementById(
-  "edit-window__close-button"
-);
-
-const profileUpdaterInputForm = document.querySelector(
-  "#edit-window__input-form"
-);
-
-const picAdderOpenButton = document.getElementById("profile__add-button");
-const picAdderCloseButton = document.getElementById(
-  "add-pic-window__close-button"
-);
-const pictureViewerCloseButton = document.getElementById(
-  "picture-viewer__close-button"
-);
-
-// viewing posts listents
+// viewing posts listeners
 
 pictureViewerCloseButton.addEventListener("click", function handleClick(event) {
   closePopup(pictureViewerPopup);
@@ -50,7 +37,7 @@ picAdderOpenButton.addEventListener("click", function handleClick(event) {
 });
 
 picAdderCloseButton.addEventListener("click", function handleClick(event) {
-  console.log("clickclick");
+  closePopup(placeAdderPopup);
 });
 
 picAdderFormElement.addEventListener("submit", addPicFormSubmitHandler);

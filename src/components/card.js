@@ -1,6 +1,42 @@
 import { openPopup, closePopup } from "./modal";
 
 const postTemplate = document.querySelector("#post-template").content;
+const postGrid = document.querySelector("#post-grid");
+const placeAdderPopup = document.querySelector(".place-add-popup");
+const picAdderFormElement = document.getElementById(
+  "add-pic-window__input-form"
+);
+const placeInput = document.getElementById("place-name");
+const placeLinkInput = document.getElementById("place-link");
+const pictureViewerPopup = document.querySelector(".popup_dark");
+const pictureViewerPicture = document.getElementById("picture-viewer-picture");
+const pictureViewerCaption = document.getElementById("picture-viewer-caption");
+const initialCards = [
+  {
+    name: "Архыз",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+  },
+  {
+    name: "Челябинская область",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+  },
+  {
+    name: "Иваново",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+  },
+  {
+    name: "Камчатка",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
+  },
+  {
+    name: "Холмогорский район",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
+  },
+  {
+    name: "Байкал",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+  },
+];
 
 // creating cards
 
@@ -38,35 +74,6 @@ function createCard(name, link) {
 
 // add new card
 
-const postGrid = document.querySelector("#post-grid");
-
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
-
 initialCards.reverse().forEach((cardinfo) => {
   renderCard(cardinfo.name, cardinfo.link);
 });
@@ -76,13 +83,6 @@ function renderCard(name, link) {
   postGrid.prepend(postElement);
 }
 
-const placeAdderPopup = document.querySelector(".place-add-popup");
-const picAdderFormElement = document.getElementById(
-  "add-pic-window__input-form"
-);
-const placeInput = document.getElementById("place-name");
-const placeLinkInput = document.getElementById("place-link");
-
 function addPicFormSubmitHandler(evt) {
   evt.preventDefault();
 
@@ -91,9 +91,11 @@ function addPicFormSubmitHandler(evt) {
   picAdderFormElement.reset();
 }
 
-const pictureViewerPopup = document.querySelector(".popup_dark");
-const pictureViewerPicture = document.getElementById("picture-viewer-picture");
-const pictureViewerCaption = document.getElementById("picture-viewer-caption");
-
-export { createCard, addPicFormSubmitHandler, renderCard };
-export { picAdderFormElement, placeAdderPopup, pictureViewerPopup };
+export {
+  picAdderFormElement,
+  placeAdderPopup,
+  pictureViewerPopup,
+  createCard,
+  addPicFormSubmitHandler,
+  renderCard,
+};
