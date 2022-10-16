@@ -27,7 +27,6 @@
         <div class="profile__info" id="">
           <div class="profile__title-with-edit-button">
             <h1 class="profile__title" id="profile__title">Жак-Ив Кусто</h1>
-
             <button class="profile__edit-button" type="button">
               <img
                 class="profile__edit-icon"
@@ -98,6 +97,7 @@
             name="profile-name"
             placeholder="Ваше имя"
           />
+          <p class="edit-window__mistake-message">Вы пропустили это поле</p>
           <label for="profile-subtitle"></label>
           <input
             class="edit-window__input-string"
@@ -106,7 +106,13 @@
             name="profile-subtitle"
             placeholder="Опишите себя"
           />
-          <button type="submit" class="edit-window__submit">Сохранить</button>
+          <p class="edit-window__mistake-message">Вы пропустили это поле</p>
+          <button
+            type="submit"
+            class="edit-window__submit edit-window__submit_inactive"
+          >
+            Сохранить
+          </button>
         </form>
       </div>
     </div>
@@ -147,7 +153,12 @@
             name="place-link"
             placeholder="Ссылка на картинку"
           />
-          <button type="submit" class="edit-window__submit">Сохранить</button>
+          <button
+            type="submit"
+            class="edit-window__submit edit-window__submit_inactive"
+          >
+            Создать
+          </button>
         </form>
       </div>
     </div>

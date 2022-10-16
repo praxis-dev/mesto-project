@@ -42,6 +42,8 @@
 @import "../blocks/edit-window/__input-form/edit-window__input-form.css";
 @import "../blocks/edit-window/__input-string/edit-window__input-string.css";
 @import "../blocks/edit-window/__submit/edit-window__submit.css";
+@import "../blocks/edit-window/_inactive/edit-window__submit_inactive.css";
+@import "../blocks/edit-window/__mistake-message/edit-window__mistake-message.css";
 
 /* post-grid */
 
