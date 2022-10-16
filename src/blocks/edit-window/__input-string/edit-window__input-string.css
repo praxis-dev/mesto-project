@@ -1,4 +1,5 @@
 .edit-window__input-string {
+  box-sizing: border-box;
   font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -7,8 +8,13 @@
   width: 100%;
   border: none;
   height: fit-content;
-  margin-bottom: 35px;
-  border-bottom: 1px solid RGBA(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.edit-window__input-string:focus {
+  outline: 1px solid rgb(132, 185, 242);
 }
 
 .edit-window__input-string::placeholder {

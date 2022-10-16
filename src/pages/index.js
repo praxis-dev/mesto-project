@@ -48,7 +48,7 @@ profileUpdaterPopupOpenButton.addEventListener(
   "click",
   function handleClick(event) {
     nameInput.value = userName.textContent;
-    jobInput.value = userJob.textContent;
+    jobInput.value = userJob.innerText;
     openPopup(profileUpdaterPopup);
   }
 );
