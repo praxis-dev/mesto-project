@@ -88,6 +88,7 @@
           class="edit-window__input-form"
           id="edit-window__input-form"
           name="user_title_subtitle"
+          novalidate
         >
           <label for="profile-name"></label>
           <input
@@ -96,8 +97,14 @@
             id="profile-name"
             name="profile-name"
             placeholder="Ваше имя"
+            minlength="2"
+            maxlength="40"
+            pattern="^[a-zA-Zа-яёА-ЯЁ -]{4,40}$"
+            required
           />
-          <p class="edit-window__mistake-message">Вы пропустили это поле</p>
+          <p class="edit-window__name-mistake-message">
+            Вы пропустили это поле
+          </p>
           <label for="profile-subtitle"></label>
           <input
             class="edit-window__input-string"
@@ -105,10 +112,15 @@
             id="profile-subtitle"
             name="profile-subtitle"
             placeholder="Опишите себя"
+            minlength="2"
+            maxlength="200"
+            pattern="^[a-zA-Zа-яёА-ЯЁ -]{4,200}$"
+            required
           />
-          <p class="edit-window__mistake-message">Вы пропустили это поле</p>
+          <p class="edit-window__job-mistake-message">Вы пропустили это поле</p>
           <button
             type="submit"
+            name="profile_submit"
             class="edit-window__submit edit-window__submit_inactive"
           >
             Сохранить

@@ -1,0 +1,11 @@
+.edit-window__name-mistake-message {
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  margin: 0 0 12px;
+  padding-left: 2px;
+  color: rgba(255, 0, 0, 1);
+  visibility: hidden;
+}
