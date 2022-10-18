@@ -1,3 +1,5 @@
+import { placeAdderPopup, pictureViewerPopup } from "../components/card";
+
 const userName = document.querySelector("#profile__title");
 const userJob = document.querySelector("#profile__subtitle");
 const nameInput = document.querySelector("#profile-name");
@@ -42,6 +44,14 @@ function updateProfile(evt) {
   closePopup(profileUpdaterPopup);
 }
 
+// popup close modals
+
+function closeModals() {
+  closePopup(pictureViewerPopup);
+  closePopup(placeAdderPopup);
+  closePopup(profileUpdaterPopup);
+}
+
 export {
   profileUpdaterPopupOpenButton,
   profileUpdaterPopupCloseButton,
@@ -57,4 +67,5 @@ export {
   openPopup,
   closePopup,
   updateProfile,
+  closeModals,
 };

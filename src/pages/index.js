@@ -15,6 +15,7 @@ import {
   picAdderOpenButton,
   picAdderCloseButton,
   pictureViewerCloseButton,
+  closeModals,
 } from "../components/modal";
 
 import {
@@ -98,3 +99,9 @@ nameInput.addEventListener("input", validate);
 jobInput.addEventListener("input", validate);
 placeInput.addEventListener("input", validate);
 placeLinkInput.addEventListener("input", validate);
+
+addEventListener("keydown", function eventHandler(evt) {
+  if (evt.key == "Escape") {
+    closeModals();
+  }
+});
