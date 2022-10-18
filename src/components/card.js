@@ -95,6 +95,8 @@ export {
   picAdderFormElement,
   placeAdderPopup,
   pictureViewerPopup,
+  placeInput,
+  placeLinkInput,
   createCard,
   addPicFormSubmitHandler,
   renderCard,

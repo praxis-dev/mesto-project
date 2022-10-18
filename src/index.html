@@ -156,7 +156,14 @@
             id="place-name"
             name="place-name"
             placeholder="Название"
+            minlength="2"
+            maxlength="200"
+            pattern="^[a-zA-Zа-яёА-ЯЁ -]{2,30}$"
+            required
           />
+          <p class="edit-window__place-name-mistake-message">
+            Вы пропустили это поле
+          </p>
           <label for="place-link"></label>
           <input
             class="edit-window__input-string"
@@ -164,7 +171,14 @@
             id="place-link"
             name="place-link"
             placeholder="Ссылка на картинку"
+            minlength="2"
+            maxlength="200"
+            pattern="/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/"
+            required
           />
+          <p class="edit-window__place-link-mistake-message">
+            Вы пропустили это поле
+          </p>
           <button
             type="submit"
             class="edit-window__submit edit-window__submit_inactive"

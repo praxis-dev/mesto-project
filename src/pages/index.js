@@ -22,6 +22,8 @@ import {
   addPicFormSubmitHandler,
   placeAdderPopup,
   pictureViewerPopup,
+  placeInput,
+  placeLinkInput,
 } from "../components/card";
 
 // validation
@@ -38,12 +40,23 @@ const nameMistakeMessage = document.querySelector(
 const jobMistakeMessage = document.querySelector(
   ".edit-window__job-mistake-message"
 );
+const placeNameMistakeMessage = document.querySelector(
+  ".edit-window__place-name-mistake-message"
+);
+const placeLinkMistakeMessage = document.querySelector(
+  ".edit-window__place-link-mistake-message"
+);
 
 nameInput.addEventListener("input", validate);
 jobInput.addEventListener("input", validate);
+placeInput.addEventListener("input", validate);
+placeLinkInput.addEventListener("input", validate);
 
 const nameReg = /^[a-zA-Zа-яёА-ЯЁ -]{4,40}$/;
 const jobReg = /^[a-zA-Zа-яёА-ЯЁ -]{4,200}$/;
+const placeNameReg = /^[a-zA-Zа-яёА-ЯЁ -]{2,30}$/;
+const placeLinkReg =
+  /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
 
 function validate(e) {
   let target = e.target;
@@ -74,12 +87,42 @@ function validate(e) {
       jobMistakeMessage.style.visibility = "hidden";
     } else if (target.value.length > 200) {
       jobMistakeMessage.style.visibility = "visible";
-
       jobMistakeMessage.textContent =
         "Максимальная длина описания 200 символов";
     } else {
       jobMistakeMessage.style.visibility = "visible";
       jobMistakeMessage.textContent = "Используйте алфавит, пробелы и тире";
+    }
+  } else if (target.name == "place-name") {
+    if (target.value.length === 0) {
+      placeNameMistakeMessage.style.visibility = "visible";
+      placeNameMistakeMessage.textContent = "Вы пропустили это поле";
+    } else if (target.value.length < 2) {
+      placeNameMistakeMessage.style.visibility = "visible";
+      placeNameMistakeMessage.textContent =
+        "Минимальная длина названия 2 символа";
+    } else if (placeNameReg.test(target.value)) {
+      placeNameMistakeMessage.style.visibility = "hidden";
+    } else if (target.value.length > 30) {
+      placeNameMistakeMessage.style.visibility = "visible";
+      placeNameMistakeMessage.textContent =
+        "Максимальная длина названия 30 символов";
+    } else {
+      placeNameMistakeMessage.style.visibility = "visible";
+      placeNameMistakeMessage.textContent =
+        "Используйте алфавит, пробелы и тире";
+    }
+  } else if (target.name == "place-link") {
+    if (target.value.length === 0) {
+      placeLinkMistakeMessage.style.visibility = "visible";
+      placeLinkMistakeMessage.textContent = "Вы пропустили это поле";
+    } else if (placeLinkReg.test(target.value)) {
+      console.log(placeLinkReg.test(target.value));
+      placeLinkMistakeMessage.style.visibility = "hidden";
+    } else if (placeLinkReg.test(target.value) === false) {
+      console.log("false");
+      placeLinkMistakeMessage.style.visibility = "visible";
+      placeLinkMistakeMessage.textContent = "Введите ссылку на фотографию";
     }
   }
 }
