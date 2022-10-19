@@ -41,9 +41,11 @@
 @import "../blocks/edit-window/__close-button-icon/edit-window__close-button-icon.css";
 @import "../blocks/edit-window/__input-form/edit-window__input-form.css";
 @import "../blocks/edit-window/__input-string/edit-window__input-string.css";
+@import "../blocks/edit-window/__input-string/_mistake/edit-window__input-string_mistake.css";
 @import "../blocks/edit-window/__submit/edit-window__submit.css";
 @import "../blocks/edit-window/__submit/_inactive/edit-window__submit_inactive.css";
 @import "../blocks/edit-window/__name-mistake-message/edit-window__name-mistake-message.css";
+@import "../blocks/edit-window/__name-mistake-message/_active/edit-window__name-mistake-message_active.css";
 @import "../blocks/edit-window/__job-mistake-message/edit-window__job-mistake-message.css";
 @import "../blocks/edit-window/__place-name-mistake-message/edit-window__place-name-mistake-message.css";
 @import "../blocks/edit-window/__place-link-mistake-message/edit-window__place-link-mistake-message.css";

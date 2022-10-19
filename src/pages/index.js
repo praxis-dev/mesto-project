@@ -27,17 +27,41 @@ import {
   placeLinkInput,
 } from "../components/card";
 
-import {
-  profileForm,
-  addPostForm,
-  profileFormInputList,
-  addPostFormInputList,
-  profileSubmitButton,
-  placeSubmitButton,
-  validate,
-  checkValidity,
-  toggleButtonState,
-} from "../components/validation";
+// validation
+
+const profileForm = document.forms.user_title_subtitle;
+const addPostForm = document.forms.place_form;
+const formError = profileForm.querySelector(`.${nameInput.id}-error`);
+
+// Функция, которая добавляет класс с ошибкой
+const showInputError = (element, errorMessage) => {
+  console.log("invalid");
+  formError.textContent = errorMessage;
+  element.classList.add("edit-window__input-string_mistake");
+  formError.classList.add("edit-window__name-mistake-message_active");
+};
+
+// Функция, которая удаляет класс с ошибкой
+const hideInputError = (element) => {
+  console.log("valid");
+  element.classList.remove("edit-window__input-string_mistake");
+  formError.classList.remove("edit-window__name-mistake-message_active");
+};
+
+// Функция, которая проверяет валидность поля
+const isValid = () => {
+  console.log(nameInput.validity.valid);
+  if (!nameInput.validity.valid) {
+    showInputError(nameInput, nameInput.validationMessage);
+  } else {
+    hideInputError(nameInput);
+  }
+};
+
+// Вызовем функцию isValid на каждый ввод символа
+nameInput.addEventListener("input", function () {
+  isValid();
+});
 
 // viewing posts listeners
 
@@ -77,28 +101,7 @@ profileUpdaterPopupCloseButton.addEventListener(
 
 profileUpdaterInputForm.addEventListener("submit", updateProfile);
 
-// form validation listeners
-
-profileForm.addEventListener("input", function handleInput() {
-  checkValidity(profileFormInputList);
-});
-
-addPostForm.addEventListener("input", function handleInput() {
-  checkValidity(addPostFormInputList);
-});
-
-profileForm.addEventListener("input", function handleInput() {
-  checkValidity(toggleButtonState(profileFormInputList, profileSubmitButton));
-});
-
-addPostForm.addEventListener("input", function handleInput() {
-  checkValidity(toggleButtonState(addPostFormInputList, placeSubmitButton));
-});
-
-nameInput.addEventListener("input", validate);
-jobInput.addEventListener("input", validate);
-placeInput.addEventListener("input", validate);
-placeLinkInput.addEventListener("input", validate);
+// closing modals listeners
 
 addEventListener("keydown", function eventHandler(evt) {
   if (evt.key == "Escape") {
@@ -117,7 +120,6 @@ profileUpdaterPopup.addEventListener("mouseup", function handleClick(e) {
     ".edit-window__input-form"
   );
   const editWindowTitle = document.querySelector(".edit-window__title");
-  console.log(e.target);
   if (
     e.target !== editWindow &&
     e.target !== editWindowInputForm &&
@@ -134,7 +136,6 @@ placeAdderPopup.addEventListener("mouseup", function handleClick(e) {
     ".edit-window__input-form"
   );
   const editWindowTitles = document.querySelectorAll(".edit-window__title");
-  console.log(e.target);
   if (
     e.target !== editWindows[1] &&
     e.target !== editWindowInputForms[1] &&

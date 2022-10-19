@@ -102,7 +102,7 @@
             pattern="^[a-zA-Zа-яёА-ЯЁ -]{4,40}$"
             required
           />
-          <p class="edit-window__name-mistake-message">
+          <p class="edit-window__name-mistake-message profile-name-error">
             Вы пропустили это поле
           </p>
           <label for="profile-subtitle"></label>
@@ -122,7 +122,6 @@
             type="submit"
             name="profile_submit"
             class="edit-window__submit edit-window__submit_inactive"
-            disabled
           >
             Сохранить
           </button>
@@ -149,6 +148,7 @@
           class="edit-window__input-form"
           id="add-pic-window__input-form"
           name="place_form"
+          novalidate
         >
           <label for="place-name"></label>
           <input
@@ -182,7 +182,6 @@
             type="submit"
             class="edit-window__submit edit-window__submit_inactive"
             name="place_submit"
-            disabled
           >
             Создать
           </button>
