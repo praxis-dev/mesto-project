@@ -29,12 +29,7 @@ import {
 
 // validation
 
-const profileForm = document.forms.user_title_subtitle;
-const addPostForm = document.forms.place_form;
-const formError = profileForm.querySelector(`.${nameInput.id}-error`);
-
 const showInputError = (formElement, inputElement, errorMessage) => {
-  console.log("invalid");
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add("edit-window__input-string_mistake");
   errorElement.textContent = errorMessage;
@@ -42,11 +37,9 @@ const showInputError = (formElement, inputElement, errorMessage) => {
 };
 
 const hideInputError = (formElement, inputElement) => {
-  console.log("valid");
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove("edit-window__input-string_mistake");
   errorElement.classList.remove("edit-window__mistake-message_active");
-  errorElement = "";
 };
 
 const isValid = (formElement, inputElement) => {
@@ -61,9 +54,11 @@ const setEventListeners = (formElement) => {
   const inputList = Array.from(
     formElement.querySelectorAll(".edit-window__input-string")
   );
+  const buttonElement = formElement.querySelector(".edit-window__submit");
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
       isValid(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
     });
   });
 };
@@ -78,6 +73,22 @@ const enableValidation = () => {
 };
 
 enableValidation();
+
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+};
+
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.disabled = true;
+    buttonElement.classList.add("edit-window__submit_inactive");
+  } else {
+    buttonElement.disabled = false;
+    buttonElement.classList.remove("edit-window__submit_inactive");
+  }
+};
 
 // viewing posts listeners
 
