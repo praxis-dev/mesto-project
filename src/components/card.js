@@ -11,32 +11,6 @@ const placeLinkInput = document.getElementById("place-link");
 const pictureViewerPopup = document.querySelector(".popup_dark");
 const pictureViewerPicture = document.getElementById("picture-viewer-picture");
 const pictureViewerCaption = document.getElementById("picture-viewer-caption");
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
 
 // creating cards
 
@@ -74,10 +48,6 @@ function createCard(name, link) {
 
 // add new card
 
-initialCards.reverse().forEach((cardinfo) => {
-  renderCard(cardinfo.name, cardinfo.link);
-});
-
 function renderCard(name, link) {
   const postElement = createCard(name, link);
   postGrid.prepend(postElement);
@@ -85,10 +55,12 @@ function renderCard(name, link) {
 
 function addPicFormSubmitHandler(evt) {
   evt.preventDefault();
-
+  const postButton = picAdderFormElement.querySelector(".edit-window__submit");
   renderCard(placeInput.value, placeLinkInput.value);
   closePopup(placeAdderPopup);
   picAdderFormElement.reset();
+  postButton.disabled = true;
+  postButton.classList.add("edit-window__submit_inactive");
 }
 
 export {

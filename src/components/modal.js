@@ -34,16 +34,6 @@ function closePopup(popup) {
   popup.classList.remove("popup_active");
 }
 
-// popup update details
-
-function updateProfile(evt) {
-  evt.preventDefault();
-
-  userName.textContent = nameInput.value;
-  userJob.textContent = jobInput.value;
-  closePopup(profileUpdaterPopup);
-}
-
 // popup close modals
 
 function closeModals() {
@@ -66,6 +56,5 @@ export {
   profileUpdaterPopup,
   openPopup,
   closePopup,
-  updateProfile,
   closeModals,
 };

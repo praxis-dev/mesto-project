@@ -1,5 +1,7 @@
 import "./styles.css";
 
+import { initialCards } from "../components/data";
+
 import {
   userName,
   userJob,
@@ -8,7 +10,6 @@ import {
   profileUpdaterPopup,
   openPopup,
   closePopup,
-  updateProfile,
   profileUpdaterPopupOpenButton,
   profileUpdaterPopupCloseButton,
   profileUpdaterInputForm,
@@ -25,7 +26,22 @@ import {
   pictureViewerPopup,
   placeInput,
   placeLinkInput,
+  renderCard,
 } from "../components/card";
+
+initialCards.reverse().forEach((cardinfo) => {
+  renderCard(cardinfo.name, cardinfo.link);
+});
+
+// popup update details
+
+function updateProfile(evt) {
+  evt.preventDefault();
+
+  userName.textContent = nameInput.value;
+  userJob.textContent = jobInput.value;
+  closePopup(profileUpdaterPopup);
+}
 
 // validation
 

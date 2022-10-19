@@ -46,8 +46,6 @@
     "*": "npm run test"
   },
   "dependencies": {
-    "core-js": "^3.25.5",
-    "gsap": "^3.11.0",
-    "scroll-lock": "^2.1.5"
+    "core-js": "^3.25.5"
   }
 }
