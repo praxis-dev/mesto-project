@@ -1,4 +1,4 @@
-import { placeAdderPopup, pictureViewerPopup } from "../components/card";
+import { addEscListener } from "../pages";
 
 const userName = document.querySelector("#profile__title");
 const userJob = document.querySelector("#profile__subtitle");
@@ -23,23 +23,27 @@ const picAdderCloseButton = document.getElementById(
 const pictureViewerCloseButton = document.getElementById(
   "picture-viewer__close-button"
 );
+const ESC_CODE = "Escape";
 
 // popup open/close
 
 function openPopup(popup) {
   popup.classList.add("popup_active");
+  addEscListener();
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_active");
+  document.removeEventListener("keydown", function eventHandler() {});
 }
 
 // popup close modals
 
-function closeModals() {
-  closePopup(pictureViewerPopup);
-  closePopup(placeAdderPopup);
-  closePopup(profileUpdaterPopup);
+function closeByEsc(evt) {
+  if (evt.key === ESC_CODE) {
+    const openedPopup = document.querySelector(".popup_active");
+    closePopup(openedPopup);
+  }
 }
 
 export {
@@ -56,5 +60,5 @@ export {
   profileUpdaterPopup,
   openPopup,
   closePopup,
-  closeModals,
+  closeByEsc,
 };
