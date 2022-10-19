@@ -1,5 +1,6 @@
-import { addEscListener } from "../pages";
+import { addEscListener, addOverlayListener } from "../pages";
 
+const allPopups = document.querySelectorAll(".popup");
 const userName = document.querySelector("#profile__title");
 const userJob = document.querySelector("#profile__subtitle");
 const nameInput = document.querySelector("#profile-name");
@@ -30,10 +31,12 @@ const ESC_CODE = "Escape";
 function openPopup(popup) {
   popup.classList.add("popup_active");
   addEscListener();
+  addOverlayListener();
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_active");
+  popup.removeEventListener("mousedown", function () {});
   document.removeEventListener("keydown", function eventHandler() {});
 }
 
@@ -58,6 +61,7 @@ export {
   nameInput,
   jobInput,
   profileUpdaterPopup,
+  allPopups,
   openPopup,
   closePopup,
   closeByEsc,

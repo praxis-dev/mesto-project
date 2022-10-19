@@ -3,6 +3,7 @@ import "./styles.css";
 import { initialCards } from "../components/data";
 
 import {
+  allPopups,
   userName,
   userJob,
   nameInput,
@@ -24,8 +25,6 @@ import {
   addPicFormSubmitHandler,
   placeAdderPopup,
   pictureViewerPopup,
-  placeInput,
-  placeLinkInput,
   renderCard,
 } from "../components/card";
 
@@ -154,4 +153,14 @@ function addEscListener() {
   });
 }
 
-export { addEscListener };
+function addOverlayListener() {
+  allPopups.forEach((popup) =>
+    popup.addEventListener("mousedown", function (evt) {
+      if (evt.target.classList.contains("popup")) {
+        closePopup(popup);
+      }
+    })
+  );
+}
+
+export { addEscListener, addOverlayListener };
