@@ -33,35 +33,51 @@ const profileForm = document.forms.user_title_subtitle;
 const addPostForm = document.forms.place_form;
 const formError = profileForm.querySelector(`.${nameInput.id}-error`);
 
-// Функция, которая добавляет класс с ошибкой
-const showInputError = (element, errorMessage) => {
+const showInputError = (formElement, inputElement, errorMessage) => {
   console.log("invalid");
-  formError.textContent = errorMessage;
-  element.classList.add("edit-window__input-string_mistake");
-  formError.classList.add("edit-window__name-mistake-message_active");
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add("edit-window__input-string_mistake");
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add("edit-window__mistake-message_active");
 };
 
-// Функция, которая удаляет класс с ошибкой
-const hideInputError = (element) => {
+const hideInputError = (formElement, inputElement) => {
   console.log("valid");
-  element.classList.remove("edit-window__input-string_mistake");
-  formError.classList.remove("edit-window__name-mistake-message_active");
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove("edit-window__input-string_mistake");
+  errorElement.classList.remove("edit-window__mistake-message_active");
+  errorElement = "";
 };
 
-// Функция, которая проверяет валидность поля
-const isValid = () => {
-  console.log(nameInput.validity.valid);
-  if (!nameInput.validity.valid) {
-    showInputError(nameInput, nameInput.validationMessage);
+const isValid = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
-    hideInputError(nameInput);
+    hideInputError(formElement, inputElement);
   }
 };
 
-// Вызовем функцию isValid на каждый ввод символа
-nameInput.addEventListener("input", function () {
-  isValid();
-});
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(
+    formElement.querySelectorAll(".edit-window__input-string")
+  );
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener("input", () => {
+      isValid(formElement, inputElement);
+    });
+  });
+};
+
+const enableValidation = () => {
+  const formList = Array.from(
+    document.querySelectorAll(".edit-window__input-form")
+  );
+  formList.forEach((formElement) => {
+    setEventListeners(formElement);
+  });
+};
+
+enableValidation();
 
 // viewing posts listeners
 
