@@ -103,4 +103,6 @@ function addOverlayListener() {
   );
 }
 
-export { addEscListener, addOverlayListener };
+addOverlayListener();
+
+export { addEscListener };

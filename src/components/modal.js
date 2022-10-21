@@ -31,12 +31,10 @@ const ESC_CODE = "Escape";
 function openPopup(popup) {
   popup.classList.add("popup_active");
   addEscListener();
-  addOverlayListener();
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_active");
-  popup.removeEventListener("mousedown", function () {});
   document.removeEventListener("keydown", function eventHandler() {});
 }
 
