@@ -1,16 +1,22 @@
 // validation
 
+const config = {
+  inputErrorClass: "edit-window__input-string_mistake",
+  inputErrorActiveClass: "edit-window__mistake-message_active",
+  editWindowSubmitInactive: "edit-window__submit_inactive",
+};
+
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add("edit-window__input-string_mistake");
+  inputElement.classList.add(config.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add("edit-window__mistake-message_active");
+  errorElement.classList.add(config.inputErrorActiveClass);
 };
 
 const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove("edit-window__input-string_mistake");
-  errorElement.classList.remove("edit-window__mistake-message_active");
+  inputElement.classList.remove(config.inputErrorClass);
+  errorElement.classList.remove(config.inputErrorActiveClass);
 };
 
 const isValid = (formElement, inputElement) => {
@@ -52,10 +58,10 @@ const hasInvalidInput = (inputList) => {
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.disabled = true;
-    buttonElement.classList.add("edit-window__submit_inactive");
+    buttonElement.classList.add(config.editWindowSubmitInactive);
   } else {
     buttonElement.disabled = false;
-    buttonElement.classList.remove("edit-window__submit_inactive");
+    buttonElement.classList.remove(config.editWindowSubmitInactive);
   }
 };
 
