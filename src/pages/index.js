@@ -85,14 +85,6 @@ profileUpdaterInputForm.addEventListener("submit", updateProfile);
 
 // closing modals listeners
 
-function addEscListener() {
-  document.addEventListener("keydown", function eventHandler(evt) {
-    if (evt.key == "Escape") {
-      closeByEsc(evt);
-    }
-  });
-}
-
 function addOverlayListener() {
   allPopups.forEach((popup) =>
     popup.addEventListener("mousedown", function (evt) {
@@ -104,5 +96,3 @@ function addOverlayListener() {
 }
 
 addOverlayListener();
-
-export { addEscListener };

@@ -30,18 +30,19 @@ const ESC_CODE = "Escape";
 
 function openPopup(popup) {
   popup.classList.add("popup_active");
-  addEscListener();
+  document.addEventListener("keydown", closeByEsc);
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_active");
-  document.removeEventListener("keydown", function eventHandler() {});
+  document.removeEventListener("keydown", closeByEsc);
 }
 
 // popup close modals
 
 function closeByEsc(evt) {
   if (evt.key === ESC_CODE) {
+    console.log("me");
     const openedPopup = document.querySelector(".popup_active");
     closePopup(openedPopup);
   }
