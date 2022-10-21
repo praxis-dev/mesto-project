@@ -3,7 +3,10 @@
 const config = {
   inputErrorClass: "edit-window__input-string_mistake",
   inputErrorActiveClass: "edit-window__mistake-message_active",
+  editWindowInputForm: ".edit-window__input-form",
+  editWindowInputString: ".edit-window__input-string",
   editWindowSubmitInactive: "edit-window__submit_inactive",
+  editWindowSubmit: ".edit-window__submit",
 };
 
 const showInputError = (formElement, inputElement, errorMessage) => {
@@ -29,9 +32,9 @@ const isValid = (formElement, inputElement) => {
 
 const setEventListeners = (formElement) => {
   const inputList = Array.from(
-    formElement.querySelectorAll(".edit-window__input-string")
+    formElement.querySelectorAll(config.editWindowInputString)
   );
-  const buttonElement = formElement.querySelector(".edit-window__submit");
+  const buttonElement = formElement.querySelector(config.editWindowSubmit);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
       isValid(formElement, inputElement);
@@ -42,7 +45,7 @@ const setEventListeners = (formElement) => {
 
 const enableValidation = () => {
   const formList = Array.from(
-    document.querySelectorAll(".edit-window__input-form")
+    document.querySelectorAll(config.editWindowInputForm)
   );
   formList.forEach((formElement) => {
     setEventListeners(formElement);
