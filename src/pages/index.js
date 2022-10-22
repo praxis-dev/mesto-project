@@ -2,8 +2,6 @@ import "./styles.css";
 
 import { validationConfig } from "../components/validation";
 
-import { initialCards } from "../components/data";
-
 import {
   allPopups,
   userName,
@@ -45,8 +43,8 @@ const profileAvatar = document.querySelector(".profile__avatar");
 
 // get profile info from server
 
-function getProfileInfo(subpath) {
-  fetch("https://nomoreparties.co/v1/" + `${cohortId}` + subpath, {
+function getProfileInfo() {
+  fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/users/me", {
     method: "GET",
     headers: apiConfig.headers,
   })
@@ -66,7 +64,7 @@ function updateProfileFromServer(dataName, dataAbout, dataAvatar) {
   profileAvatar.src = dataAvatar;
 }
 
-getProfileInfo("/users/me");
+getProfileInfo();
 
 function getCards() {
   const profileAvatar = document.querySelector(".profile__avatar");
@@ -80,7 +78,9 @@ function getCards() {
     })
 
     .then((data) => {
-      console.log(data);
+      data.reverse().forEach((cardinfo) => {
+        renderCard(cardinfo.name, cardinfo.link);
+      });
     })
     .catch((error) => console.log(error));
 }
@@ -88,10 +88,6 @@ function getCards() {
 getCards();
 
 ///////////// end of API /////////////
-
-initialCards.reverse().forEach((cardinfo) => {
-  renderCard(cardinfo.name, cardinfo.link);
-});
 
 enableValidation(validationConfig);
 
