@@ -1,6 +1,6 @@
 import "./styles.css";
 
-import { config } from "../components/validation";
+import { validationConfig } from "../components/validation";
 
 import { initialCards } from "../components/data";
 
@@ -30,11 +30,70 @@ import {
 } from "../components/card";
 import { enableValidation } from "../components/validation";
 
+///////////// API /////////////
+
+const cohortId = "plus-cohort-16";
+const authorizationToken = "84065f1e-9b65-4660-bac5-9a220fdec6d4";
+const apiConfig = {
+  url: `https://nomoreparties.co/v1/${cohortId}`,
+  headers: {
+    authorization: authorizationToken,
+    "Content-Type": "application/json",
+  },
+};
+const profileAvatar = document.querySelector(".profile__avatar");
+
+// get profile info from server
+
+function getProfileInfo(subpath) {
+  fetch("https://nomoreparties.co/v1/" + `${cohortId}` + subpath, {
+    method: "GET",
+    headers: apiConfig.headers,
+  })
+    .then((res) => {
+      return res.json();
+    })
+
+    .then((data) => {
+      updateProfileFromServer(data.name, data.about, data.avatar);
+    })
+    .catch((error) => console.log(error));
+}
+
+function updateProfileFromServer(dataName, dataAbout, dataAvatar) {
+  userName.innerText = dataName;
+  userJob.innerText = dataAbout;
+  profileAvatar.src = dataAvatar;
+}
+
+getProfileInfo("/users/me");
+
+function getCards() {
+  const profileAvatar = document.querySelector(".profile__avatar");
+  console.log(profileAvatar);
+  fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/cards", {
+    method: "GET",
+    headers: apiConfig.headers,
+  })
+    .then((res) => {
+      return res.json();
+    })
+
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => console.log(error));
+}
+
+getCards();
+
+///////////// end of API /////////////
+
 initialCards.reverse().forEach((cardinfo) => {
   renderCard(cardinfo.name, cardinfo.link);
 });
 
-enableValidation(config);
+enableValidation(validationConfig);
 
 // popup update details
 

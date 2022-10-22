@@ -1,6 +1,6 @@
 // validation
 
-const config = {
+const validationConfig = {
   inputErrorClass: "edit-window__input-string_mistake",
   inputErrorActiveClass: "edit-window__mistake-message_active",
   editWindowInputForm: ".edit-window__input-form",
@@ -9,51 +9,58 @@ const config = {
   editWindowSubmit: ".edit-window__submit",
 };
 
-const showInputError = (formElement, inputElement, errorMessage, config) => {
+const showInputError = (
+  formElement,
+  inputElement,
+  errorMessage,
+  validationConfig
+) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add(config.inputErrorClass);
+  inputElement.classList.add(validationConfig.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add(config.inputErrorActiveClass);
+  errorElement.classList.add(validationConfig.inputErrorActiveClass);
 };
 
-const hideInputError = (formElement, inputElement, config) => {
+const hideInputError = (formElement, inputElement, validationConfig) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove(config.inputErrorClass);
-  errorElement.classList.remove(config.inputErrorActiveClass);
+  inputElement.classList.remove(validationConfig.inputErrorClass);
+  errorElement.classList.remove(validationConfig.inputErrorActiveClass);
 };
 
-const isValid = (formElement, inputElement, config) => {
+const isValid = (formElement, inputElement, validationConfig) => {
   if (!inputElement.validity.valid) {
     showInputError(
       formElement,
       inputElement,
       inputElement.validationMessage,
-      config
+      validationConfig
     );
   } else {
-    hideInputError(formElement, inputElement, config);
+    hideInputError(formElement, inputElement, validationConfig);
   }
 };
 
-const setEventListeners = (formElement, config) => {
+const setEventListeners = (formElement, validationConfig) => {
   const inputList = Array.from(
-    formElement.querySelectorAll(config.editWindowInputString)
+    formElement.querySelectorAll(validationConfig.editWindowInputString)
   );
-  const buttonElement = formElement.querySelector(config.editWindowSubmit);
+  const buttonElement = formElement.querySelector(
+    validationConfig.editWindowSubmit
+  );
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
-      isValid(formElement, inputElement, config);
-      toggleButtonState(inputList, buttonElement, config);
+      isValid(formElement, inputElement, validationConfig);
+      toggleButtonState(inputList, buttonElement, validationConfig);
     });
   });
 };
 
-const enableValidation = (config) => {
+const enableValidation = (validationConfig) => {
   const formList = Array.from(
-    document.querySelectorAll(config.editWindowInputForm)
+    document.querySelectorAll(validationConfig.editWindowInputForm)
   );
   formList.forEach((formElement) => {
-    setEventListeners(formElement, config);
+    setEventListeners(formElement, validationConfig);
   });
 };
 
@@ -63,14 +70,14 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-const toggleButtonState = (inputList, buttonElement, config) => {
+const toggleButtonState = (inputList, buttonElement, validationConfig) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.disabled = true;
-    buttonElement.classList.add(config.editWindowSubmitInactive);
+    buttonElement.classList.add(validationConfig.editWindowSubmitInactive);
   } else {
     buttonElement.disabled = false;
-    buttonElement.classList.remove(config.editWindowSubmitInactive);
+    buttonElement.classList.remove(validationConfig.editWindowSubmitInactive);
   }
 };
 
-export { enableValidation, config };
+export { enableValidation, validationConfig };
