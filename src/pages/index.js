@@ -34,7 +34,7 @@ initialCards.reverse().forEach((cardinfo) => {
   renderCard(cardinfo.name, cardinfo.link);
 });
 
-enableValidation();
+enableValidation(config);
 
 // popup update details
 
@@ -96,4 +96,4 @@ function addOverlayListener() {
   );
 }
 
-addOverlayListener(config);
+addOverlayListener();
