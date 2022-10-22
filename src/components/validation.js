@@ -43,7 +43,7 @@ const setEventListeners = (formElement) => {
   });
 };
 
-const enableValidation = () => {
+const enableValidation = (config) => {
   const formList = Array.from(
     document.querySelectorAll(config.editWindowInputForm)
   );
@@ -68,4 +68,4 @@ const toggleButtonState = (inputList, buttonElement) => {
   }
 };
 
-export { enableValidation };
+export { enableValidation, config };

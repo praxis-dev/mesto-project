@@ -1,5 +1,7 @@
 import "./styles.css";
 
+import { config } from "../components/validation";
+
 import { initialCards } from "../components/data";
 
 import {
@@ -17,7 +19,6 @@ import {
   picAdderOpenButton,
   picAdderCloseButton,
   pictureViewerCloseButton,
-  closeByEsc,
 } from "../components/modal";
 
 import {
@@ -95,4 +96,4 @@ function addOverlayListener() {
   );
 }
 
-addOverlayListener();
+addOverlayListener(config);
