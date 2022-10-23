@@ -15,15 +15,21 @@ const pictureViewerCaption = document.getElementById("picture-viewer-caption");
 
 // creating cards
 
-function createCard(name, link) {
+function createCard(name, link, likeNumber) {
   const postElement = postTemplate.querySelector(".post").cloneNode(true);
 
   const postImage = postElement.querySelector(".post__picture");
   const postName = postElement.querySelector(".post__title");
+  const likeCounter = postElement.querySelector(".post__like-counter");
 
   postImage.src = link;
   postName.textContent = name;
   postImage.alt = name;
+  likeCounter.textContent = likeNumber;
+
+  if (likeNumber === 0) {
+    likeCounter.style.display = "none";
+  }
 
   const trashIcon = postElement.querySelector(".post__trash-icon");
 
@@ -49,8 +55,8 @@ function createCard(name, link) {
 
 // add new card
 
-function renderCard(name, link) {
-  const postElement = createCard(name, link);
+function renderCard(name, link, likes) {
+  const postElement = createCard(name, link, likes);
   postGrid.prepend(postElement);
 }
 

@@ -78,8 +78,9 @@ function getCards() {
     })
 
     .then((data) => {
+      // console.log(data[4]["likes"]);
       data.reverse().forEach((cardinfo) => {
-        renderCard(cardinfo.name, cardinfo.link);
+        renderCard(cardinfo.name, cardinfo.link, cardinfo.likes.length);
       });
     })
     .catch((error) => console.log(error));
