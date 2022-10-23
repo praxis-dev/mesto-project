@@ -1,4 +1,5 @@
 import { openPopup, closePopup } from "./modal";
+import { postCard } from "../pages";
 
 const postTemplate = document.querySelector("#post-template").content;
 const postGrid = document.querySelector("#post-grid");
@@ -57,6 +58,7 @@ function addPicFormSubmitHandler(evt) {
   evt.preventDefault();
   const postButton = picAdderFormElement.querySelector(".edit-window__submit");
   renderCard(placeInput.value, placeLinkInput.value);
+  postCard(placeInput.value, placeLinkInput.value);
   closePopup(placeAdderPopup);
   picAdderFormElement.reset();
   postButton.disabled = true;

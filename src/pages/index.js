@@ -66,9 +66,9 @@ function updateProfileFromServer(dataName, dataAbout, dataAvatar) {
 
 getProfileInfo();
 
+// get posts from server
+
 function getCards() {
-  const profileAvatar = document.querySelector(".profile__avatar");
-  console.log(profileAvatar);
   fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/cards", {
     method: "GET",
     headers: apiConfig.headers,
@@ -87,6 +87,36 @@ function getCards() {
 
 getCards();
 
+// patch profile
+
+function patchProfile(name, about) {
+  fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/users/me", {
+    method: "PATCH",
+    headers: apiConfig.headers,
+    body: JSON.stringify({
+      name: name,
+      about: about,
+    }),
+  })
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+}
+
+// post card
+
+export function postCard(name, link) {
+  fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/cards", {
+    method: "POST",
+    headers: apiConfig.headers,
+    body: JSON.stringify({
+      name: name,
+      link: link,
+    }),
+  })
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+}
+
 ///////////// end of API /////////////
 
 enableValidation(validationConfig);
@@ -98,6 +128,7 @@ function updateProfile(evt) {
 
   userName.textContent = nameInput.value;
   userJob.textContent = jobInput.value;
+  patchProfile(nameInput.value, jobInput.value);
   closePopup(profileUpdaterPopup);
 }
 
