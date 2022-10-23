@@ -1,0 +1,6 @@
+.post__likes-container {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  margin-right: 4px;
+}

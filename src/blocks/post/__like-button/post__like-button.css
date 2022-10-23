@@ -7,9 +7,11 @@
   background-repeat: no-repeat;
   width: 25px;
   height: 19px;
-  align-self: center;
-  margin-right: 4px;
   cursor: pointer;
+  margin: 0 auto;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 22px;
 }
 .post__like-button:hover {
   opacity: 0.5;

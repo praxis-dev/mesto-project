@@ -57,6 +57,8 @@
 @import "../blocks/post/__picture/post__picture.css";
 @import "../blocks/post/__title/post__title.css";
 @import "../blocks/post/__like-button/post__like-button.css";
+@import "../blocks/post/__like-counter/post__like-counter.css";
+@import "../blocks/post/__likes-container/post__likes-container.css";
 @import "../blocks/post/__like-button/_active/post__like-button_active.css";
 @import "../blocks/post/__fit-title/post__fit-title.css";
 @import "../blocks/post/__trash-icon/post__trash-icon.css";
