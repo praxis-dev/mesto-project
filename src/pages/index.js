@@ -64,7 +64,34 @@ function updateProfileFromServer(dataName, dataAbout, dataAvatar) {
   profileAvatar.src = dataAvatar;
 }
 
+console.log(id);
+
 getProfileInfo();
+
+let id;
+
+async function getId() {
+  const response = await fetch(
+    "https://nomoreparties.co/v1/" + `${cohortId}` + "/users/me",
+    {
+      method: "GET",
+      headers: apiConfig.headers,
+    }
+  );
+  let data = await response.json();
+  data = JSON.stringify(data);
+  data = JSON.parse(data);
+
+  return data._id;
+}
+
+id = await getId();
+
+getId();
+
+console.log(id);
+
+export { id };
 
 // get posts from server
 
@@ -78,9 +105,16 @@ function getCards() {
     })
 
     .then((data) => {
-      // console.log(data[4]["likes"]);
+      // console.log(data[0]);
       data.reverse().forEach((cardinfo) => {
         renderCard(cardinfo.name, cardinfo.link, cardinfo.likes.length);
+      });
+
+      data.forEach((element) => {
+        // console.log(element);
+        // if (element._id === "f470fd62a0d6482a02d72a95") {
+        //   console.log("mine");
+        // }
       });
     })
     .catch((error) => console.log(error));
@@ -98,24 +132,25 @@ function patchProfile(name, about) {
       name: name,
       about: about,
     }),
-  })
-    .then((response) => response.json())
-    .then((json) => console.log(json));
+  }).then((response) => response.json());
+  // .then((json) => console.log(json));
 }
 
 // post card
 
-export function postCard(name, link) {
+export function postCard(name, link, id) {
+  console.log(id);
+  console.log("id read inside postCard");
   fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/cards", {
     method: "POST",
     headers: apiConfig.headers,
     body: JSON.stringify({
       name: name,
       link: link,
+      _id: id,
     }),
-  })
-    .then((response) => response.json())
-    .then((json) => console.log(json));
+  }).then((response) => response.json());
+  // .then((json) => console.log(json));
 }
 
 ///////////// end of API /////////////

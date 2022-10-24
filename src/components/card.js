@@ -1,5 +1,6 @@
 import { openPopup, closePopup } from "./modal";
-import { postCard } from "../pages";
+import { postCard, id } from "../pages";
+// console.log(id);
 
 const postTemplate = document.querySelector("#post-template").content;
 const postGrid = document.querySelector("#post-grid");
@@ -60,11 +61,13 @@ function renderCard(name, link, likes) {
   postGrid.prepend(postElement);
 }
 
-function addPicFormSubmitHandler(evt) {
+function addPicFormSubmitHandler(evt, id) {
   evt.preventDefault();
   const postButton = picAdderFormElement.querySelector(".edit-window__submit");
   renderCard(placeInput.value, placeLinkInput.value);
-  postCard(placeInput.value, placeLinkInput.value);
+  postCard(placeInput.value, placeLinkInput.value, id);
+  console.log(id);
+  console.log("id read inside addPicFormSubmitHandler");
   closePopup(placeAdderPopup);
   picAdderFormElement.reset();
   postButton.disabled = true;
