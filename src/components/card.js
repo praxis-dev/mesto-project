@@ -1,5 +1,5 @@
 import { openPopup, closePopup } from "./modal";
-import { postCard, apiConfig } from "../pages";
+import { postCard, deleteCard } from "../pages";
 
 const postTemplate = document.querySelector("#post-template").content;
 const postGrid = document.querySelector("#post-grid");
@@ -15,16 +15,18 @@ const pictureViewerCaption = document.getElementById("picture-viewer-caption");
 
 // creating cards
 
-function createCard(name, link, likeNumber, postOwnerId, myId) {
+function createCard(name, link, likeNumber, postOwnerId, myId, cardId) {
   const postElement = postTemplate.querySelector(".post").cloneNode(true);
   const postImage = postElement.querySelector(".post__picture");
   const postName = postElement.querySelector(".post__title");
   const likeCounter = postElement.querySelector(".post__like-counter");
+  let renderedCardId;
 
   postImage.src = link;
   postName.textContent = name;
   postImage.alt = name;
   likeCounter.textContent = likeNumber;
+  renderedCardId = cardId;
 
   if (likeNumber === 0) {
     likeCounter.style.display = "none";
@@ -34,11 +36,11 @@ function createCard(name, link, likeNumber, postOwnerId, myId) {
 
   trashIcon.addEventListener("click", (event) => {
     event.target.closest(".post").remove();
+    deleteCard(cardId);
   });
 
   if (myId != postOwnerId) {
     trashIcon.style.visibility = "hidden";
-    console.log("delete_removed");
   }
 
   const likeButton = postElement.querySelector(".post__like-button");
@@ -59,8 +61,8 @@ function createCard(name, link, likeNumber, postOwnerId, myId) {
 
 // add new card
 
-function renderCard(name, link, likes, postOwnerId, myId) {
-  const postElement = createCard(name, link, likes, postOwnerId, myId);
+function renderCard(name, link, likes, postOwnerId, myId, cardId) {
+  const postElement = createCard(name, link, likes, postOwnerId, myId, cardId);
   postGrid.prepend(postElement);
 }
 
@@ -69,8 +71,6 @@ function addPicFormSubmitHandler(evt) {
   const postButton = picAdderFormElement.querySelector(".edit-window__submit");
   renderCard(placeInput.value, placeLinkInput.value);
   postCard(placeInput.value, placeLinkInput.value);
-  // console.log(id);
-  // console.log("id read inside addPicFormSubmitHandler");
   closePopup(placeAdderPopup);
   picAdderFormElement.reset();
   postButton.disabled = true;

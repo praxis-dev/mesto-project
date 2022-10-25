@@ -79,21 +79,15 @@ function getCards() {
     })
 
     .then((data) => {
-      // console.log(data[0]);
       data.reverse().forEach((cardinfo) => {
         renderCard(
           cardinfo.name,
           cardinfo.link,
           cardinfo.likes.length,
           cardinfo.owner._id,
-          apiConfig.id
+          apiConfig.id,
+          cardinfo._id
         );
-      });
-
-      data.forEach((element) => {
-        if (element.owner._id === apiConfig.id) {
-          console.log("mine");
-        }
       });
     })
     .catch((error) => console.log(error));
@@ -119,7 +113,6 @@ function patchProfile(name, about) {
 // post card
 
 export function postCard(name, link) {
-  console.log("id read inside postCard");
   fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/cards", {
     method: "POST",
     headers: apiConfig.headers,
@@ -129,6 +122,29 @@ export function postCard(name, link) {
       _id: apiConfig.id,
     }),
   })
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+}
+
+//get card id
+
+// delete card
+
+export function deleteCard(cardId) {
+  fetch(
+    "https://nomoreparties.co/v1/" +
+      `${cohortId}` +
+      "/cards" +
+      "/" +
+      `${cardId}`,
+    {
+      method: "DELETE",
+      headers: apiConfig.headers,
+      body: JSON.stringify({
+        _id: apiConfig.id,
+      }),
+    }
+  )
     .then((response) => response.json())
     .then((json) => console.log(json));
 }
