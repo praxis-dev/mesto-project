@@ -79,6 +79,7 @@ function getCards() {
     })
 
     .then((data) => {
+      data.forEach((element) => console.log(element));
       data.reverse().forEach((cardinfo) => {
         renderCard(
           cardinfo.name,
@@ -90,6 +91,7 @@ function getCards() {
         );
       });
     })
+
     .catch((error) => console.log(error));
 }
 
@@ -126,8 +128,6 @@ export function postCard(name, link) {
     .then((json) => console.log(json));
 }
 
-//get card id
-
 // delete card
 
 export function deleteCard(cardId) {
@@ -148,6 +148,54 @@ export function deleteCard(cardId) {
     .then((response) => response.json())
     .then((json) => console.log(json));
 }
+
+// like card
+
+export function addLike() {
+  let likes = ["1"];
+  fetch(
+    "https://nomoreparties.co/v1/" +
+      `${cohortId}` +
+      "/cards" +
+      "/likes/" +
+      "6356eb41a332460b99bfafe1",
+    {
+      method: "PUT",
+      headers: apiConfig.headers,
+      body: JSON.stringify({
+        _id: apiConfig.id,
+        likes: [...likes, "1"],
+      }),
+    }
+  )
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+}
+
+// addLike();
+
+export function removeLike() {
+  let likes = ["1"];
+  fetch(
+    "https://nomoreparties.co/v1/" +
+      `${cohortId}` +
+      "/cards" +
+      "/likes/" +
+      "6356eb41a332460b99bfafe1",
+    {
+      method: "DELETE",
+      headers: apiConfig.headers,
+      body: JSON.stringify({
+        _id: apiConfig.id,
+        likes: [likes.pop()],
+      }),
+    }
+  )
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+}
+
+removeLike();
 
 ///////////// end of API /////////////
 
