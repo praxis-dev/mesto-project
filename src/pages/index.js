@@ -30,9 +30,9 @@ import { enableValidation } from "../components/validation";
 
 ///////////// API /////////////
 
-const cohortId = "plus-cohort-16";
-const authorizationToken = "84065f1e-9b65-4660-bac5-9a220fdec6d4";
-const apiConfig = {
+export const cohortId = "plus-cohort-16";
+export const authorizationToken = "84065f1e-9b65-4660-bac5-9a220fdec6d4";
+export const apiConfig = {
   url: `https://nomoreparties.co/v1/${cohortId}`,
   headers: {
     authorization: authorizationToken,
@@ -54,6 +54,7 @@ function getProfileInfo() {
 
     .then((data) => {
       updateProfileFromServer(data.name, data.about, data.avatar);
+      apiConfig.id = data._id;
     })
     .catch((error) => console.log(error));
 }
@@ -64,34 +65,7 @@ function updateProfileFromServer(dataName, dataAbout, dataAvatar) {
   profileAvatar.src = dataAvatar;
 }
 
-console.log(id);
-
 getProfileInfo();
-
-let id;
-
-async function getId() {
-  const response = await fetch(
-    "https://nomoreparties.co/v1/" + `${cohortId}` + "/users/me",
-    {
-      method: "GET",
-      headers: apiConfig.headers,
-    }
-  );
-  let data = await response.json();
-  data = JSON.stringify(data);
-  data = JSON.parse(data);
-
-  return data._id;
-}
-
-id = await getId();
-
-getId();
-
-console.log(id);
-
-export { id };
 
 // get posts from server
 
@@ -107,14 +81,19 @@ function getCards() {
     .then((data) => {
       // console.log(data[0]);
       data.reverse().forEach((cardinfo) => {
-        renderCard(cardinfo.name, cardinfo.link, cardinfo.likes.length);
+        renderCard(
+          cardinfo.name,
+          cardinfo.link,
+          cardinfo.likes.length,
+          cardinfo.owner._id,
+          apiConfig.id
+        );
       });
 
       data.forEach((element) => {
-        // console.log(element);
-        // if (element._id === "f470fd62a0d6482a02d72a95") {
-        //   console.log("mine");
-        // }
+        if (element.owner._id === apiConfig.id) {
+          console.log("mine");
+        }
       });
     })
     .catch((error) => console.log(error));
@@ -132,14 +111,14 @@ function patchProfile(name, about) {
       name: name,
       about: about,
     }),
-  }).then((response) => response.json());
-  // .then((json) => console.log(json));
+  })
+    .then((response) => response.json())
+    .then((json) => console.log(json));
 }
 
 // post card
 
-export function postCard(name, link, id) {
-  console.log(id);
+export function postCard(name, link) {
   console.log("id read inside postCard");
   fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/cards", {
     method: "POST",
@@ -147,10 +126,11 @@ export function postCard(name, link, id) {
     body: JSON.stringify({
       name: name,
       link: link,
-      _id: id,
+      _id: apiConfig.id,
     }),
-  }).then((response) => response.json());
-  // .then((json) => console.log(json));
+  })
+    .then((response) => response.json())
+    .then((json) => console.log(json));
 }
 
 ///////////// end of API /////////////

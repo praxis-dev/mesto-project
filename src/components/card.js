@@ -1,6 +1,5 @@
 import { openPopup, closePopup } from "./modal";
-import { postCard, id } from "../pages";
-// console.log(id);
+import { postCard, apiConfig } from "../pages";
 
 const postTemplate = document.querySelector("#post-template").content;
 const postGrid = document.querySelector("#post-grid");
@@ -16,9 +15,8 @@ const pictureViewerCaption = document.getElementById("picture-viewer-caption");
 
 // creating cards
 
-function createCard(name, link, likeNumber) {
+function createCard(name, link, likeNumber, postOwnerId, myId) {
   const postElement = postTemplate.querySelector(".post").cloneNode(true);
-
   const postImage = postElement.querySelector(".post__picture");
   const postName = postElement.querySelector(".post__title");
   const likeCounter = postElement.querySelector(".post__like-counter");
@@ -38,6 +36,11 @@ function createCard(name, link, likeNumber) {
     event.target.closest(".post").remove();
   });
 
+  if (myId != postOwnerId) {
+    trashIcon.style.visibility = "hidden";
+    console.log("delete_removed");
+  }
+
   const likeButton = postElement.querySelector(".post__like-button");
 
   likeButton.addEventListener("click", (event) => {
@@ -56,18 +59,18 @@ function createCard(name, link, likeNumber) {
 
 // add new card
 
-function renderCard(name, link, likes) {
-  const postElement = createCard(name, link, likes);
+function renderCard(name, link, likes, postOwnerId, myId) {
+  const postElement = createCard(name, link, likes, postOwnerId, myId);
   postGrid.prepend(postElement);
 }
 
-function addPicFormSubmitHandler(evt, id) {
+function addPicFormSubmitHandler(evt) {
   evt.preventDefault();
   const postButton = picAdderFormElement.querySelector(".edit-window__submit");
   renderCard(placeInput.value, placeLinkInput.value);
-  postCard(placeInput.value, placeLinkInput.value, id);
-  console.log(id);
-  console.log("id read inside addPicFormSubmitHandler");
+  postCard(placeInput.value, placeLinkInput.value);
+  // console.log(id);
+  // console.log("id read inside addPicFormSubmitHandler");
   closePopup(placeAdderPopup);
   picAdderFormElement.reset();
   postButton.disabled = true;
