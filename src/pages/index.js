@@ -69,7 +69,7 @@ getProfileInfo();
 
 // get posts from server
 
-function getCards() {
+export function getCards() {
   fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/cards", {
     method: "GET",
     headers: apiConfig.headers,
@@ -151,14 +151,16 @@ export function deleteCard(cardId) {
 
 // like card
 
-export function addLike() {
+// add like
+
+export function addLike(cardId) {
   let likes = ["1"];
   fetch(
     "https://nomoreparties.co/v1/" +
       `${cohortId}` +
       "/cards" +
       "/likes/" +
-      "6356eb41a332460b99bfafe1",
+      `${cardId}`,
     {
       method: "PUT",
       headers: apiConfig.headers,
@@ -172,16 +174,16 @@ export function addLike() {
     .then((json) => console.log(json));
 }
 
-// addLike();
+//remove like
 
-export function removeLike() {
+export function removeLike(cardId) {
   let likes = ["1"];
   fetch(
     "https://nomoreparties.co/v1/" +
       `${cohortId}` +
       "/cards" +
       "/likes/" +
-      "6356eb41a332460b99bfafe1",
+      `${cardId}`,
     {
       method: "DELETE",
       headers: apiConfig.headers,
@@ -195,7 +197,48 @@ export function removeLike() {
     .then((json) => console.log(json));
 }
 
-removeLike();
+// liked by current user
+
+function likedByCurrentUser(cardId) {
+  let likedByMe;
+  fetch(
+    "https://nomoreparties.co/v1/" +
+      `${cohortId}` +
+      "/cards" +
+      "/likes/" +
+      `${cardId}`,
+    {
+      method: "PUT",
+      headers: apiConfig.headers,
+      body: JSON.stringify({
+        _id: apiConfig.id,
+      }),
+    }
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      data.likes.forEach((element) => console.log(element._id));
+      data.likes.forEach((element) => {
+        console.log("triggered");
+        console.log(apiConfig.id);
+        if (apiConfig.id === element._id) {
+          likedByMe = true;
+          console.log(likedByMe);
+          return likedByMe;
+        } else {
+          likedByMe = false;
+          console.log(likedByMe);
+          return likedByMe;
+        }
+      });
+    });
+}
+
+likedByCurrentUser("6358a1bbb5f4340bf1ef08e8");
+
+// get carbyId
+// get card likes (array of objects)
+// cycle through like objects to find if there is a match by userId
 
 ///////////// end of API /////////////
 

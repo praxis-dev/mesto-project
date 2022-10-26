@@ -1,5 +1,5 @@
 import { openPopup, closePopup } from "./modal";
-import { postCard, deleteCard } from "../pages";
+import { postCard, deleteCard, addLike, removeLike } from "../pages";
 
 const postTemplate = document.querySelector("#post-template").content;
 const postGrid = document.querySelector("#post-grid");
@@ -47,6 +47,7 @@ function createCard(name, link, likeNumber, postOwnerId, myId, cardId) {
 
   likeButton.addEventListener("click", (event) => {
     likeButton.classList.toggle("post__like-button_active");
+    addLike(cardId);
   });
 
   postImage.addEventListener("click", (event) => {
