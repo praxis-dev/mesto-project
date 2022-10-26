@@ -52,9 +52,13 @@ function createCard(name, link, likeNumber, postOwnerId, myId, cardId) {
 
   likeButton.addEventListener("click", (event) => {
     if (likedByCurrentUser(cardId) === true) {
+      console.log(likedByCurrentUser(cardId));
+      console.log(cardId);
       console.log("remove like");
       removeLike(cardId);
-    } else {
+    } else if (likedByCurrentUser(cardId) != true) {
+      console.log(likedByCurrentUser(cardId));
+      console.log(cardId);
       console.log("add like");
       addLike(cardId);
     }

@@ -79,7 +79,7 @@ export function getCards() {
     })
 
     .then((data) => {
-      data.forEach((element) => console.log(element));
+      // data.forEach((element) => console.log(element));
       data.reverse().forEach((cardinfo) => {
         renderCard(
           cardinfo.name,
@@ -176,7 +176,8 @@ export function addLike(cardId) {
   )
     .then((response) => response.json())
     .then((json) => console.log(json))
-    .then(() => likeButton.classList.add("post__like-button_active"));
+    .then(() => console.log("activate button"))
+    .then(() => likeButton.classList.add(".post__like-button_active"));
 }
 
 //remove like
@@ -204,13 +205,12 @@ export function removeLike(cardId) {
   )
     .then((response) => response.json())
     .then((json) => console.log(json))
-    .then(() => likeButton.classList.remove("post__like-button_active"));
+    .then(() => likeButton.classList.remove(".post__like-button_active"));
 }
 
 // liked by current user
 
 export function likedByCurrentUser(cardId) {
-  let likedByMe;
   fetch(
     "https://nomoreparties.co/v1/" +
       `${cohortId}` +
@@ -227,24 +227,28 @@ export function likedByCurrentUser(cardId) {
   )
     .then((response) => response.json())
     .then((data) => {
-      data.likes.forEach((element) => console.log(element._id));
-      data.likes.forEach((element) => {
-        console.log("check if liked triggered");
-        console.log(apiConfig.id);
-        if (apiConfig.id === element._id) {
-          likedByMe = true;
-          console.log(likedByMe);
-          return likedByMe;
-        } else {
-          likedByMe = false;
-          console.log(likedByMe);
-          return likedByMe;
+      // data.likes.forEach((element) => console.log(element._id));
+      console.log("check if liked triggered");
+      let found = false;
+      for (let i = 0; i < data.likes.length; i++) {
+        if (data.likes[i]._id == apiConfig.id) {
+          found = true;
+          console.log("found my like");
+          console.log(found);
         }
-      });
+      }
     });
 }
 
-likedByCurrentUser("6358a1bbb5f4340bf1ef08e8");
+console.log(likedByCurrentUser("63589ef97835d40b8101fa2f"));
+
+// const array = [1, 2, 3, 4, 5];
+
+// // checks whether an element is even
+// const even = (element) => element % 2 === 0;
+
+// console.log(array.some(even));
+// expected output: true
 
 // get carbyId
 // get card likes (array of objects)
