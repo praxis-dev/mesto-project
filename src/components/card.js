@@ -1,5 +1,11 @@
 import { openPopup, closePopup } from "./modal";
-import { postCard, deleteCard, addLike, removeLike } from "../pages";
+import {
+  postCard,
+  deleteCard,
+  addLike,
+  removeLike,
+  likedByCurrentUser,
+} from "../pages";
 
 const postTemplate = document.querySelector("#post-template").content;
 const postGrid = document.querySelector("#post-grid");
@@ -36,7 +42,6 @@ function createCard(name, link, likeNumber, postOwnerId, myId, cardId) {
 
   trashIcon.addEventListener("click", (event) => {
     event.target.closest(".post").remove();
-    deleteCard(cardId);
   });
 
   if (myId != postOwnerId) {
@@ -46,8 +51,13 @@ function createCard(name, link, likeNumber, postOwnerId, myId, cardId) {
   const likeButton = postElement.querySelector(".post__like-button");
 
   likeButton.addEventListener("click", (event) => {
-    likeButton.classList.toggle("post__like-button_active");
-    addLike(cardId);
+    if (likedByCurrentUser(cardId) === true) {
+      console.log("remove like");
+      removeLike(cardId);
+    } else {
+      console.log("add like");
+      addLike(cardId);
+    }
   });
 
   postImage.addEventListener("click", (event) => {

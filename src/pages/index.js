@@ -154,6 +154,10 @@ export function deleteCard(cardId) {
 // add like
 
 export function addLike(cardId) {
+  const postTemplate = document.querySelector("#post-template").content;
+  const postElement = postTemplate.querySelector(".post").cloneNode(true);
+  const likeButton = postElement.querySelector(".post__like-button");
+  console.log("add like triggered");
   let likes = ["1"];
   fetch(
     "https://nomoreparties.co/v1/" +
@@ -171,12 +175,17 @@ export function addLike(cardId) {
     }
   )
     .then((response) => response.json())
-    .then((json) => console.log(json));
+    .then((json) => console.log(json))
+    .then(() => likeButton.classList.add("post__like-button_active"));
 }
 
 //remove like
 
 export function removeLike(cardId) {
+  const postTemplate = document.querySelector("#post-template").content;
+  const postElement = postTemplate.querySelector(".post").cloneNode(true);
+  const likeButton = postElement.querySelector(".post__like-button");
+  console.log("remove like triggered");
   let likes = ["1"];
   fetch(
     "https://nomoreparties.co/v1/" +
@@ -194,12 +203,13 @@ export function removeLike(cardId) {
     }
   )
     .then((response) => response.json())
-    .then((json) => console.log(json));
+    .then((json) => console.log(json))
+    .then(() => likeButton.classList.remove("post__like-button_active"));
 }
 
 // liked by current user
 
-function likedByCurrentUser(cardId) {
+export function likedByCurrentUser(cardId) {
   let likedByMe;
   fetch(
     "https://nomoreparties.co/v1/" +
@@ -219,7 +229,7 @@ function likedByCurrentUser(cardId) {
     .then((data) => {
       data.likes.forEach((element) => console.log(element._id));
       data.likes.forEach((element) => {
-        console.log("triggered");
+        console.log("check if liked triggered");
         console.log(apiConfig.id);
         if (apiConfig.id === element._id) {
           likedByMe = true;
