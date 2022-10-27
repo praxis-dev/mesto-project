@@ -1,5 +1,10 @@
 import { openPopup, closePopup } from "./modal";
-import { postCard, deleteCard } from "./api";
+import {
+  postCard,
+  deleteCard,
+  postLikeToServer,
+  removeLikeFromServer,
+} from "./api";
 
 const postTemplate = document.querySelector("#post-template").content;
 const postGrid = document.querySelector("#post-grid");
@@ -56,7 +61,7 @@ function createCard(
 
   likeButton.addEventListener("click", () => {
     console.log("click");
-    likeCard(likeButton, likeCounter);
+    likeCard(likeButton, likeCounter, renderedCardId);
   });
 
   postImage.addEventListener("click", (event) => {
@@ -71,16 +76,18 @@ function createCard(
 
 // like card function
 
-function likeCard(button, likes) {
+function likeCard(button, likes, cardId) {
   console.log("triggered");
   if (button.classList.contains("post__like-button_active")) {
     console.log("this one is active");
     likes.textContent--;
     button.classList.remove("post__like-button_active");
+    removeLikeFromServer(cardId);
   } else {
     console.log("this one is not");
     likes.textContent++;
     button.classList.add("post__like-button_active");
+    postLikeToServer(cardId);
   }
 }
 

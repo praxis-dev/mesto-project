@@ -61,3 +61,46 @@ export const deleteCard = (cardId) => {
     }
   );
 };
+
+export const postLikeToServer = (cardId) => {
+  console.log("add like triggered");
+  let likes = ["1"];
+  return fetch(
+    "https://nomoreparties.co/v1/" +
+      `${cohortId}` +
+      "/cards" +
+      "/likes/" +
+      `${cardId}`,
+    {
+      method: "PUT",
+      headers: apiConfig.headers,
+      body: JSON.stringify({
+        _id: apiConfig.id,
+        likes: [...likes, "1"],
+      }),
+    }
+  )
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+};
+
+export const removeLikeFromServer = (cardId) => {
+  let likes = ["1"];
+  return fetch(
+    "https://nomoreparties.co/v1/" +
+      `${cohortId}` +
+      "/cards" +
+      "/likes/" +
+      `${cardId}`,
+    {
+      method: "DELETE",
+      headers: apiConfig.headers,
+      body: JSON.stringify({
+        _id: apiConfig.id,
+        likes: [likes.pop()],
+      }),
+    }
+  )
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+};
