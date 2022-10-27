@@ -1,11 +1,5 @@
 import { openPopup, closePopup } from "./modal";
-import {
-  postCard,
-  deleteCard,
-  postLikeToServer,
-  removeLikeFromServer,
-  likedByCurrentUser,
-} from "./api";
+import { postCard, deleteCard } from "./api";
 
 const postTemplate = document.querySelector("#post-template").content;
 const postGrid = document.querySelector("#post-grid");
@@ -21,7 +15,15 @@ const pictureViewerCaption = document.getElementById("picture-viewer-caption");
 
 // creating cards
 
-function createCard(name, link, likeNumber, postOwnerId, myId, cardId) {
+function createCard(
+  name,
+  link,
+  likeNumber,
+  postOwnerId,
+  myId,
+  cardId,
+  isLikedByMe
+) {
   const postElement = postTemplate.querySelector(".post").cloneNode(true);
   const postImage = postElement.querySelector(".post__picture");
   const postName = postElement.querySelector(".post__title");
@@ -47,7 +49,13 @@ function createCard(name, link, likeNumber, postOwnerId, myId, cardId) {
 
   const likeButton = postElement.querySelector(".post__like-button");
 
+  if (isLikedByMe) {
+    console.log(`${cardId} is liked by me`);
+    likeButton.classList.add("post__like-button_active");
+  }
+
   likeButton.addEventListener("click", () => {
+    console.log("click");
     likeCard(likeButton, likeCounter);
   });
 
@@ -65,15 +73,29 @@ function createCard(name, link, likeNumber, postOwnerId, myId, cardId) {
 
 function likeCard(button, likes) {
   console.log("triggered");
-  console.log(likes.textContent);
-  button.classList.toggle("post__like-button_active");
-  likes.textContent++;
+  if (button.classList.contains("post__like-button_active")) {
+    console.log("this one is active");
+    likes.textContent--;
+    button.classList.remove("post__like-button_active");
+  } else {
+    console.log("this one is not");
+    likes.textContent++;
+    button.classList.add("post__like-button_active");
+  }
 }
 
 // add new card
 
-function renderCard(name, link, likes, postOwnerId, myId, cardId) {
-  const postElement = createCard(name, link, likes, postOwnerId, myId, cardId);
+function renderCard(name, link, likes, postOwnerId, myId, cardId, isLikedByMe) {
+  const postElement = createCard(
+    name,
+    link,
+    likes,
+    postOwnerId,
+    myId,
+    cardId,
+    isLikedByMe
+  );
   postGrid.prepend(postElement);
 }
 

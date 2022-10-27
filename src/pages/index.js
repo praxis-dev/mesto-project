@@ -35,6 +35,8 @@ import {
   getProfileInfo,
   getCards,
   patchProfile,
+  checkIfLikedByMe,
+  likedByCurrentUser,
 } from "../components/api";
 
 ///////////// API /////////////
@@ -69,7 +71,7 @@ getCards()
     return res.json();
   })
   .then((data) => {
-    // data.forEach((element) => console.log(element));
+    data.forEach((cardinfo) => console.log(likedByMe(cardinfo)));
     data.reverse().forEach((cardinfo) => {
       renderCard(
         cardinfo.name,
@@ -77,7 +79,8 @@ getCards()
         cardinfo.likes.length,
         cardinfo.owner._id,
         apiConfig.id,
-        cardinfo._id
+        cardinfo._id,
+        likedByMe(cardinfo)
       );
     });
   })
@@ -86,13 +89,9 @@ getCards()
 
 getCards();
 
-// like card
-
-// add like
-
-//remove like
-
-// liked by current user
+function likedByMe(card) {
+  return card.likes.some((like) => like._id === apiConfig.id);
+}
 
 ///////////// end of API /////////////
 
