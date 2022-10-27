@@ -2,10 +2,10 @@ import { openPopup, closePopup } from "./modal";
 import {
   postCard,
   deleteCard,
-  addLike,
-  removeLike,
+  postLikeToServer,
+  removeLikeFromServer,
   likedByCurrentUser,
-} from "../pages";
+} from "./api";
 
 const postTemplate = document.querySelector("#post-template").content;
 const postGrid = document.querySelector("#post-grid");
@@ -42,6 +42,7 @@ function createCard(name, link, likeNumber, postOwnerId, myId, cardId) {
 
   trashIcon.addEventListener("click", (event) => {
     event.target.closest(".post").remove();
+    deleteCard(cardId);
   });
 
   if (myId != postOwnerId) {
@@ -52,6 +53,7 @@ function createCard(name, link, likeNumber, postOwnerId, myId, cardId) {
 
   likeButton.addEventListener("click", (event) => {
     likeButtonCLickHandler(cardId);
+    likeButton.classList.toggle(".post__like-button_active");
   });
 
   postImage.addEventListener("click", (event) => {
@@ -72,11 +74,11 @@ function likeButtonCLickHandler(cardId) {
     console.log(likedByCurrentUser(cardId));
     console.log(cardId);
     console.log(`Liked CardId ${cardId} logged to remove like`);
-    removeLike(cardId);
+    removeLikeFromServer(cardId);
   } else if (likedByCurrentUser(cardId) != true) {
     console.log(likedByCurrentUser(cardId));
     console.log(`Not liked CardId ${cardId} logged to add like`);
-    addLike(cardId);
+    postLikeToServer(cardId);
   }
 }
 

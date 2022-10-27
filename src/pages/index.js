@@ -28,222 +28,71 @@ import {
 } from "../components/card";
 import { enableValidation } from "../components/validation";
 
+import {
+  cohortId,
+  authorizationToken,
+  apiConfig,
+  getProfileInfo,
+  getCards,
+  patchProfile,
+} from "../components/api";
+
 ///////////// API /////////////
 
-export const cohortId = "plus-cohort-16";
-export const authorizationToken = "84065f1e-9b65-4660-bac5-9a220fdec6d4";
-export const apiConfig = {
-  url: `https://nomoreparties.co/v1/${cohortId}`,
-  headers: {
-    authorization: authorizationToken,
-    "Content-Type": "application/json",
-  },
-};
 const profileAvatar = document.querySelector(".profile__avatar");
 
 // get profile info from server
 
-function getProfileInfo() {
-  fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/users/me", {
-    method: "GET",
-    headers: apiConfig.headers,
+getProfileInfo()
+  .then((res) => {
+    return res.json();
   })
-    .then((res) => {
-      return res.json();
-    })
+  .then((data) => {
+    updateProfileFromServer(data.name, data.about, data.avatar, data._id);
+  })
+  .catch((error) => console.log(error));
+//
 
-    .then((data) => {
-      updateProfileFromServer(data.name, data.about, data.avatar);
-      apiConfig.id = data._id;
-    })
-    .catch((error) => console.log(error));
-}
-
-function updateProfileFromServer(dataName, dataAbout, dataAvatar) {
+function updateProfileFromServer(dataName, dataAbout, dataAvatar, dataId) {
   userName.innerText = dataName;
   userJob.innerText = dataAbout;
   profileAvatar.src = dataAvatar;
+  apiConfig.id = dataId;
 }
 
 getProfileInfo();
 
 // get posts from server
 
-export function getCards() {
-  fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/cards", {
-    method: "GET",
-    headers: apiConfig.headers,
+getCards()
+  .then((res) => {
+    return res.json();
   })
-    .then((res) => {
-      return res.json();
-    })
-
-    .then((data) => {
-      // data.forEach((element) => console.log(element));
-      data.reverse().forEach((cardinfo) => {
-        renderCard(
-          cardinfo.name,
-          cardinfo.link,
-          cardinfo.likes.length,
-          cardinfo.owner._id,
-          apiConfig.id,
-          cardinfo._id
-        );
-      });
-    })
-
-    .catch((error) => console.log(error));
-}
+  .then((data) => {
+    // data.forEach((element) => console.log(element));
+    data.reverse().forEach((cardinfo) => {
+      renderCard(
+        cardinfo.name,
+        cardinfo.link,
+        cardinfo.likes.length,
+        cardinfo.owner._id,
+        apiConfig.id,
+        cardinfo._id
+      );
+    });
+  })
+  .catch((error) => console.log(error));
+//
 
 getCards();
-
-// patch profile
-
-function patchProfile(name, about) {
-  fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/users/me", {
-    method: "PATCH",
-    headers: apiConfig.headers,
-    body: JSON.stringify({
-      name: name,
-      about: about,
-    }),
-  })
-    .then((response) => response.json())
-    .then((json) => console.log(json));
-}
-
-// post card
-
-export function postCard(name, link) {
-  fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/cards", {
-    method: "POST",
-    headers: apiConfig.headers,
-    body: JSON.stringify({
-      name: name,
-      link: link,
-      _id: apiConfig.id,
-    }),
-  })
-    .then((response) => response.json())
-    .then((json) => console.log(json));
-}
-
-// delete card
-
-export function deleteCard(cardId) {
-  fetch(
-    "https://nomoreparties.co/v1/" +
-      `${cohortId}` +
-      "/cards" +
-      "/" +
-      `${cardId}`,
-    {
-      method: "DELETE",
-      headers: apiConfig.headers,
-      body: JSON.stringify({
-        _id: apiConfig.id,
-      }),
-    }
-  )
-    .then((response) => response.json())
-    .then((json) => console.log(json));
-}
 
 // like card
 
 // add like
 
-export function addLike(cardId) {
-  const postTemplate = document.querySelector("#post-template").content;
-  const postElement = postTemplate.querySelector(".post").cloneNode(true);
-  const likeButton = postElement.querySelector(".post__like-button");
-  console.log("add like triggered");
-  let likes = ["1"];
-  fetch(
-    "https://nomoreparties.co/v1/" +
-      `${cohortId}` +
-      "/cards" +
-      "/likes/" +
-      `${cardId}`,
-    {
-      method: "PUT",
-      headers: apiConfig.headers,
-      body: JSON.stringify({
-        _id: apiConfig.id,
-        likes: [...likes, "1"],
-      }),
-    }
-  )
-    .then((response) => response.json())
-    .then((json) => console.log(json))
-    .then(() => console.log("activate button"))
-    .then(() => likeButton.classList.add(".post__like-button_active"));
-}
-
 //remove like
 
-export function removeLike(cardId) {
-  const postTemplate = document.querySelector("#post-template").content;
-  const postElement = postTemplate.querySelector(".post").cloneNode(true);
-  const likeButton = postElement.querySelector(".post__like-button");
-  console.log("remove like triggered");
-  let likes = ["1"];
-  fetch(
-    "https://nomoreparties.co/v1/" +
-      `${cohortId}` +
-      "/cards" +
-      "/likes/" +
-      `${cardId}`,
-    {
-      method: "DELETE",
-      headers: apiConfig.headers,
-      body: JSON.stringify({
-        _id: apiConfig.id,
-        likes: [likes.pop()],
-      }),
-    }
-  )
-    .then((response) => response.json())
-    .then((json) => console.log(json))
-    .then(() => likeButton.classList.remove(".post__like-button_active"));
-}
-
 // liked by current user
-
-export function likedByCurrentUser(cardId) {
-  fetch(
-    "https://nomoreparties.co/v1/" +
-      `${cohortId}` +
-      "/cards" +
-      "/likes/" +
-      `${cardId}`,
-    {
-      method: "PUT",
-      headers: apiConfig.headers,
-      body: JSON.stringify({
-        _id: apiConfig.id,
-      }),
-    }
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      // data.likes.forEach((element) => console.log(element._id));
-      return checkIfLikedByMe(data);
-    });
-}
-
-export function checkIfLikedByMe(data) {
-  console.log(`2. checkIfLikedByMe called poster id is ${apiConfig.id} `);
-  let found = false;
-  for (let i = 0; i < data.likes.length; i++) {
-    if (data.likes[i]._id == apiConfig.id) {
-      found = true;
-      console.log("found my like");
-    }
-  }
-  console.log(found);
-  return found;
-}
 
 ///////////// end of API /////////////
 
@@ -256,7 +105,9 @@ function updateProfile(evt) {
 
   userName.textContent = nameInput.value;
   userJob.textContent = jobInput.value;
-  patchProfile(nameInput.value, jobInput.value);
+  patchProfile(nameInput.value, jobInput.value)
+    .then((response) => response.json())
+    .then((json) => console.log(json));
   closePopup(profileUpdaterPopup);
 }
 
