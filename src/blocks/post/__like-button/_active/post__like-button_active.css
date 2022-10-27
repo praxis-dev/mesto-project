@@ -1,13 +1,3 @@
 .post__like-button_active {
-  background: none;
-  border: none;
-  cursor: pointer;
   background-image: url(../../../../vendor/images/like-button-active.svg);
-  background: cover;
-  background-repeat: no-repeat;
-  width: 25px;
-  height: 19px;
-  align-self: center;
-  margin-right: 4px;
-  cursor: pointer;
 }

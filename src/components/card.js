@@ -34,10 +34,6 @@ function createCard(name, link, likeNumber, postOwnerId, myId, cardId) {
   likeCounter.textContent = likeNumber;
   renderedCardId = cardId;
 
-  if (likeNumber === 0) {
-    likeCounter.style.display = "none";
-  }
-
   const trashIcon = postElement.querySelector(".post__trash-icon");
 
   trashIcon.addEventListener("click", (event) => {
@@ -51,9 +47,8 @@ function createCard(name, link, likeNumber, postOwnerId, myId, cardId) {
 
   const likeButton = postElement.querySelector(".post__like-button");
 
-  likeButton.addEventListener("click", (event) => {
-    likeButtonCLickHandler(cardId);
-    likeButton.classList.toggle(".post__like-button_active");
+  likeButton.addEventListener("click", () => {
+    likeCard(likeButton, likeCounter);
   });
 
   postImage.addEventListener("click", (event) => {
@@ -66,20 +61,13 @@ function createCard(name, link, likeNumber, postOwnerId, myId, cardId) {
   return postElement;
 }
 
-// like button press handler
+// like card function
 
-function likeButtonCLickHandler(cardId) {
-  console.log("1. likeButtonCLickHandler called ");
-  if (likedByCurrentUser(cardId) === true) {
-    console.log(likedByCurrentUser(cardId));
-    console.log(cardId);
-    console.log(`Liked CardId ${cardId} logged to remove like`);
-    removeLikeFromServer(cardId);
-  } else if (likedByCurrentUser(cardId) != true) {
-    console.log(likedByCurrentUser(cardId));
-    console.log(`Not liked CardId ${cardId} logged to add like`);
-    postLikeToServer(cardId);
-  }
+function likeCard(button, likes) {
+  console.log("triggered");
+  console.log(likes.textContent);
+  button.classList.toggle("post__like-button_active");
+  likes.textContent++;
 }
 
 // add new card
