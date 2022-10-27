@@ -228,31 +228,22 @@ export function likedByCurrentUser(cardId) {
     .then((response) => response.json())
     .then((data) => {
       // data.likes.forEach((element) => console.log(element._id));
-      console.log("check if liked triggered");
-      let found = false;
-      for (let i = 0; i < data.likes.length; i++) {
-        if (data.likes[i]._id == apiConfig.id) {
-          found = true;
-          console.log("found my like");
-          console.log(found);
-        }
-      }
+      return checkIfLikedByMe(data);
     });
 }
 
-console.log(likedByCurrentUser("63589ef97835d40b8101fa2f"));
-
-// const array = [1, 2, 3, 4, 5];
-
-// // checks whether an element is even
-// const even = (element) => element % 2 === 0;
-
-// console.log(array.some(even));
-// expected output: true
-
-// get carbyId
-// get card likes (array of objects)
-// cycle through like objects to find if there is a match by userId
+export function checkIfLikedByMe(data) {
+  console.log(`2. checkIfLikedByMe called poster id is ${apiConfig.id} `);
+  let found = false;
+  for (let i = 0; i < data.likes.length; i++) {
+    if (data.likes[i]._id == apiConfig.id) {
+      found = true;
+      console.log("found my like");
+    }
+  }
+  console.log(found);
+  return found;
+}
 
 ///////////// end of API /////////////
 

@@ -51,17 +51,7 @@ function createCard(name, link, likeNumber, postOwnerId, myId, cardId) {
   const likeButton = postElement.querySelector(".post__like-button");
 
   likeButton.addEventListener("click", (event) => {
-    if (likedByCurrentUser(cardId) === true) {
-      console.log(likedByCurrentUser(cardId));
-      console.log(cardId);
-      console.log("remove like");
-      removeLike(cardId);
-    } else if (likedByCurrentUser(cardId) != true) {
-      console.log(likedByCurrentUser(cardId));
-      console.log(cardId);
-      console.log("add like");
-      addLike(cardId);
-    }
+    likeButtonCLickHandler(cardId);
   });
 
   postImage.addEventListener("click", (event) => {
@@ -72,6 +62,22 @@ function createCard(name, link, likeNumber, postOwnerId, myId, cardId) {
   });
 
   return postElement;
+}
+
+// like button press handler
+
+function likeButtonCLickHandler(cardId) {
+  console.log("1. likeButtonCLickHandler called ");
+  if (likedByCurrentUser(cardId) === true) {
+    console.log(likedByCurrentUser(cardId));
+    console.log(cardId);
+    console.log(`Liked CardId ${cardId} logged to remove like`);
+    removeLike(cardId);
+  } else if (likedByCurrentUser(cardId) != true) {
+    console.log(likedByCurrentUser(cardId));
+    console.log(`Not liked CardId ${cardId} logged to add like`);
+    addLike(cardId);
+  }
 }
 
 // add new card
