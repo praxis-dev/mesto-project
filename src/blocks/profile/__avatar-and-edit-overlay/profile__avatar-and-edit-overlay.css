@@ -1,0 +1,10 @@
+.profile__avatar-and-edit-overlay {
+  border: 1px solid gold;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  visibility: hidden;
+}

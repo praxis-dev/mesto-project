@@ -1,0 +1,10 @@
+.profile__avatar-edit-button {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 26px;
+  border: 1px solid green;
+  cursor: pointer;
+}

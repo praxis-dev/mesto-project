@@ -26,6 +26,9 @@
 @import "../blocks/profile/__title/profile__title.css";
 @import "../blocks/profile/__subtitle/profile__subtitle.css";
 @import "../blocks/profile/__edit-icon/profile__edit-icon.css";
+@import "../blocks/profile/__avatar-edit-button/profile__avatar-edit-button.css";
+@import "../blocks/profile/__avatar-and-edit-icon/profile__avatar-and-edit-icon.css";
+@import "../blocks/profile/__avatar-and-edit-overlay/profile__avatar-and-edit-overlay.css";
 
 /* popup */
 

@@ -3,6 +3,9 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
+  background-color: black;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 @media screen and (max-width: 700px) {
