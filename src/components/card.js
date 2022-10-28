@@ -5,6 +5,7 @@ import {
   postLikeToServer,
   removeLikeFromServer,
 } from "./api";
+import { displayLoading } from "../pages";
 
 const postTemplate = document.querySelector("#post-template").content;
 const postGrid = document.querySelector("#post-grid");
@@ -12,6 +13,9 @@ const placeAdderPopup = document.querySelector(".place-add-popup");
 const avatarChangerPopup = document.querySelector(".avatar-change-popup");
 const picAdderFormElement = document.getElementById(
   "add-pic-window__input-form"
+);
+const avatarAdderFormElement = document.getElementById(
+  "add-avatar-window__input-form"
 );
 const placeInput = document.getElementById("place-name");
 const placeLinkInput = document.getElementById("place-link");
@@ -107,8 +111,9 @@ function renderCard(name, link, likes, postOwnerId, myId, cardId, isLikedByMe) {
   postGrid.prepend(postElement);
 }
 
-function addPicFormSubmitHandler(evt) {
+function addPicFormSubmitHandler(evt, form) {
   evt.preventDefault();
+  displayLoading(form);
   const postButton = picAdderFormElement.querySelector(".edit-window__submit");
   renderCard(placeInput.value, placeLinkInput.value);
   postCard(placeInput.value, placeLinkInput.value);
@@ -125,6 +130,7 @@ export {
   placeInput,
   placeLinkInput,
   avatarChangerPopup,
+  avatarAdderFormElement,
   createCard,
   addPicFormSubmitHandler,
   renderCard,

@@ -8,6 +8,7 @@ import {
   userJob,
   nameInput,
   jobInput,
+  avatarInput,
   profileUpdaterPopup,
   openPopup,
   closePopup,
@@ -28,6 +29,7 @@ import {
   pictureViewerPopup,
   avatarChangerPopup,
   renderCard,
+  avatarAdderFormElement,
 } from "../components/card";
 import { enableValidation } from "../components/validation";
 
@@ -40,6 +42,7 @@ import {
   patchProfile,
   checkIfLikedByMe,
   likedByCurrentUser,
+  patchAvatar,
 } from "../components/api";
 
 ///////////// API /////////////
@@ -104,6 +107,7 @@ enableValidation(validationConfig);
 
 function updateProfile(evt) {
   evt.preventDefault();
+  displayLoading(profileUpdaterInputForm);
 
   userName.textContent = nameInput.value;
   userJob.textContent = jobInput.value;
@@ -111,6 +115,31 @@ function updateProfile(evt) {
     .then((response) => response.json())
     .then((json) => console.log(json));
   closePopup(profileUpdaterPopup);
+}
+
+// popup update avatar
+
+function updateAvatar(evt) {
+  evt.preventDefault();
+  console.log("update avatar triggered");
+  profileAvatar.src = avatarInput.value;
+
+  patchAvatar(avatarInput.value)
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+  closePopup(avatarChangerPopup);
+}
+
+// display loading status
+
+export function displayLoading(form) {
+  const formSubmitButton = form.querySelector('button[type="submit"]');
+  formSubmitButton.textContent = "Сохранение...";
+}
+
+export function displayDefaultSubmitButtonText(form) {
+  const formSubmitButton = form.querySelector('button[type="submit"]');
+  formSubmitButton.textContent = "Сохранить";
 }
 
 // viewing posts listeners
@@ -122,24 +151,31 @@ pictureViewerCloseButton.addEventListener("click", function handleClick(event) {
 // change avatar listeners
 
 avatarAdderOpenButton.addEventListener("click", function handleClick(event) {
-  openPopup(avatarChangerPopup);
+  openPopup(avatarChangerPopup, avatarAdderFormElement);
 });
 
 avatarAdderCloseButton.addEventListener("click", function handleClick(event) {
   closePopup(avatarChangerPopup);
 });
 
+avatarAdderFormElement.addEventListener("submit", function handleClick(event) {
+  updateAvatar(event);
+  displayLoading(avatarAdderFormElement);
+});
+
 // add pic form listeners
 
 picAdderOpenButton.addEventListener("click", function handleClick(event) {
-  openPopup(placeAdderPopup);
+  openPopup(placeAdderPopup, picAdderFormElement);
 });
 
 picAdderCloseButton.addEventListener("click", function handleClick(event) {
   closePopup(placeAdderPopup);
 });
 
-picAdderFormElement.addEventListener("submit", addPicFormSubmitHandler);
+picAdderFormElement.addEventListener("submit", function handleClick(event) {
+  addPicFormSubmitHandler(event, picAdderFormElement);
+});
 
 // profile edit listeners
 
@@ -148,7 +184,7 @@ profileUpdaterPopupOpenButton.addEventListener(
   function handleClick(event) {
     nameInput.value = userName.textContent;
     jobInput.value = userJob.innerText;
-    openPopup(profileUpdaterPopup);
+    openPopup(profileUpdaterPopup, profileUpdaterInputForm);
   }
 );
 

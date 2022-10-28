@@ -232,11 +232,11 @@
         <h2 class="edit-window__title">Обновить аватар</h2>
         <form
           class="edit-window__input-form"
-          id="add-pic-window__input-form"
-          name="place_form"
+          id="add-avatar-window__input-form"
+          name="avatar_form"
           novalidate
         >
-          <label for="place-link"></label>
+          <label for="avatar-link"></label>
           <input
             class="edit-window__input-string"
             type="text"
@@ -246,16 +246,16 @@
             pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)"
             required
           />
-          <p class="edit-window__mistake-message place-link-error">
+          <p class="edit-window__mistake-message avatar-link-error">
             Вы пропустили это поле
           </p>
           <button
             type="submit"
             class="edit-window__submit edit-window__submit_inactive"
-            name="place_submit"
+            name="avatar_submit"
             disabled
           >
-            Создать
+            Сохранить
           </button>
         </form>
       </div>

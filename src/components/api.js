@@ -104,3 +104,17 @@ export const removeLikeFromServer = (cardId) => {
     .then((response) => response.json())
     .then((json) => console.log(json));
 };
+
+export const patchAvatar = (avatarLink) => {
+  console.log(avatarLink);
+  return fetch(
+    "https://nomoreparties.co/v1/" + `${cohortId}` + "/users/me/avatar",
+    {
+      method: "PATCH",
+      headers: apiConfig.headers,
+      body: JSON.stringify({
+        avatar: avatarLink,
+      }),
+    }
+  );
+};

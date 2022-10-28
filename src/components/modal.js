@@ -1,4 +1,4 @@
-import { addEscListener, addOverlayListener } from "../pages";
+import { displayDefaultSubmitButtonText } from "../pages";
 
 const allPopups = document.querySelectorAll(".popup");
 const userName = document.querySelector(".profile__title");
@@ -16,6 +16,7 @@ const profileUpdaterPopupCloseButton = document.getElementById(
 const profileUpdaterInputForm = document.querySelector(
   "#edit-window__input-form"
 );
+const avatarInput = document.querySelector("#avatar-link");
 
 const picAdderOpenButton = document.getElementById("profile__add-button");
 const picAdderCloseButton = document.getElementById(
@@ -36,8 +37,9 @@ const ESC_CODE = "Escape";
 
 // popup open/close
 
-function openPopup(popup) {
+function openPopup(popup, form) {
   popup.classList.add("popup_active");
+  displayDefaultSubmitButtonText(form);
   document.addEventListener("keydown", closeByEsc);
 }
 
@@ -70,6 +72,7 @@ export {
   allPopups,
   avatarAdderCloseButton,
   avatarAdderOpenButton,
+  avatarInput,
   openPopup,
   closePopup,
   closeByEsc,
