@@ -9,6 +9,7 @@ import {
 const postTemplate = document.querySelector("#post-template").content;
 const postGrid = document.querySelector("#post-grid");
 const placeAdderPopup = document.querySelector(".place-add-popup");
+const avatarChangerPopup = document.querySelector(".avatar-change-popup");
 const picAdderFormElement = document.getElementById(
   "add-pic-window__input-form"
 );
@@ -123,6 +124,7 @@ export {
   pictureViewerPopup,
   placeInput,
   placeLinkInput,
+  avatarChangerPopup,
   createCard,
   addPicFormSubmitHandler,
   renderCard,

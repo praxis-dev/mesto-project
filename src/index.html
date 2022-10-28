@@ -28,6 +28,7 @@
           <div class="profile__avatar-and-edit-overlay">
             <svg
               class="profile__avatar-edit-button"
+              id="profile__avatar-edit-button"
               width="26"
               height="26"
               viewBox="0 0 26 26"
@@ -196,6 +197,52 @@
             id="place-link"
             name="place-link"
             placeholder="Ссылка на картинку"
+            pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)"
+            required
+          />
+          <p class="edit-window__mistake-message place-link-error">
+            Вы пропустили это поле
+          </p>
+          <button
+            type="submit"
+            class="edit-window__submit edit-window__submit_inactive"
+            name="place_submit"
+            disabled
+          >
+            Создать
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup avatar-change-popup">
+      <div class="edit-window" id="edit-window2">
+        <button
+          class="edit-window__close-button"
+          type="button"
+          id="change-avatar-window__close-button"
+        >
+          <img
+            src="<%=require('./vendor/images/close-icon.svg')%>"
+            alt="Иконка закрыть окно"
+            class="edit-window__close-button-icon"
+          />
+        </button>
+
+        <h2 class="edit-window__title">Обновить аватар</h2>
+        <form
+          class="edit-window__input-form"
+          id="add-pic-window__input-form"
+          name="place_form"
+          novalidate
+        >
+          <label for="place-link"></label>
+          <input
+            class="edit-window__input-string"
+            type="text"
+            id="avatar-link"
+            name="avatar-link"
+            placeholder="Ссылка на аватар"
             pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)"
             required
           />

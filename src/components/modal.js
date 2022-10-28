@@ -24,6 +24,14 @@ const picAdderCloseButton = document.getElementById(
 const pictureViewerCloseButton = document.getElementById(
   "picture-viewer__close-button"
 );
+
+const avatarAdderOpenButton = document.getElementById(
+  "profile__avatar-edit-button"
+);
+const avatarAdderCloseButton = document.getElementById(
+  "change-avatar-window__close-button"
+);
+
 const ESC_CODE = "Escape";
 
 // popup open/close
@@ -60,6 +68,8 @@ export {
   jobInput,
   profileUpdaterPopup,
   allPopups,
+  avatarAdderCloseButton,
+  avatarAdderOpenButton,
   openPopup,
   closePopup,
   closeByEsc,

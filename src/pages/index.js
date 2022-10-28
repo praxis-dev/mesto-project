@@ -17,6 +17,8 @@ import {
   picAdderOpenButton,
   picAdderCloseButton,
   pictureViewerCloseButton,
+  avatarAdderOpenButton,
+  avatarAdderCloseButton,
 } from "../components/modal";
 
 import {
@@ -24,6 +26,7 @@ import {
   addPicFormSubmitHandler,
   placeAdderPopup,
   pictureViewerPopup,
+  avatarChangerPopup,
   renderCard,
 } from "../components/card";
 import { enableValidation } from "../components/validation";
@@ -114,6 +117,16 @@ function updateProfile(evt) {
 
 pictureViewerCloseButton.addEventListener("click", function handleClick(event) {
   closePopup(pictureViewerPopup);
+});
+
+// change avatar listeners
+
+avatarAdderOpenButton.addEventListener("click", function handleClick(event) {
+  openPopup(avatarChangerPopup);
+});
+
+avatarAdderCloseButton.addEventListener("click", function handleClick(event) {
+  closePopup(avatarChangerPopup);
 });
 
 // add pic form listeners
