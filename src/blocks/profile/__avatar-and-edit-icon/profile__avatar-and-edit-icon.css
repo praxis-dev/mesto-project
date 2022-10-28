@@ -2,7 +2,6 @@
   height: fit-content;
   display: inline-block;
   position: relative;
-  border: 1px solid red;
 }
 
 .profile__avatar-and-edit-icon:hover .profile__avatar-and-edit-overlay {
