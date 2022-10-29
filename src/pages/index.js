@@ -74,24 +74,25 @@ function updateProfileFromServer(dataName, dataAbout, dataAvatar, dataId) {
 
 // get posts from server
 
-getCards()
-  .then((res) => {
-    return res.json();
-  })
-  .then((data) => {
-    data.reverse().forEach((cardinfo) => {
-      renderCard(
-        cardinfo.name,
-        cardinfo.link,
-        cardinfo.likes.length,
-        cardinfo.owner._id,
-        apiConfig.id,
-        cardinfo._id,
-        likedByMe(cardinfo)
-      );
+getCards().then((res) => {
+  if (res.ok) {
+    return res.json().then((data) => {
+      data.reverse().forEach((cardinfo) => {
+        renderCard(
+          cardinfo.name,
+          cardinfo.link,
+          cardinfo.likes.length,
+          cardinfo.owner._id,
+          apiConfig.id,
+          cardinfo._id,
+          likedByMe(cardinfo)
+        );
+      });
     });
-  })
-  .catch((error) => console.log(error));
+  }
+  return Promise.reject(`Ошибка: ${res.status}`);
+});
+
 //
 
 function likedByMe(card) {
