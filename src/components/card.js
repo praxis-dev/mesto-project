@@ -70,7 +70,7 @@ function createCard(
   });
 
   postImage.addEventListener("click", (event) => {
-    openPopup(pictureViewerPopup);
+    openPopup(pictureViewerPopup, picAdderFormElement);
     pictureViewerPicture.src = link;
     pictureViewerPicture.alt = name;
     pictureViewerCaption.textContent = name;

@@ -174,7 +174,7 @@ picAdderCloseButton.addEventListener("click", function handleClick(event) {
 });
 
 picAdderFormElement.addEventListener("submit", function handleClick(event) {
-  addPicFormSubmitHandler(event, picAdderFormElement);
+  addPicFormSubmitHandler(event, picAdderFormElementF);
 });
 
 // profile edit listeners
