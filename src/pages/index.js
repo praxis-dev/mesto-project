@@ -4,10 +4,13 @@ import { validationConfig } from "../components/validation";
 
 import {
   allPopups,
+  postGrid,
   userName,
   userJob,
   nameInput,
   jobInput,
+  placeInput,
+  placeLinkInput,
   avatarInput,
   profileUpdaterPopup,
   profileUpdaterPopupOpenButton,
@@ -24,13 +27,14 @@ import {
   avatarAdderFormElement,
   placeAdderPopup,
   profileAvatar,
+  postButton,
 } from "../components/global";
 
 import { openPopup, closePopup } from "../components/modal";
 
-import { addPicFormSubmitHandler, renderCard } from "../components/card";
+import { createCard } from "../components/card";
 
-import { enableValidation } from "../components/validation";
+import { enableValidation, blockSubmit } from "../components/validation";
 
 import {
   apiConfig,
@@ -38,6 +42,7 @@ import {
   getCards,
   patchProfile,
   patchAvatar,
+  postCard,
 } from "../components/api";
 
 ///////////// API /////////////
@@ -60,8 +65,6 @@ function updateProfileFromServer(dataName, dataAbout, dataAvatar, dataId) {
   profileAvatar.src = dataAvatar;
   apiConfig.id = dataId;
 }
-
-getProfileInfo();
 
 // get posts from server
 
@@ -135,6 +138,40 @@ export function displayDefaultSubmitButtonText(form) {
   formSubmitButton.textContent = "Сохранить";
 }
 
+// add new card
+
+export function renderCard(
+  name,
+  link,
+  likes,
+  postOwnerId,
+  myId,
+  cardId,
+  isLikedByMe
+) {
+  const postElement = createCard(
+    name,
+    link,
+    likes,
+    postOwnerId,
+    myId,
+    cardId,
+    isLikedByMe
+  );
+  postGrid.prepend(postElement);
+}
+
+function addPicFormSubmitHandler(evt, form) {
+  evt.preventDefault();
+  displayLoading(form);
+  renderCard(placeInput.value, placeLinkInput.value);
+  postCard(placeInput.value, placeLinkInput.value);
+  closePopup(placeAdderPopup);
+  blockSubmit();
+  picAdderFormElement.reset();
+  postButton.classList.add("edit-window__submit_inactive");
+}
+
 // viewing posts listeners
 
 pictureViewerCloseButton.addEventListener("click", function handleClick(event) {
@@ -203,3 +240,17 @@ function addOverlayListener() {
 }
 
 addOverlayListener();
+
+// set picture viewer
+
+export function setPictureViewer(link, name) {
+  const pictureViewerPicture = document.getElementById(
+    "picture-viewer-picture"
+  );
+  const pictureViewerCaption = document.getElementById(
+    "picture-viewer-caption"
+  );
+  pictureViewerPicture.src = link;
+  pictureViewerPicture.alt = name;
+  pictureViewerCaption.textContent = name;
+}

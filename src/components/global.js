@@ -1,6 +1,9 @@
 // card
 
-export const postTemplate = document.querySelector("#post-template").content;
+export const postTemplate = document
+  .querySelector("#post-template")
+  .content.querySelector(".post");
+
 export const postGrid = document.querySelector("#post-grid");
 export const placeAdderPopup = document.querySelector(".place-add-popup");
 export const avatarChangerPopup = document.querySelector(
@@ -15,12 +18,6 @@ export const avatarAdderFormElement = document.getElementById(
 export const placeInput = document.getElementById("place-name");
 export const placeLinkInput = document.getElementById("place-link");
 export const pictureViewerPopup = document.querySelector(".popup_dark");
-export const pictureViewerPicture = document.getElementById(
-  "picture-viewer-picture"
-);
-export const pictureViewerCaption = document.getElementById(
-  "picture-viewer-caption"
-);
 
 // modal
 
@@ -66,3 +63,9 @@ export const ESC_CODE = "Escape";
 // profile
 
 export const profileAvatar = document.querySelector(".profile__avatar");
+
+// postButton
+
+export const postButton = picAdderFormElement.querySelector(
+  ".edit-window__submit"
+);

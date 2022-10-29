@@ -1,5 +1,7 @@
 // validation
 
+import { postButton } from "./global";
+
 const validationConfig = {
   inputErrorClass: "edit-window__input-string_mistake",
   inputErrorActiveClass: "edit-window__mistake-message_active",
@@ -80,4 +82,9 @@ const toggleButtonState = (inputList, buttonElement, validationConfig) => {
   }
 };
 
-export { enableValidation, validationConfig };
+function blockSubmit() {
+  console.log("block submit triggered");
+  postButton.disabled = true;
+}
+
+export { enableValidation, validationConfig, blockSubmit };

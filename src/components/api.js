@@ -118,3 +118,17 @@ export const patchAvatar = (avatarLink) => {
     }
   );
 };
+
+export const getCardLikes = (cardId) => {
+  return fetch(
+    "https://nomoreparties.co/v1/" +
+      `${cohortId}` +
+      "/cards/" +
+      "/likes/" +
+      cardId,
+    {
+      method: "PUT",
+      headers: apiConfig.headers,
+    }
+  );
+};

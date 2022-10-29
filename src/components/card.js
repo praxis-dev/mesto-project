@@ -1,22 +1,16 @@
-import { openPopup, closePopup } from "./modal";
+import { openPopup } from "./modal";
 import {
-  postCard,
   deleteCard,
   postLikeToServer,
   removeLikeFromServer,
+  getCardLikes,
 } from "./api";
-import { displayLoading } from "../pages";
+import { setPictureViewer } from "../pages";
 
 import {
   postTemplate,
-  postGrid,
-  placeAdderPopup,
   picAdderFormElement,
-  placeInput,
-  placeLinkInput,
   pictureViewerPopup,
-  pictureViewerPicture,
-  pictureViewerCaption,
 } from "./global";
 
 // creating cards
@@ -30,7 +24,7 @@ function createCard(
   cardId,
   isLikedByMe
 ) {
-  const postElement = postTemplate.querySelector(".post").cloneNode(true);
+  const postElement = postTemplate.cloneNode(true);
   const postImage = postElement.querySelector(".post__picture");
   const postName = postElement.querySelector(".post__title");
   const likeCounter = postElement.querySelector(".post__like-counter");
@@ -66,10 +60,8 @@ function createCard(
   });
 
   postImage.addEventListener("click", (event) => {
+    setPictureViewer(link, name);
     openPopup(pictureViewerPopup, picAdderFormElement);
-    pictureViewerPicture.src = link;
-    pictureViewerPicture.alt = name;
-    pictureViewerCaption.textContent = name;
   });
 
   return postElement;
@@ -78,45 +70,34 @@ function createCard(
 // like card function
 
 function likeCard(button, likes, cardId) {
-  console.log("triggered");
+  console.log("like card triggered");
   if (button.classList.contains("post__like-button_active")) {
     console.log("this one is active");
-    likes.textContent--;
     button.classList.remove("post__like-button_active");
     removeLikeFromServer(cardId);
+    getCardLikes(cardId)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        likes.textContent = data.length;
+      });
   } else {
     console.log("this one is not");
-    likes.textContent++;
     button.classList.add("post__like-button_active");
     postLikeToServer(cardId);
+    getCardLikes(cardId)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        likes.textContent = data.length;
+      });
   }
 }
 
-// add new card
+// update like number after like
 
-function renderCard(name, link, likes, postOwnerId, myId, cardId, isLikedByMe) {
-  const postElement = createCard(
-    name,
-    link,
-    likes,
-    postOwnerId,
-    myId,
-    cardId,
-    isLikedByMe
-  );
-  postGrid.prepend(postElement);
-}
+function updatelikeNumberAfterLike(cardId) {}
 
-function addPicFormSubmitHandler(evt, form) {
-  evt.preventDefault();
-  displayLoading(form);
-  const postButton = picAdderFormElement.querySelector(".edit-window__submit");
-  renderCard(placeInput.value, placeLinkInput.value);
-  postCard(placeInput.value, placeLinkInput.value);
-  closePopup(placeAdderPopup);
-  picAdderFormElement.reset();
-  postButton.disabled = true;
-  postButton.classList.add("edit-window__submit_inactive");
-}
-
-export { createCard, addPicFormSubmitHandler, renderCard };
+export { createCard };
