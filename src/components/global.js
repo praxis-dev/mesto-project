@@ -51,8 +51,8 @@ export const pictureViewerCloseButton = document.getElementById(
   "picture-viewer__close-button"
 );
 
-export const avatarAdderOpenButton = document.getElementById(
-  "profile__avatar-edit-button"
+export const avatarAdderOpenButton = document.querySelector(
+  ".profile__avatar-and-edit-overlay"
 );
 export const avatarAdderCloseButton = document.getElementById(
   "change-avatar-window__close-button"

@@ -84,7 +84,7 @@ function likeCard(button, likes, cardId) {
         likes.textContent = data.likes.length;
       });
   } else {
-    console.log("this one is not");
+    console.log(`${cardId} this one is not`);
     button.classList.add("post__like-button_active");
     postLikeToServer(cardId)
       .then((response) => {

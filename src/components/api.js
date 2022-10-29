@@ -64,7 +64,7 @@ export const deleteCard = (cardId) => {
 
 export const postLikeToServer = (cardId) => {
   console.log("add like triggered");
-  let likes = ["1"];
+  let likes = [];
   return fetch(
     "https://nomoreparties.co/v1/" +
       `${cohortId}` +
@@ -76,7 +76,7 @@ export const postLikeToServer = (cardId) => {
       headers: apiConfig.headers,
       body: JSON.stringify({
         _id: apiConfig.id,
-        likes: [...likes, "1"],
+        likes: [likes.push("1")],
       }),
     }
   );

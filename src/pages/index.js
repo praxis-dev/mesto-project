@@ -49,14 +49,20 @@ import {
 
 // get profile info from server
 
-getProfileInfo()
-  .then((res) => {
-    return res.json();
-  })
-  .then((data) => {
-    updateProfileFromServer(data.name, data.about, data.avatar, data._id);
-  })
-  .catch((error) => console.log(error));
+getProfileInfo().then((res) => {
+  if (res.ok) {
+    return res
+      .json()
+      .then((data) => {
+        updateProfileFromServer(data.name, data.about, data.avatar, data._id);
+      })
+      .then(() => {
+        getCards();
+      });
+  }
+  return Promise.reject(`Ошибка: ${res.status}`);
+});
+
 //
 
 function updateProfileFromServer(dataName, dataAbout, dataAvatar, dataId) {
@@ -73,7 +79,6 @@ getCards()
     return res.json();
   })
   .then((data) => {
-    data.forEach((cardinfo) => console.log(likedByMe(cardinfo)));
     data.reverse().forEach((cardinfo) => {
       renderCard(
         cardinfo.name,
@@ -88,8 +93,6 @@ getCards()
   })
   .catch((error) => console.log(error));
 //
-
-getCards();
 
 function likedByMe(card) {
   return card.likes.some((like) => like._id === apiConfig.id);
@@ -165,15 +168,27 @@ export function renderCard(
 function addPicFormSubmitHandler(evt, form) {
   evt.preventDefault();
   displayLoading(form);
-  renderCard(placeInput.value, placeLinkInput.value);
   postCard(placeInput.value, placeLinkInput.value)
-    .then((response) => response.json())
-    .then((json) => console.log(json))
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) =>
+      renderCard(
+        data.name,
+        data.link,
+        data.likes.length,
+        data.owner._id,
+        apiConfig.id,
+        data._id,
+        likedByMe(data)
+      )
+    )
     .finally(() => displayDefaultSubmitButtonText(form));
   closePopup(placeAdderPopup);
   blockSubmit();
   picAdderFormElement.reset();
   postButton.classList.add("edit-window__submit_inactive");
+  getCards();
 }
 
 // viewing posts listeners
