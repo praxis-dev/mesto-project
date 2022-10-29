@@ -72,15 +72,17 @@
 
     <template id="post-template">
       <article class="post">
-        <img
-          src="<%=require('./vendor/images/trash-icon.svg')%>"
-          class="post__trash-icon"
-        />
-        <img
-          src="<%=require('./vendor/images/karachaevsk.jpg')%>"
-          alt="Иллюстрация"
-          class="post__picture"
-        />
+        <div class="post__image-wrapper">
+          <img
+            src="<%=require('./vendor/images/trash-icon.svg')%>"
+            class="post__trash-icon"
+          />
+          <img
+            src="<%=require('./vendor/images/karachaevsk.jpg')%>"
+            alt="Иллюстрация"
+            class="post__picture"
+          />
+        </div>
         <div class="post__fit-title">
           <h2 class="post__title">Карачаево-Черкесия</h2>
           <div class="post__likes-container">

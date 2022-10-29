@@ -1,7 +1,7 @@
 .post__picture {
   object-fit: cover;
-  max-width: 282px;
-  margin-bottom: 15px;
+  width: 282px;
+
   border-radius: 10px 10px 0 0;
   aspect-ratio: 1 / 1;
   cursor: pointer;

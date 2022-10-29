@@ -21,9 +21,8 @@ import {
 
 // popup open/close
 
-function openPopup(popup, form) {
+function openPopup(popup) {
   popup.classList.add("popup_active");
-  displayDefaultSubmitButtonText(form);
   document.addEventListener("keydown", closeByEsc);
 }
 

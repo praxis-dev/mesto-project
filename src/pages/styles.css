@@ -65,6 +65,7 @@
 @import "../blocks/post/__like-button/_active/post__like-button_active.css";
 @import "../blocks/post/__fit-title/post__fit-title.css";
 @import "../blocks/post/__trash-icon/post__trash-icon.css";
+@import "../blocks/post/__image-wrapper/post__image-wrapper.css";
 
 /* footer */
 

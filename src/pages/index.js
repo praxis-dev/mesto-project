@@ -109,7 +109,8 @@ function updateProfile(evt) {
   userJob.textContent = jobInput.value;
   patchProfile(nameInput.value, jobInput.value)
     .then((response) => response.json())
-    .then((json) => console.log(json));
+    .then((json) => console.log(json))
+    .finally(() => displayDefaultSubmitButtonText(profileUpdaterInputForm));
   closePopup(profileUpdaterPopup);
 }
 
@@ -165,7 +166,10 @@ function addPicFormSubmitHandler(evt, form) {
   evt.preventDefault();
   displayLoading(form);
   renderCard(placeInput.value, placeLinkInput.value);
-  postCard(placeInput.value, placeLinkInput.value);
+  postCard(placeInput.value, placeLinkInput.value)
+    .then((response) => response.json())
+    .then((json) => console.log(json))
+    .finally(() => displayDefaultSubmitButtonText(form));
   closePopup(placeAdderPopup);
   blockSubmit();
   picAdderFormElement.reset();
