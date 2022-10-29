@@ -10,8 +10,6 @@ import {
   jobInput,
   avatarInput,
   profileUpdaterPopup,
-  openPopup,
-  closePopup,
   profileUpdaterPopupOpenButton,
   profileUpdaterPopupCloseButton,
   profileUpdaterInputForm,
@@ -20,34 +18,29 @@ import {
   pictureViewerCloseButton,
   avatarAdderOpenButton,
   avatarAdderCloseButton,
-} from "../components/modal";
-
-import {
   picAdderFormElement,
-  addPicFormSubmitHandler,
-  placeAdderPopup,
-  pictureViewerPopup,
   avatarChangerPopup,
-  renderCard,
+  pictureViewerPopup,
   avatarAdderFormElement,
-} from "../components/card";
+  placeAdderPopup,
+  profileAvatar,
+} from "../components/global";
+
+import { openPopup, closePopup } from "../components/modal";
+
+import { addPicFormSubmitHandler, renderCard } from "../components/card";
+
 import { enableValidation } from "../components/validation";
 
 import {
-  cohortId,
-  authorizationToken,
   apiConfig,
   getProfileInfo,
   getCards,
   patchProfile,
-  checkIfLikedByMe,
-  likedByCurrentUser,
   patchAvatar,
 } from "../components/api";
 
 ///////////// API /////////////
-
-const profileAvatar = document.querySelector(".profile__avatar");
 
 // get profile info from server
 
@@ -174,7 +167,7 @@ picAdderCloseButton.addEventListener("click", function handleClick(event) {
 });
 
 picAdderFormElement.addEventListener("submit", function handleClick(event) {
-  addPicFormSubmitHandler(event, picAdderFormElementF);
+  addPicFormSubmitHandler(event, picAdderFormElement);
 });
 
 // profile edit listeners

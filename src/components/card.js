@@ -7,21 +7,17 @@ import {
 } from "./api";
 import { displayLoading } from "../pages";
 
-const postTemplate = document.querySelector("#post-template").content;
-const postGrid = document.querySelector("#post-grid");
-const placeAdderPopup = document.querySelector(".place-add-popup");
-const avatarChangerPopup = document.querySelector(".avatar-change-popup");
-const picAdderFormElement = document.getElementById(
-  "add-pic-window__input-form"
-);
-const avatarAdderFormElement = document.getElementById(
-  "add-avatar-window__input-form"
-);
-const placeInput = document.getElementById("place-name");
-const placeLinkInput = document.getElementById("place-link");
-const pictureViewerPopup = document.querySelector(".popup_dark");
-const pictureViewerPicture = document.getElementById("picture-viewer-picture");
-const pictureViewerCaption = document.getElementById("picture-viewer-caption");
+import {
+  postTemplate,
+  postGrid,
+  placeAdderPopup,
+  picAdderFormElement,
+  placeInput,
+  placeLinkInput,
+  pictureViewerPopup,
+  pictureViewerPicture,
+  pictureViewerCaption,
+} from "./global";
 
 // creating cards
 
@@ -123,15 +119,4 @@ function addPicFormSubmitHandler(evt, form) {
   postButton.classList.add("edit-window__submit_inactive");
 }
 
-export {
-  picAdderFormElement,
-  placeAdderPopup,
-  pictureViewerPopup,
-  placeInput,
-  placeLinkInput,
-  avatarChangerPopup,
-  avatarAdderFormElement,
-  createCard,
-  addPicFormSubmitHandler,
-  renderCard,
-};
+export { createCard, addPicFormSubmitHandler, renderCard };
