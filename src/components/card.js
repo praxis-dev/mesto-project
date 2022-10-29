@@ -74,30 +74,27 @@ function likeCard(button, likes, cardId) {
   if (button.classList.contains("post__like-button_active")) {
     console.log("this one is active");
     button.classList.remove("post__like-button_active");
-    removeLikeFromServer(cardId);
-    getCardLikes(cardId)
+
+    removeLikeFromServer(cardId)
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        likes.textContent = data.length;
+        console.log(Array.from(data.likes));
+        likes.textContent = data.likes.length;
       });
   } else {
     console.log("this one is not");
     button.classList.add("post__like-button_active");
-    postLikeToServer(cardId);
-    getCardLikes(cardId)
+    postLikeToServer(cardId)
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        likes.textContent = data.length;
+        console.log(Array.from(data.likes));
+        likes.textContent = data.likes.length;
       });
   }
 }
-
-// update like number after like
-
-function updatelikeNumberAfterLike(cardId) {}
 
 export { createCard };

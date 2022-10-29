@@ -79,12 +79,11 @@ export const postLikeToServer = (cardId) => {
         likes: [...likes, "1"],
       }),
     }
-  )
-    .then((response) => response.json())
-    .then((json) => console.log(json));
+  );
 };
 
 export const removeLikeFromServer = (cardId) => {
+  console.log("remove like triggered");
   let likes = ["1"];
   return fetch(
     "https://nomoreparties.co/v1/" +
@@ -100,9 +99,7 @@ export const removeLikeFromServer = (cardId) => {
         likes: [likes.pop()],
       }),
     }
-  )
-    .then((response) => response.json())
-    .then((json) => console.log(json));
+  );
 };
 
 export const patchAvatar = (avatarLink) => {
@@ -125,7 +122,7 @@ export const getCardLikes = (cardId) => {
       `${cohortId}` +
       "/cards/" +
       "/likes/" +
-      cardId,
+      `${cardId}`,
     {
       method: "PUT",
       headers: apiConfig.headers,
