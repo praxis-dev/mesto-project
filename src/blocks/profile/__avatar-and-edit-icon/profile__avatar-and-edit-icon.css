@@ -1,7 +1,9 @@
 .profile__avatar-and-edit-icon {
   height: fit-content;
+  width: fit-content;
   display: inline-block;
   position: relative;
+  margin: 0 auto;
 }
 
 .profile__avatar-and-edit-icon:hover .profile__avatar-and-edit-overlay {
