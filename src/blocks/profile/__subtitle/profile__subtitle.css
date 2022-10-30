@@ -19,6 +19,6 @@
     line-height: 17px;
     text-align: center;
     max-width: fit-content;
-    margin-left: 31px;
+    margin: 0 auto;
   }
 }

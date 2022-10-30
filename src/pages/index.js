@@ -28,6 +28,8 @@ import {
   placeAdderPopup,
   profileAvatar,
   postButton,
+  pictureViewerPicture,
+  pictureViewerCaption,
 } from "../components/global";
 
 import { openPopup, closePopup } from "../components/modal";
@@ -103,12 +105,11 @@ function updateProfile(evt) {
       userName.textContent = data.name;
       userJob.textContent = data.about;
     })
+    .then(() => closePopup(profileUpdaterPopup))
     .catch((err) => {
       console.log(err);
     })
     .finally(() => displayDefaultSubmitButtonText(profileUpdaterInputForm));
-
-  closePopup(profileUpdaterPopup);
 }
 
 // popup update avatar
@@ -123,10 +124,10 @@ function updateAvatar(evt) {
     .then((data) => {
       profileAvatar.src = data.avatar;
     })
+    .then(() => closePopup(avatarChangerPopup))
     .catch((err) => {
       console.log(err);
     });
-  closePopup(avatarChangerPopup);
 }
 
 // display loading status
@@ -182,14 +183,14 @@ function addPicFormSubmitHandler(evt, form) {
         likedByMe(data)
       )
     )
+    .then(() => closePopup(placeAdderPopup))
+    .then(() => postButton.classList.add("edit-window__submit_inactive"))
+    .then(() => displayDefaultSubmitButtonText(form))
+    .then(() => picAdderFormElement.reset())
     .catch((err) => {
       console.log(err);
     })
-    .finally(() => displayDefaultSubmitButtonText(form));
-  closePopup(placeAdderPopup);
-  blockSubmit();
-  picAdderFormElement.reset();
-  postButton.classList.add("edit-window__submit_inactive");
+    .finally(() => blockSubmit());
 }
 
 // viewing posts listeners
@@ -264,12 +265,6 @@ addOverlayListener();
 // set picture viewer
 
 export function setPictureViewer(link, name) {
-  const pictureViewerPicture = document.getElementById(
-    "picture-viewer-picture"
-  );
-  const pictureViewerCaption = document.getElementById(
-    "picture-viewer-caption"
-  );
   pictureViewerPicture.src = link;
   pictureViewerPicture.alt = name;
   pictureViewerCaption.textContent = name;

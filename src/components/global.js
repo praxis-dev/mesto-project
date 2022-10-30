@@ -69,3 +69,12 @@ export const profileAvatar = document.querySelector(".profile__avatar");
 export const postButton = picAdderFormElement.querySelector(
   ".edit-window__submit"
 );
+
+// pictureViewer
+
+export const pictureViewerPicture = document.getElementById(
+  "picture-viewer-picture"
+);
+export const pictureViewerCaption = document.getElementById(
+  "picture-viewer-caption"
+);
