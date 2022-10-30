@@ -88,7 +88,6 @@ export const deleteCard = (cardId) => {
 };
 
 export const postLikeToServer = (cardId) => {
-  console.log("add like triggered");
   let likes = [];
   return fetch(
     "https://nomoreparties.co/v1/" +
@@ -113,7 +112,6 @@ export const postLikeToServer = (cardId) => {
 };
 
 export const removeLikeFromServer = (cardId) => {
-  console.log("remove like triggered");
   let likes = ["1"];
   return fetch(
     "https://nomoreparties.co/v1/" +

@@ -1,11 +1,11 @@
 import { openPopup } from "./modal";
+import { postLikeToServer, removeLikeFromServer, apiConfig } from "./api";
 import {
-  deleteCard,
-  postLikeToServer,
-  removeLikeFromServer,
-  apiConfig,
-} from "./api";
-import { setPictureViewer } from "../pages";
+  setPictureViewer,
+  deleteTargetCard,
+  activateLike,
+  deactivateLike,
+} from "../pages";
 
 import {
   postTemplate,
@@ -15,7 +15,7 @@ import {
 
 // creating cards
 
-function createCard(
+export function createCard(
   name,
   link,
   likeNumber,
@@ -39,8 +39,7 @@ function createCard(
   const trashIcon = postElement.querySelector(".post__trash-icon");
 
   trashIcon.addEventListener("click", (event) => {
-    event.target.closest(".post").remove();
-    deleteCard(cardId);
+    deleteTargetCard(cardId, event);
   });
 
   if (myId != postOwnerId) {
@@ -55,7 +54,6 @@ function createCard(
   }
 
   likeButton.addEventListener("click", () => {
-    console.log("click");
     likeCard(likeButton, likeCounter, renderedCardId);
   });
 
@@ -70,35 +68,23 @@ function createCard(
 // like card function
 
 function likeCard(button, likes, cardId) {
-  console.log("like card triggered");
   if (button.classList.contains("post__like-button_active")) {
-    console.log("this one is active");
-    button.classList.remove("post__like-button_active");
-
-    removeLikeFromServer(cardId)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log(Array.from(data.likes));
-        likes.textContent = data.likes.length;
-      });
+    deactivateLike(button, likes, cardId);
   } else {
-    console.log(`${cardId} this one is not`);
-    button.classList.add("post__like-button_active");
-    postLikeToServer(cardId)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log(Array.from(data.likes));
-        likes.textContent = data.likes.length;
-      });
+    activateLike(button, likes, cardId);
   }
 }
 
-function likedByMe(card) {
-  return card.likes.some((like) => like._id === apiConfig.id);
+export function increaseLikes(data, likes, button) {
+  likes.textContent = data.likes.length;
+  button.classList.remove("post__like-button_active");
 }
 
-export { createCard, likedByMe };
+export function decreaseLikes(data, likes, button) {
+  likes.textContent = data.likes.length;
+  button.classList.add("post__like-button_active");
+}
+
+export function likedByMe(card) {
+  return card.likes.some((like) => like._id === apiConfig.id);
+}

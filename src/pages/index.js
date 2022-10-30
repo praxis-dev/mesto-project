@@ -34,7 +34,12 @@ import {
 
 import { openPopup, closePopup } from "../components/modal";
 
-import { createCard, likedByMe } from "../components/card";
+import {
+  createCard,
+  likedByMe,
+  increaseLikes,
+  decreaseLikes,
+} from "../components/card";
 
 import { enableValidation, blockSubmit } from "../components/validation";
 
@@ -45,9 +50,10 @@ import {
   patchProfile,
   patchAvatar,
   postCard,
+  deleteCard,
+  postLikeToServer,
+  removeLikeFromServer,
 } from "../components/api";
-
-///////////// API /////////////
 
 // get profile and cards info from server
 
@@ -58,21 +64,25 @@ getProfileInfo().then((res) => {
       updateProfileFromServer(data.name, data.about, data.avatar, data._id);
     })
     .then(() => {
-      getCards().then((res) => {
-        return res.json().then((data) => {
-          data.reverse().forEach((cardinfo) => {
-            renderCard(
-              cardinfo.name,
-              cardinfo.link,
-              cardinfo.likes.length,
-              cardinfo.owner._id,
-              apiConfig.id,
-              cardinfo._id,
-              likedByMe(cardinfo)
-            );
+      getCards()
+        .then((res) => {
+          return res.json().then((data) => {
+            data.reverse().forEach((cardinfo) => {
+              renderCard(
+                cardinfo.name,
+                cardinfo.link,
+                cardinfo.likes.length,
+                cardinfo.owner._id,
+                apiConfig.id,
+                cardinfo._id,
+                likedByMe(cardinfo)
+              );
+            });
           });
+        })
+        .catch((err) => {
+          console.log(err);
         });
-      });
     })
     .catch((err) => {
       console.log(err);
@@ -88,7 +98,17 @@ function updateProfileFromServer(dataName, dataAbout, dataAvatar, dataId) {
   apiConfig.id = dataId;
 }
 
-///////////// end of API /////////////
+// delete card function for trash icon event listener in card creator function
+
+export function deleteTargetCard(cardId, event) {
+  deleteCard(cardId)
+    .then(() => {
+      event.target.closest(".post").remove();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
 enableValidation(validationConfig);
 
@@ -191,6 +211,34 @@ function addPicFormSubmitHandler(evt, form) {
       console.log(err);
     })
     .finally(() => blockSubmit());
+}
+
+// activate / deactivate likes
+
+export function deactivateLike(button, likes, cardId) {
+  removeLikeFromServer(cardId)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      increaseLikes(data, likes, button);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+export function activateLike(button, likes, cardId) {
+  postLikeToServer(cardId)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      decreaseLikes(data, likes, button);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 // viewing posts listeners

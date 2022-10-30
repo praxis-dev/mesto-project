@@ -83,7 +83,6 @@ const toggleButtonState = (inputList, buttonElement, validationConfig) => {
 };
 
 function blockSubmit() {
-  console.log("block submit triggered");
   postButton.disabled = true;
 }
 
