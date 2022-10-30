@@ -30,6 +30,7 @@ import {
   postButton,
   pictureViewerPicture,
   pictureViewerCaption,
+  currentUser,
 } from "../components/global";
 
 import { openPopup, closePopup } from "../components/modal";
@@ -44,7 +45,6 @@ import {
 import { enableValidation, blockSubmit } from "../components/validation";
 
 import {
-  apiConfig,
   getProfileInfo,
   getCards,
   patchProfile,
@@ -73,7 +73,7 @@ getProfileInfo().then((res) => {
                 cardinfo.link,
                 cardinfo.likes.length,
                 cardinfo.owner._id,
-                apiConfig.id,
+                currentUser.id,
                 cardinfo._id,
                 likedByMe(cardinfo)
               );
@@ -95,7 +95,7 @@ function updateProfileFromServer(dataName, dataAbout, dataAvatar, dataId) {
   userName.innerText = dataName;
   userJob.innerText = dataAbout;
   profileAvatar.src = dataAvatar;
-  apiConfig.id = dataId;
+  currentUser.id = dataId;
 }
 
 // delete card function for trash icon event listener in card creator function
@@ -198,19 +198,24 @@ function addPicFormSubmitHandler(evt, form) {
         data.link,
         data.likes.length,
         data.owner._id,
-        apiConfig.id,
+        currentUser.id,
         data._id,
         likedByMe(data)
       )
     )
-    .then(() => closePopup(placeAdderPopup))
-    .then(() => postButton.classList.add("edit-window__submit_inactive"))
-    .then(() => displayDefaultSubmitButtonText(form))
-    .then(() => picAdderFormElement.reset())
+    .then(() => {
+      closePopup(placeAdderPopup);
+      postButton.classList.add("edit-window__submit_inactive");
+      picAdderFormElement.reset();
+      blockSubmit();
+    })
+
     .catch((err) => {
       console.log(err);
     })
-    .finally(() => blockSubmit());
+    .finally(() => {
+      displayDefaultSubmitButtonText(form);
+    });
 }
 
 // activate / deactivate likes

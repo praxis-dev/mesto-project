@@ -1,3 +1,4 @@
+import { currentUser } from "./global";
 export const cohortId = "plus-cohort-16";
 export const authorizationToken = "84065f1e-9b65-4660-bac5-9a220fdec6d4";
 export const apiConfig = {
@@ -55,7 +56,7 @@ export const postCard = (name, link) => {
     body: JSON.stringify({
       name: name,
       link: link,
-      _id: apiConfig.id,
+      _id: currentUser.id,
     }),
   }).then((res) => {
     if (res.ok) {
@@ -76,7 +77,7 @@ export const deleteCard = (cardId) => {
       method: "DELETE",
       headers: apiConfig.headers,
       body: JSON.stringify({
-        _id: apiConfig.id,
+        _id: currentUser.id,
       }),
     }
   ).then((res) => {
@@ -99,7 +100,7 @@ export const postLikeToServer = (cardId) => {
       method: "PUT",
       headers: apiConfig.headers,
       body: JSON.stringify({
-        _id: apiConfig.id,
+        _id: currentUser.id,
         likes: [likes.push("1")],
       }),
     }
@@ -123,7 +124,7 @@ export const removeLikeFromServer = (cardId) => {
       method: "DELETE",
       headers: apiConfig.headers,
       body: JSON.stringify({
-        _id: apiConfig.id,
+        _id: currentUser.id,
         likes: [likes.pop()],
       }),
     }

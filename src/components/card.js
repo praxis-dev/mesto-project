@@ -11,6 +11,7 @@ import {
   postTemplate,
   picAdderFormElement,
   pictureViewerPopup,
+  currentUser,
 } from "./global";
 
 // creating cards
@@ -86,5 +87,5 @@ export function decreaseLikes(data, likes, button) {
 }
 
 export function likedByMe(card) {
-  return card.likes.some((like) => like._id === apiConfig.id);
+  return card.likes.some((like) => like._id === currentUser.id);
 }

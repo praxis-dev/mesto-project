@@ -1,3 +1,5 @@
+export const currentUser = {};
+
 // card
 
 export const postTemplate = document
