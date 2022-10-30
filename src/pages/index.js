@@ -32,7 +32,7 @@ import {
 
 import { openPopup, closePopup } from "../components/modal";
 
-import { createCard } from "../components/card";
+import { createCard, likedByMe } from "../components/card";
 
 import { enableValidation, blockSubmit } from "../components/validation";
 
@@ -47,20 +47,34 @@ import {
 
 ///////////// API /////////////
 
-// get profile info from server
+// get profile and cards info from server
 
 getProfileInfo().then((res) => {
-  if (res.ok) {
-    return res
-      .json()
-      .then((data) => {
-        updateProfileFromServer(data.name, data.about, data.avatar, data._id);
-      })
-      .then(() => {
-        getCards();
+  return res
+    .json()
+    .then((data) => {
+      updateProfileFromServer(data.name, data.about, data.avatar, data._id);
+    })
+    .then(() => {
+      getCards().then((res) => {
+        return res.json().then((data) => {
+          data.reverse().forEach((cardinfo) => {
+            renderCard(
+              cardinfo.name,
+              cardinfo.link,
+              cardinfo.likes.length,
+              cardinfo.owner._id,
+              apiConfig.id,
+              cardinfo._id,
+              likedByMe(cardinfo)
+            );
+          });
+        });
       });
-  }
-  return Promise.reject(`Ошибка: ${res.status}`);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 //
@@ -72,33 +86,6 @@ function updateProfileFromServer(dataName, dataAbout, dataAvatar, dataId) {
   apiConfig.id = dataId;
 }
 
-// get posts from server
-
-getCards().then((res) => {
-  if (res.ok) {
-    return res.json().then((data) => {
-      data.reverse().forEach((cardinfo) => {
-        renderCard(
-          cardinfo.name,
-          cardinfo.link,
-          cardinfo.likes.length,
-          cardinfo.owner._id,
-          apiConfig.id,
-          cardinfo._id,
-          likedByMe(cardinfo)
-        );
-      });
-    });
-  }
-  return Promise.reject(`Ошибка: ${res.status}`);
-});
-
-//
-
-function likedByMe(card) {
-  return card.likes.some((like) => like._id === apiConfig.id);
-}
-
 ///////////// end of API /////////////
 
 enableValidation(validationConfig);
@@ -108,13 +95,19 @@ enableValidation(validationConfig);
 function updateProfile(evt) {
   evt.preventDefault();
   displayLoading(profileUpdaterInputForm);
-
-  userName.textContent = nameInput.value;
-  userJob.textContent = jobInput.value;
   patchProfile(nameInput.value, jobInput.value)
-    .then((response) => response.json())
-    .then((json) => console.log(json))
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      userName.textContent = data.name;
+      userJob.textContent = data.about;
+    })
+    .catch((err) => {
+      console.log(err);
+    })
     .finally(() => displayDefaultSubmitButtonText(profileUpdaterInputForm));
+
   closePopup(profileUpdaterPopup);
 }
 
@@ -122,12 +115,17 @@ function updateProfile(evt) {
 
 function updateAvatar(evt) {
   evt.preventDefault();
-  console.log("update avatar triggered");
-  profileAvatar.src = avatarInput.value;
 
   patchAvatar(avatarInput.value)
-    .then((response) => response.json())
-    .then((json) => console.log(json));
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      profileAvatar.src = data.avatar;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   closePopup(avatarChangerPopup);
 }
 
@@ -184,12 +182,14 @@ function addPicFormSubmitHandler(evt, form) {
         likedByMe(data)
       )
     )
+    .catch((err) => {
+      console.log(err);
+    })
     .finally(() => displayDefaultSubmitButtonText(form));
   closePopup(placeAdderPopup);
   blockSubmit();
   picAdderFormElement.reset();
   postButton.classList.add("edit-window__submit_inactive");
-  getCards();
 }
 
 // viewing posts listeners

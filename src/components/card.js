@@ -3,7 +3,7 @@ import {
   deleteCard,
   postLikeToServer,
   removeLikeFromServer,
-  getCardLikes,
+  apiConfig,
 } from "./api";
 import { setPictureViewer } from "../pages";
 
@@ -97,4 +97,8 @@ function likeCard(button, likes, cardId) {
   }
 }
 
-export { createCard };
+function likedByMe(card) {
+  return card.likes.some((like) => like._id === apiConfig.id);
+}
+
+export { createCard, likedByMe };

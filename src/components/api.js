@@ -12,6 +12,11 @@ export const getProfileInfo = () => {
   return fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/users/me", {
     method: "GET",
     headers: apiConfig.headers,
+  }).then((res) => {
+    if (res.ok) {
+      return res;
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
   });
 };
 
@@ -19,6 +24,11 @@ export const getCards = () => {
   return fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/cards", {
     method: "GET",
     headers: apiConfig.headers,
+  }).then((res) => {
+    if (res.ok) {
+      return res;
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
   });
 };
 
@@ -30,6 +40,11 @@ export const patchProfile = (name, about) => {
       name: name,
       about: about,
     }),
+  }).then((res) => {
+    if (res.ok) {
+      return res;
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
   });
 };
 
@@ -42,6 +57,11 @@ export const postCard = (name, link) => {
       link: link,
       _id: apiConfig.id,
     }),
+  }).then((res) => {
+    if (res.ok) {
+      return res;
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
   });
 };
 
@@ -59,7 +79,12 @@ export const deleteCard = (cardId) => {
         _id: apiConfig.id,
       }),
     }
-  );
+  ).then((res) => {
+    if (res.ok) {
+      return res;
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  });
 };
 
 export const postLikeToServer = (cardId) => {
@@ -79,7 +104,12 @@ export const postLikeToServer = (cardId) => {
         likes: [likes.push("1")],
       }),
     }
-  );
+  ).then((res) => {
+    if (res.ok) {
+      return res;
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  });
 };
 
 export const removeLikeFromServer = (cardId) => {
@@ -99,7 +129,12 @@ export const removeLikeFromServer = (cardId) => {
         likes: [likes.pop()],
       }),
     }
-  );
+  ).then((res) => {
+    if (res.ok) {
+      return res;
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  });
 };
 
 export const patchAvatar = (avatarLink) => {
@@ -113,7 +148,12 @@ export const patchAvatar = (avatarLink) => {
         avatar: avatarLink,
       }),
     }
-  );
+  ).then((res) => {
+    if (res.ok) {
+      return res;
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  });
 };
 
 export const getCardLikes = (cardId) => {
@@ -127,5 +167,10 @@ export const getCardLikes = (cardId) => {
       method: "PUT",
       headers: apiConfig.headers,
     }
-  );
+  ).then((res) => {
+    if (res.ok) {
+      return res;
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  });
 };
