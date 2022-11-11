@@ -8,6 +8,40 @@ export const apiConfig = {
     "Content-Type": "application/json",
   },
 };
+class Api {
+  constructor(baseUrl, cohortId, endPoint, method, headers) {
+    this._baseUrl = baseUrl;
+    this._cohortId = cohortId;
+    this._endPoint = endPoint;
+    this._method = method;
+    this._headers = headers;
+  }
+
+  getProfileInfo() {
+    return fetch(
+      `${this._baseUrl}` + `${this._cohortId}` + `${this._endPoint}`,
+      {
+        method: this._method,
+        headers: this._headers,
+      }
+    ).then((res) => {
+      if (res.ok) {
+        return res;
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
+}
+
+const OOPgetProfileInfo = new Api(
+  apiConfig.url,
+  cohortId,
+  "/users/me",
+  "GET",
+  apiConfig.headers
+);
+
+OOPgetProfileInfo.getProfileInfo();
 
 export const getProfileInfo = () => {
   return fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/users/me", {
