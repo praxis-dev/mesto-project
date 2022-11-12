@@ -2,7 +2,7 @@ import { currentUser } from "./global";
 export const cohortId = "plus-cohort-16";
 export const authorizationToken = "84065f1e-9b65-4660-bac5-9a220fdec6d4";
 export const apiConfig = {
-  url: `https://nomoreparties.co/v1/${cohortId}`,
+  url: `https://nomoreparties.co/v1/`,
   headers: {
     authorization: authorizationToken,
     "Content-Type": "application/json",
@@ -41,7 +41,7 @@ const OOPgetProfileInfo = new Api(
   apiConfig.headers
 );
 
-OOPgetProfileInfo.getProfileInfo();
+console.log(OOPgetProfileInfo.getProfileInfo());
 
 export const getProfileInfo = () => {
   return fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/users/me", {
