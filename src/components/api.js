@@ -9,15 +9,31 @@ export const apiConfig = {
   },
 };
 class Api {
-  constructor(baseUrl, cohortId, endPoint, method, headers) {
+  constructor(
+    baseUrl,
+    cohortId,
+    endPoint,
+    method,
+    headers,
+    name,
+    about,
+    currentUser,
+    picName,
+    picLink
+  ) {
     this._baseUrl = baseUrl;
     this._cohortId = cohortId;
     this._endPoint = endPoint;
     this._method = method;
     this._headers = headers;
+    this._name = name;
+    this._about = about;
+    this._currentUser = currentUser;
+    this._picName = picName;
+    this._picLink = picLink;
   }
 
-  getProfileInfo() {
+  get() {
     return fetch(
       `${this._baseUrl}` + `${this._cohortId}` + `${this._endPoint}`,
       {
@@ -31,74 +47,130 @@ class Api {
       return Promise.reject(`Ошибка: ${res.status}`);
     });
   }
+
+  patch() {
+    return fetch(
+      `${this._baseUrl}` + `${this._cohortId}` + `${this._endPoint}`,
+      {
+        method: this._method,
+        headers: this._headers,
+        body: JSON.stringify({
+          name: this._name,
+          about: this._about,
+        }),
+      }
+    ).then((res) => {
+      if (res.ok) {
+        return res;
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
+
+  post() {
+    return fetch(`${this._baseUrl}` + `${cohortId}` + `${this._endPoint}`, {
+      method: this._method,
+      headers: this._headers,
+      body: JSON.stringify({
+        name: this._picName,
+        link: this._picLink,
+        _id: this._currentUser.id,
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        return res;
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
 }
 
-const OOPgetProfileInfo = new Api(
-  apiConfig.url,
-  cohortId,
-  "/users/me",
-  "GET",
-  apiConfig.headers
-);
+export const getProfileInfo = () =>
+  new Api(apiConfig.url, cohortId, "/users/me", "GET", apiConfig.headers).get();
 
-console.log(OOPgetProfileInfo.getProfileInfo());
+export const getCards = () =>
+  new Api(apiConfig.url, cohortId, "/cards", "GET", apiConfig.headers).get();
 
-export const getProfileInfo = () => {
-  return fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/users/me", {
-    method: "GET",
-    headers: apiConfig.headers,
-  }).then((res) => {
-    if (res.ok) {
-      return res;
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
-};
+export const patchProfile = (currentUser, name, about) =>
+  new Api(
+    apiConfig.url,
+    cohortId,
+    "/users/me",
+    "PATCH",
+    apiConfig.headers,
+    currentUser,
+    name,
+    about
+  ).patch();
 
-export const getCards = () => {
-  return fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/cards", {
-    method: "GET",
-    headers: apiConfig.headers,
-  }).then((res) => {
-    if (res.ok) {
-      return res;
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
-};
+export const postCard = (picName, picLink) =>
+  new Api(
+    apiConfig.url,
+    cohortId,
+    "/cards",
+    "POST",
+    apiConfig.headers,
+    currentUser,
+    picName,
+    picLink
+  ).post();
 
-export const patchProfile = (name, about) => {
-  return fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/users/me", {
-    method: "PATCH",
-    headers: apiConfig.headers,
-    body: JSON.stringify({
-      name: name,
-      about: about,
-    }),
-  }).then((res) => {
-    if (res.ok) {
-      return res;
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
-};
+// export const getProfileInfo = () => {
+//   return fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/users/me", {
+//     method: "GET",
+//     headers: apiConfig.headers,
+//   }).then((res) => {
+//     if (res.ok) {
+//       return res;
+//     }
+//     return Promise.reject(`Ошибка: ${res.status}`);
+//   });
+// };
 
-export const postCard = (name, link) => {
-  return fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/cards", {
-    method: "POST",
-    headers: apiConfig.headers,
-    body: JSON.stringify({
-      name: name,
-      link: link,
-      _id: currentUser.id,
-    }),
-  }).then((res) => {
-    if (res.ok) {
-      return res;
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
-};
+// export const getCards = () => {
+//   return fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/cards", {
+//     method: "GET",
+//     headers: apiConfig.headers,
+//   }).then((res) => {
+//     if (res.ok) {
+//       return res;
+//     }
+//     return Promise.reject(`Ошибка: ${res.status}`);
+//   });
+// };
+
+// export const patchProfile = (name, about) => {
+//   return fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/users/me", {
+//     method: "PATCH",
+//     headers: apiConfig.headers,
+//     body: JSON.stringify({
+//       name: name,
+//       about: about,
+//     }),
+//   }).then((res) => {
+//     if (res.ok) {
+//       return res;
+//     }
+//     return Promise.reject(`Ошибка: ${res.status}`);
+//   });
+// };
+
+// export const postCard = (name, link) => {
+//   return fetch("https://nomoreparties.co/v1/" + `${cohortId}` + "/cards", {
+//     method: "POST",
+//     headers: apiConfig.headers,
+//     body: JSON.stringify({
+//       name: name,
+//       link: link,
+//       _id: currentUser.id,
+//     }),
+//   }).then((res) => {
+//     if (res.ok) {
+//       return res;
+//     }
+//     return Promise.reject(`Ошибка: ${res.status}`);
+//   });
+// };
 
 export const deleteCard = (cardId) => {
   return fetch(
