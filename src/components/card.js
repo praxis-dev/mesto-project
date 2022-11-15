@@ -1,5 +1,4 @@
 import { openPopup } from "./modal";
-import { postLikeToServer, removeLikeFromServer, apiConfig } from "./api";
 import {
   setPictureViewer,
   deleteTargetCard,
@@ -50,7 +49,6 @@ export function createCard(
   const likeButton = postElement.querySelector(".post__like-button");
 
   if (isLikedByMe) {
-    console.log(`${cardId} is liked by me`);
     likeButton.classList.add("post__like-button_active");
   }
 

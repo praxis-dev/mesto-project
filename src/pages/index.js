@@ -44,27 +44,19 @@ import {
 
 import { enableValidation, blockSubmit } from "../components/validation";
 
-import {
-  getProfileInfo,
-  getCards,
-  patchProfile,
-  patchAvatar,
-  postCard,
-  deleteCard,
-  postLikeToServer,
-  removeLikeFromServer,
-} from "../components/api";
+import { api } from "../components/api";
 
 // get profile and cards info from server
 
-getProfileInfo().then((res) => {
+api.getProfileInfo().then((res) => {
   return res
     .json()
     .then((data) => {
       updateProfileFromServer(data.name, data.about, data.avatar, data._id);
     })
     .then(() => {
-      getCards()
+      api
+        .getCards()
         .then((res) => {
           return res.json().then((data) => {
             data.reverse().forEach((cardinfo) => {
@@ -101,7 +93,8 @@ function updateProfileFromServer(dataName, dataAbout, dataAvatar, dataId) {
 // delete card function for trash icon event listener in card creator function
 
 export function deleteTargetCard(cardId, event) {
-  deleteCard(cardId)
+  api
+    .deleteCard(cardId)
     .then(() => {
       event.target.closest(".post").remove();
     })
@@ -117,7 +110,8 @@ enableValidation(validationConfig);
 function updateProfile(evt) {
   evt.preventDefault();
   displayLoading(profileUpdaterInputForm);
-  patchProfile(nameInput.value, jobInput.value)
+  api
+    .patchProfile(nameInput.value, jobInput.value)
     .then((response) => {
       return response.json();
     })
@@ -137,7 +131,8 @@ function updateProfile(evt) {
 function updateAvatar(evt) {
   evt.preventDefault();
 
-  patchAvatar(avatarInput.value)
+  api
+    .patchAvatar(avatarInput.value)
     .then((response) => {
       return response.json();
     })
@@ -188,7 +183,8 @@ export function renderCard(
 function addPicFormSubmitHandler(evt, form) {
   evt.preventDefault();
   displayLoading(form);
-  postCard(placeInput.value, placeLinkInput.value)
+  api
+    .postCard(placeInput.value, placeLinkInput.value)
     .then((response) => {
       return response.json();
     })
@@ -221,7 +217,8 @@ function addPicFormSubmitHandler(evt, form) {
 // activate / deactivate likes
 
 export function deactivateLike(button, likes, cardId) {
-  removeLikeFromServer(cardId)
+  api
+    .removeLikeFromServer(cardId)
     .then((response) => {
       return response.json();
     })
@@ -234,7 +231,8 @@ export function deactivateLike(button, likes, cardId) {
 }
 
 export function activateLike(button, likes, cardId) {
-  postLikeToServer(cardId)
+  api
+    .postLikeToServer(cardId)
     .then((response) => {
       return response.json();
     })
