@@ -1,91 +1,99 @@
-import { openPopup } from "./modal";
-import { postLikeToServer, removeLikeFromServer, apiConfig } from "./api";
+import {openPopup} from "./modal";
 import {
-  setPictureViewer,
-  deleteTargetCard,
-  activateLike,
-  deactivateLike,
+    setPictureViewer,
+    deleteTargetCard,
+    activateLike,
+    deactivateLike,
 } from "../pages";
 
 import {
-  postTemplate,
-  picAdderFormElement,
-  pictureViewerPopup,
-  currentUser,
+    picAdderFormElement,
+    pictureViewerPopup,
+    currentUser,
 } from "./global";
 
 // creating cards
 
-export function createCard(
-  name,
-  link,
-  likeNumber,
-  postOwnerId,
-  myId,
-  cardId,
-  isLikedByMe
-) {
-  const postElement = postTemplate.cloneNode(true);
-  const postImage = postElement.querySelector(".post__picture");
-  const postName = postElement.querySelector(".post__title");
-  const likeCounter = postElement.querySelector(".post__like-counter");
-  let renderedCardId;
+export class Card {
+    constructor(data, {selector}, increaseLikes, _decreaseLikes) {
+        this._title = data.name;
+        this._image = data.link;
+        this._selector = selector;
+        this._likes = data._likes;
+        this._id = data._id;
+        this._ownerId = data. owner._id;
+        this._myId = data._myId;
+    }
 
-  postImage.src = link;
-  postName.textContent = name;
-  postImage.alt = name;
-  likeCounter.textContent = likeNumber;
-  renderedCardId = cardId;
+    _getElement() {
+        return document.querySelector(this._selector)
+            .content
+            .querySelector('.post')
+            .cloneNode(true);
+    }
 
-  const trashIcon = postElement.querySelector(".post__trash-icon");
+    generateCard() {
+        this._element = this._getElement();
+        this._imageElement = this._element.querySelector('.post__picture')
+        this._likeCounter = this._element.querySelector(".post__like-counter");
+        this._trashIcon = this._element.querySelector(".post__trash-icon");
+        this._likeButton = this._element.querySelector(".post__like-button");
+        this._imageElement.src = this._image;
+        this._element.querySelector('.post__title').textContent = this._title;
+        this._imageElement.alt = this._title;
+        this._likeCounter.textContent = this._likes.length;
+        this._renderedCardId = this._id;
 
-  trashIcon.addEventListener("click", (event) => {
-    deleteTargetCard(cardId, event);
-  });
+        this._setEventListeners()
+        this._likedByMe()
 
-  if (myId != postOwnerId) {
-    trashIcon.style.visibility = "hidden";
-  }
+        if (this._myId != this._ownerId) {
+            this._trashIcon.style.visibility = "hidden";
+        }
 
-  const likeButton = postElement.querySelector(".post__like-button");
+        return this._element;
+    }
+_setEventListeners() {
+    this._trashIcon.addEventListener("click", (event) => {
+        deleteTargetCard(this._id, event);
+    })
+    this._likeButton.addEventListener("click", () => {
+        this._likeCard(this._likeButton, this._likeCounter, this._renderedCardId);
+    });
+    this._imageElement.addEventListener("click", (event) => {
+        setPictureViewer(link, name);
+        openPopup(pictureViewerPopup, picAdderFormElement);
+    });
+}
 
-  if (isLikedByMe) {
+
+if (isLikedByMe) {
     console.log(`${cardId} is liked by me`);
-    likeButton.classList.add("post__like-button_active");
-  }
-
-  likeButton.addEventListener("click", () => {
-    likeCard(likeButton, likeCounter, renderedCardId);
-  });
-
-  postImage.addEventListener("click", (event) => {
-    setPictureViewer(link, name);
-    openPopup(pictureViewerPopup, picAdderFormElement);
-  });
-
-  return postElement;
+    this._likeButton.classList.add("post__like-button_active");
 }
 
 // like card function
 
-function likeCard(button, likes, cardId) {
-  if (button.classList.contains("post__like-button_active")) {
-    deactivateLike(button, likes, cardId);
-  } else {
-    activateLike(button, likes, cardId);
-  }
+    _likeCard(button, likes, cardId) {
+    if (button.classList.contains("post__like-button_active")) {
+        deactivateLike(button, likes, cardId);
+    } else {
+        activateLike(button, likes, cardId);
+    }
 }
 
-export function increaseLikes(data, likes, button) {
-  likes.textContent = data.likes.length;
-  button.classList.remove("post__like-button_active");
+ _increaseLikes(data, likes, button) {
+    likes.textContent = data.likes.length;
+    button.classList.remove("post__like-button_active");
 }
 
-export function decreaseLikes(data, likes, button) {
-  likes.textContent = data.likes.length;
-  button.classList.add("post__like-button_active");
+ _decreaseLikes(data, likes, button) {
+    likes.textContent = data.likes.length;
+    button.classList.add("post__like-button_active");
 }
 
-export function likedByMe(card) {
-  return card.likes.some((like) => like._id === currentUser.id);
+
+_likedByMe() {
+    return this._likes.some((element) => element._id === currentUser.id);
+}
 }
