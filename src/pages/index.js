@@ -42,7 +42,11 @@ import {
   decreaseLikes,
 } from "../components/card";
 
-import { enableValidation, blockSubmit } from "../components/validation";
+import {
+  formValidator,
+  enableValidation,
+  blockSubmit,
+} from "../components/validation";
 
 import { api } from "../components/api";
 
@@ -103,7 +107,7 @@ export function deleteTargetCard(cardId, event) {
     });
 }
 
-enableValidation(validationConfig);
+formValidator.enableValidation(validationConfig);
 
 // popup update details
 
@@ -203,7 +207,7 @@ function addPicFormSubmitHandler(evt, form) {
       closePopup(placeAdderPopup);
       postButton.classList.add("edit-window__submit_inactive");
       picAdderFormElement.reset();
-      blockSubmit();
+      formValidator.blockSubmit();
     })
 
     .catch((err) => {
