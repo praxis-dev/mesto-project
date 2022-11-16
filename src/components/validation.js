@@ -2,7 +2,7 @@
 
 import { postButton } from "./global";
 
-const validationConfig = {
+export const validationConfig = {
   inputErrorClass: "edit-window__input-string_mistake",
   inputErrorActiveClass: "edit-window__mistake-message_active",
   editWindowInputForm: ".edit-window__input-form",
@@ -13,12 +13,7 @@ const validationConfig = {
 
 export class FormValidator {
   constructor(validationConfig) {
-    this._inputErrorClass = validationConfig.inputErrorClass;
-    this._inputErrorActiveClass = validationConfig.inputErrorActiveClass;
-    this._editWindowInputForm = validationConfig.editWindowInputForm;
-    this._editWindowInputString = validationConfig.editWindowInputString;
-    this._editWindowSubmitInactive = validationConfig.editWindowSubmitInactive;
-    this._editWindowSubmit = validationConfig.editWindowSubmit;
+    this._validationConfig = validationConfig;
   }
 
   _showInputError(formElement, inputElement, errorMessage, validationConfig) {
@@ -88,5 +83,3 @@ export class FormValidator {
 }
 
 // export const formValidator = new FormValidator(apiConfig);
-
-export { validationConfig };
