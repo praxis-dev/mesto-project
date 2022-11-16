@@ -1,6 +1,6 @@
 import "./styles.css";
 
-import { validationConfig } from "../components/validation";
+import { FormValidator, validationConfig } from "../components/validation";
 
 import {
   allPopups,
@@ -42,13 +42,7 @@ import {
   decreaseLikes,
 } from "../components/card";
 
-import {
-  formValidator,
-  enableValidation,
-  blockSubmit,
-} from "../components/validation";
-
-import { api } from "../components/api";
+import { api, apiConfig } from "../components/api";
 
 // get profile and cards info from server
 
@@ -107,7 +101,20 @@ export function deleteTargetCard(cardId, event) {
     });
 }
 
-formValidator.enableValidation(validationConfig);
+const profileFormValidator = new FormValidator();
+const addPicFormValidator = new FormValidator();
+const avatarAdderFormValidator = new FormValidator();
+
+profileFormValidator.enableValidation(
+  validationConfig,
+  profileUpdaterInputForm
+);
+
+addPicFormValidator.enableValidation(validationConfig, picAdderFormElement);
+avatarAdderFormValidator.enableValidation(
+  validationConfig,
+  avatarAdderFormElement
+);
 
 // popup update details
 
@@ -207,7 +214,7 @@ function addPicFormSubmitHandler(evt, form) {
       closePopup(placeAdderPopup);
       postButton.classList.add("edit-window__submit_inactive");
       picAdderFormElement.reset();
-      formValidator.blockSubmit();
+      profileFormValidator.blockSubmit();
     })
 
     .catch((err) => {
