@@ -101,20 +101,26 @@ export function deleteTargetCard(cardId, event) {
     });
 }
 
-const profileFormValidator = new FormValidator();
-const addPicFormValidator = new FormValidator();
-const avatarAdderFormValidator = new FormValidator();
+// new validators
 
-profileFormValidator.enableValidation(
+const profileFormValidator = new FormValidator(
   validationConfig,
   profileUpdaterInputForm
 );
-
-addPicFormValidator.enableValidation(validationConfig, picAdderFormElement);
-avatarAdderFormValidator.enableValidation(
+const addPicFormValidator = new FormValidator(
+  validationConfig,
+  picAdderFormElement
+);
+const avatarAdderFormValidator = new FormValidator(
   validationConfig,
   avatarAdderFormElement
 );
+
+profileFormValidator.enableValidation();
+
+addPicFormValidator.enableValidation();
+
+avatarAdderFormValidator.enableValidation();
 
 // popup update details
 

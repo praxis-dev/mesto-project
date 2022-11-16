@@ -12,53 +12,54 @@ export const validationConfig = {
 };
 
 export class FormValidator {
-  constructor(validationConfig) {
+  constructor(validationConfig, form) {
     this._validationConfig = validationConfig;
+    this._form = form;
   }
 
-  _showInputError(formElement, inputElement, errorMessage, validationConfig) {
+  _showInputError(formElement, inputElement, errorMessage, _validationConfig) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.add(validationConfig.inputErrorClass);
+    inputElement.classList.add(_validationConfig.inputErrorClass);
     errorElement.textContent = errorMessage;
-    errorElement.classList.add(validationConfig.inputErrorActiveClass);
+    errorElement.classList.add(_validationConfig.inputErrorActiveClass);
   }
 
-  _hideInputError(formElement, inputElement, validationConfig) {
+  _hideInputError(formElement, inputElement, _validationConfig) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.remove(validationConfig.inputErrorClass);
-    errorElement.classList.remove(validationConfig.inputErrorActiveClass);
+    inputElement.classList.remove(_validationConfig.inputErrorClass);
+    errorElement.classList.remove(_validationConfig.inputErrorActiveClass);
   }
 
-  _isValid(formElement, inputElement, validationConfig) {
+  _isValid(formElement, inputElement, _validationConfig) {
     if (!inputElement.validity.valid) {
       this._showInputError(
         formElement,
         inputElement,
         inputElement.validationMessage,
-        validationConfig
+        _validationConfig
       );
     } else {
-      this._hideInputError(formElement, inputElement, validationConfig);
+      this._hideInputError(formElement, inputElement, _validationConfig);
     }
   }
 
-  _setEventListeners(formElement, validationConfig) {
+  _setEventListeners(formElement, _validationConfig) {
     const inputList = Array.from(
-      formElement.querySelectorAll(validationConfig.editWindowInputString)
+      formElement.querySelectorAll(_validationConfig.editWindowInputString)
     );
     const buttonElement = formElement.querySelector(
-      validationConfig.editWindowSubmit
+      _validationConfig.editWindowSubmit
     );
     inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
-        this._isValid(formElement, inputElement, validationConfig);
-        this._toggleButtonState(inputList, buttonElement, validationConfig);
+        this._isValid(formElement, inputElement, _validationConfig);
+        this._toggleButtonState(inputList, buttonElement, _validationConfig);
       });
     });
   }
 
-  enableValidation(validationConfig, form) {
-    this._setEventListeners(form, validationConfig);
+  enableValidation() {
+    this._setEventListeners(this._form, this._validationConfig);
   }
 
   _hasInvalidInput(inputList) {
@@ -67,13 +68,15 @@ export class FormValidator {
     });
   }
 
-  _toggleButtonState(inputList, buttonElement, validationConfig) {
+  _toggleButtonState(inputList, buttonElement, _validationConfig) {
     if (this._hasInvalidInput(inputList)) {
       buttonElement.disabled = true;
-      buttonElement.classList.add(validationConfig.editWindowSubmitInactive);
+      buttonElement.classList.add(_validationConfig.editWindowSubmitInactive);
     } else {
       buttonElement.disabled = false;
-      buttonElement.classList.remove(validationConfig.editWindowSubmitInactive);
+      buttonElement.classList.remove(
+        _validationConfig.editWindowSubmitInactive
+      );
     }
   }
 
