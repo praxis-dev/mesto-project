@@ -1,3 +1,5 @@
+import { Popup } from "../components/modal";
+
 import "./styles.css";
 
 import { FormValidator, validationConfig } from "../components/validation";
@@ -43,6 +45,12 @@ import {
 } from "../components/card";
 
 import { api, apiConfig } from "../components/api";
+
+// popup classes
+
+const testPopup = new Popup(profileUpdaterPopup);
+
+testPopup.confirmReception();
 
 // get profile and cards info from server
 
@@ -303,16 +311,11 @@ profileUpdaterPopupOpenButton.addEventListener(
   function handleClick(event) {
     nameInput.value = userName.textContent;
     jobInput.value = userJob.innerText;
-    openPopup(profileUpdaterPopup, profileUpdaterInputForm);
+    testPopup.openPopup(profileUpdaterPopup, profileUpdaterInputForm);
   }
 );
 
-profileUpdaterPopupCloseButton.addEventListener(
-  "click",
-  function handleClick(event) {
-    closePopup(profileUpdaterPopup);
-  }
-);
+testPopup.setEventlisteners(profileUpdaterPopupCloseButton);
 
 profileUpdaterInputForm.addEventListener("submit", updateProfile);
 
@@ -328,7 +331,7 @@ function addOverlayListener() {
   );
 }
 
-addOverlayListener();
+// addOverlayListener();
 
 // set picture viewer
 
