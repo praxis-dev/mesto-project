@@ -2,27 +2,25 @@ import {openPopup} from "./modal";
 import {
     setPictureViewer,
     deleteTargetCard,
-    activateLike,
-    deactivateLike,
 } from "../pages";
 
 import {
     picAdderFormElement,
     pictureViewerPopup,
-    currentUser,
 } from "./global";
+import {postLikeToServer, removeLikeFromServer} from "./api";
 
 // creating cards
 
 export class Card {
-    constructor(data, {selector}, increaseLikes, _decreaseLikes) {
-        this._title = data.name;
-        this._image = data.link;
+    constructor(name, link, likes, postOwnerId, myId, cardId, {selector}) {
+        this._title = name;
+        this._image = link;
+        this._likes = likes;
+        this._ownerId = postOwnerId;
+        this._myId = myId;
+        this._id = cardId;
         this._selector = selector;
-        this._likes = data._likes;
-        this._id = data._id;
-        this._ownerId = data.owner._id;
-        this._myId = data._myId;
     }
 
     _getElement() {
@@ -47,53 +45,45 @@ export class Card {
         this._setEventListeners()
         this._likedByMe()
 
-        if (this._myId != this._ownerId) {
+        if (this._myId !== this._ownerId) {
             this._trashIcon.style.visibility = "hidden";
         }
 
         return this._element;
     }
-_setEventListeners() {
-    this._trashIcon.addEventListener("click", (event) => {
-        deleteTargetCard(this._id, event);
-    })
-    this._likeButton.addEventListener("click", () => {
-        this._likeCard(this._likeButton, this._likeCounter, this._renderedCardId);
-    });
-    this._imageElement.addEventListener("click", (event) => {
-        setPictureViewer(link, name);
-        openPopup(pictureViewerPopup, picAdderFormElement);
-    });
-}
 
-
-if (isLikedByMe) {
-    console.log(`${cardId} is liked by me`);
-    this._likeButton.classList.add("post__like-button_active");
-}
-
-// like card function
-
-    _likeCard(button, likes, cardId) {
-    if (button.classList.contains("post__like-button_active")) {
-        deactivateLike(button, likes, cardId);
-    } else {
-        activateLike(button, likes, cardId);
+    _setEventListeners() {
+        this._trashIcon.addEventListener("click", (event) => {
+            deleteTargetCard(this._id, event);
+        })
+        this._likeButton.addEventListener("click", () => {
+            this._toggleLike()
+        });
+        this._imageElement.addEventListener("click", () => {
+            setPictureViewer(this._image, this._title);
+            openPopup(pictureViewerPopup, picAdderFormElement);
+        });
     }
-}
 
- _increaseLikes(data, likes, button) {
-    likes.textContent = data.likes.length;
-    button.classList.remove("post__like-button_active");
-}
+    _toggleLike() {
+        if (this._likeButton.classList.contains('post__like-button_active')) {
+            removeLikeFromServer(this._id)
+                .then((data) => {
+                    this._likeCounter.textContent = data.likes.length;
+                    this._likeButton.classList.remove('.post__like-button_active')
+                })
+                .catch((err) => console.log(err));
+        } else {
+            postLikeToServer(this._id)
+                .then((data) => {
+                    this._likeCounter.textContent = data.likes.length;
+                    this._likeButton.classList.add('.post__like-button_active')
+                })
+        }
+    }
 
- _decreaseLikes(data, likes, button) {
-    likes.textContent = data.likes.length;
-    button.classList.add("post__like-button_active");
-}
 
-
-_likedByMe() {
-    return this._likes.some((element) => element._id === currentUser.id);
-}
+    _likedByMe() {
+        return this._likes.some(() => this._id === this._ownerId);
+    }
 }
