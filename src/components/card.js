@@ -21,7 +21,7 @@ export class Card {
         this._selector = selector;
         this._likes = data._likes;
         this._id = data._id;
-        this._ownerId = data. owner._id;
+        this._ownerId = data.owner._id;
         this._myId = data._myId;
     }
 
