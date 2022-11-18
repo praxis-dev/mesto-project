@@ -17,6 +17,8 @@ import {
   avatarAdderOpenButton,
   avatarAdderCloseButton,
   ESC_CODE,
+  pictureViewerPicture,
+  pictureViewerPopup,
 } from "./global";
 
 export class Popup {
@@ -55,11 +57,37 @@ export class Popup {
 
   setEventlisteners(popupCloseButton) {
     console.log("oop listeners set");
+    const openedPopup = document.querySelector(".popup_active");
     popupCloseButton.addEventListener("click", function handleClick(event) {
       closePopup(openedPopup);
     });
   }
 }
+
+export class PopupWithImage extends Popup {
+  constructor(pictureViewerPicture, link, name) {
+    super(pictureViewerPicture);
+    this._pictureViewerPicture = pictureViewerPicture;
+    this._link = link;
+    this._name = name;
+  }
+
+  openPopup() {
+    super.openPopup();
+    // this._pictureViewerPicture = this._link;
+    // this._;
+  }
+}
+
+export const testPopupWithImage = new PopupWithImage(pictureViewerPopup);
+
+console.log(testPopupWithImage.closePopup());
+
+// export function setPictureViewer(link, name) {
+//   pictureViewerPicture.src = link;
+//   pictureViewerPicture.alt = name;
+//   pictureViewerCaption.textContent = name;
+// }
 
 // popup open/close
 

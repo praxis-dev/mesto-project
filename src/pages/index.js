@@ -1,4 +1,4 @@
-import { Popup } from "../components/modal";
+import { Popup, testPopupWithImage } from "../components/modal";
 
 import "./styles.css";
 
@@ -272,7 +272,7 @@ export function activateLike(button, likes, cardId) {
 // viewing posts listeners
 
 pictureViewerCloseButton.addEventListener("click", function handleClick(event) {
-  closePopup(pictureViewerPopup);
+  testPopupWithImage.closePopup(pictureViewerPopup);
 });
 
 // change avatar listeners
