@@ -311,7 +311,7 @@ profileUpdaterPopupOpenButton.addEventListener(
   function handleClick(event) {
     nameInput.value = userName.textContent;
     jobInput.value = userJob.innerText;
-    testPopup.openPopup(profileUpdaterPopup, profileUpdaterInputForm);
+    testPopup.open(profileUpdaterPopup, profileUpdaterInputForm);
   }
 );
 

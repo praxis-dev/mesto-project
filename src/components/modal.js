@@ -29,39 +29,39 @@ export class Popup {
   confirmReception() {
     console.log(this._popupSelector);
   }
-  openPopup() {
-    console.log("it's oop!");
+  open = () => {
     this._popupSelector.classList.add("popup_active");
     document.addEventListener("keydown", this._closeByEsc);
-    this._popupSelector.addEventListener("mousedown", function (evt) {
+    this._popupSelector.addEventListener("mousedown", (evt) => {
       if (evt.target.classList.contains("popup")) {
-        const openedPopup = document.querySelector(".popup_active");
-        closePopup(openedPopup);
+        this.close();
+        console.log("overlay closed by oop too");
       }
     });
-  }
+    console.log("opened with oop!");
+  };
 
-  closePopup() {
-    console.log("it's oop too!");
+  close = () => {
     this._popupSelector.classList.remove("popup_active");
     document.removeEventListener("keydown", this._closeByEsc);
-  }
+    console.log("closed with OOP!");
+  };
 
-  _closeByEsc(evt) {
+  _closeByEsc = (evt) => {
     console.log("oop close triggered!");
     if (evt.key === ESC_CODE) {
-      const openedPopup = document.querySelector(".popup_active");
-      closePopup(openedPopup);
+      console.log("esc triggered");
+      this.close();
     }
-  }
+  };
 
-  setEventlisteners(popupCloseButton) {
+  setEventlisteners = (popupCloseButton) => {
+    console.log(popupCloseButton);
     console.log("oop listeners set");
-    const openedPopup = document.querySelector(".popup_active");
-    popupCloseButton.addEventListener("click", function handleClick(event) {
-      closePopup(openedPopup);
+    popupCloseButton.addEventListener("click", () => {
+      this.close();
     });
-  }
+  };
 }
 
 export class PopupWithImage extends Popup {
@@ -80,8 +80,6 @@ export class PopupWithImage extends Popup {
 }
 
 export const testPopupWithImage = new PopupWithImage(pictureViewerPopup);
-
-console.log(testPopupWithImage.closePopup());
 
 // export function setPictureViewer(link, name) {
 //   pictureViewerPicture.src = link;
