@@ -144,7 +144,7 @@ function updateProfile(evt) {
       userName.textContent = data.name;
       userJob.textContent = data.about;
     })
-    .then(() => closePopup(profileUpdaterPopup))
+    .then(() => testPopup.close())
     .catch((err) => {
       console.log(err);
     })
