@@ -72,8 +72,25 @@ export class PopupWithImage extends Popup {
     this._name = name;
   }
 
-  // this._pictureViewerPicture = this._link;
-  // this._;
+  confirm() {
+    console.log(
+      this._pictureViewerPicture.querySelector(".picture-viewer__pic").src,
+      this._pictureViewerPicture.querySelector(".picture-viewer__pic").alt,
+      this._pictureViewerPicture.querySelector(".picture-viewer__caption")
+        .textContent
+    );
+  }
+
+  set(link, name) {
+    (this._pictureViewerPicture.querySelector(".picture-viewer__pic").src =
+      link),
+      (this._pictureViewerPicture.querySelector(".picture-viewer__pic").alt =
+        name),
+      (this._pictureViewerPicture.querySelector(
+        ".picture-viewer__caption"
+      ).textContent = name);
+    console.log("image set with oop");
+  }
 }
 
 // export function setPictureViewer(link, name) {

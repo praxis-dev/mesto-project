@@ -50,9 +50,9 @@ import { api, apiConfig } from "../components/api";
 
 const testPopup = new Popup(profileUpdaterPopup);
 
-testPopup.confirmReception();
-
 export const testPopupWithImage = new PopupWithImage(pictureViewerPopup);
+
+testPopupWithImage.confirm();
 
 // get profile and cards info from server
 

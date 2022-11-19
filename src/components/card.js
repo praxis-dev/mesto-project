@@ -59,7 +59,7 @@ export function createCard(
   });
 
   postImage.addEventListener("click", (event) => {
-    setPictureViewer(link, name);
+    testPopupWithImage.set(link, name);
     testPopupWithImage.open();
   });
 
