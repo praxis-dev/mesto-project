@@ -1,4 +1,4 @@
-import { Popup, testPopupWithImage } from "../components/modal";
+import { Popup, PopupWithImage } from "../components/modal";
 
 import "./styles.css";
 
@@ -51,6 +51,8 @@ import { api, apiConfig } from "../components/api";
 const testPopup = new Popup(profileUpdaterPopup);
 
 testPopup.confirmReception();
+
+export const testPopupWithImage = new PopupWithImage(pictureViewerPopup);
 
 // get profile and cards info from server
 
@@ -272,7 +274,7 @@ export function activateLike(button, likes, cardId) {
 // viewing posts listeners
 
 pictureViewerCloseButton.addEventListener("click", function handleClick(event) {
-  testPopupWithImage.closePopup(pictureViewerPopup);
+  testPopupWithImage.close();
 });
 
 // change avatar listeners

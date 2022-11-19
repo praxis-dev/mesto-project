@@ -72,14 +72,9 @@ export class PopupWithImage extends Popup {
     this._name = name;
   }
 
-  openPopup() {
-    super.openPopup();
-    // this._pictureViewerPicture = this._link;
-    // this._;
-  }
+  // this._pictureViewerPicture = this._link;
+  // this._;
 }
-
-export const testPopupWithImage = new PopupWithImage(pictureViewerPopup);
 
 // export function setPictureViewer(link, name) {
 //   pictureViewerPicture.src = link;

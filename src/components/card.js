@@ -1,4 +1,6 @@
-import { openPopup, testPopupWithImage } from "./modal";
+import { testPopupWithImage } from "../pages/index";
+
+import { openPopup } from "./modal";
 import {
   setPictureViewer,
   deleteTargetCard,
@@ -58,7 +60,7 @@ export function createCard(
 
   postImage.addEventListener("click", (event) => {
     setPictureViewer(link, name);
-    testPopupWithImage.openPopup(pictureViewerPopup);
+    testPopupWithImage.open();
   });
 
   return postElement;
