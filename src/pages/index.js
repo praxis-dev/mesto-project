@@ -1,4 +1,4 @@
-import { Popup, PopupWithImage } from "../components/modal";
+import { Popup, PopupWithForm, PopupWithImage } from "../components/modal";
 
 import "./styles.css";
 
@@ -52,7 +52,9 @@ const testPopup = new Popup(profileUpdaterPopup);
 
 export const testPopupWithImage = new PopupWithImage(pictureViewerPopup);
 
-testPopupWithImage.confirm();
+export const testPicAdderPopup = new PopupWithForm(placeAdderPopup);
+
+testPicAdderPopup.confirmReception();
 
 // get profile and cards info from server
 
@@ -111,7 +113,7 @@ export function deleteTargetCard(cardId, event) {
     });
 }
 
-// new validators
+// OOP validators
 
 const profileFormValidator = new FormValidator(
   validationConfig,
@@ -227,7 +229,7 @@ function addPicFormSubmitHandler(evt, form) {
       )
     )
     .then(() => {
-      closePopup(placeAdderPopup);
+      testPicAdderPopup.close();
       postButton.classList.add("edit-window__submit_inactive");
       picAdderFormElement.reset();
       profileFormValidator.blockSubmit();
@@ -295,11 +297,11 @@ avatarAdderFormElement.addEventListener("submit", function handleClick(event) {
 // add pic form listeners
 
 picAdderOpenButton.addEventListener("click", function handleClick(event) {
-  openPopup(placeAdderPopup, picAdderFormElement);
+  testPicAdderPopup.open();
 });
 
 picAdderCloseButton.addEventListener("click", function handleClick(event) {
-  closePopup(placeAdderPopup);
+  testPicAdderPopup.close();
 });
 
 picAdderFormElement.addEventListener("submit", function handleClick(event) {
@@ -334,11 +336,3 @@ function addOverlayListener() {
 }
 
 // addOverlayListener();
-
-// set picture viewer
-
-export function setPictureViewer(link, name) {
-  pictureViewerPicture.src = link;
-  pictureViewerPicture.alt = name;
-  pictureViewerCaption.textContent = name;
-}

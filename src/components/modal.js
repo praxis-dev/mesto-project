@@ -21,6 +21,8 @@ import {
   pictureViewerPopup,
 } from "./global";
 
+// popup general class
+
 export class Popup {
   constructor(popupSelector) {
     this._popupSelector = popupSelector;
@@ -64,6 +66,8 @@ export class Popup {
   };
 }
 
+// picture viewer popup
+
 export class PopupWithImage extends Popup {
   constructor(pictureViewerPicture, link, name) {
     super(pictureViewerPicture);
@@ -72,7 +76,7 @@ export class PopupWithImage extends Popup {
     this._name = name;
   }
 
-  confirm() {
+  confirmImageParameters() {
     console.log(
       this._pictureViewerPicture.querySelector(".picture-viewer__pic").src,
       this._pictureViewerPicture.querySelector(".picture-viewer__pic").alt,
@@ -93,13 +97,11 @@ export class PopupWithImage extends Popup {
   }
 }
 
-// export function setPictureViewer(link, name) {
-//   pictureViewerPicture.src = link;
-//   pictureViewerPicture.alt = name;
-//   pictureViewerCaption.textContent = name;
-// }
-
-// popup open/close
+export class PopupWithForm extends Popup {
+  constructor(popupSelector) {
+    super(popupSelector);
+  }
+}
 
 function openPopup(popup) {
   popup.classList.add("popup_active");
