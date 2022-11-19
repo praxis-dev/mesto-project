@@ -10,9 +10,17 @@ import {
 } from "./global";
 import {postLikeToServer, removeLikeFromServer} from "./api";
 
+const likeCount = (cardLikeCount, likes) => {
+    cardLikeCount.textContent = likes.length
+}
+const toggleLikeActive = (evt) => {
+    evt.classList.toggle('.post__like-button_active')
+}
+
+
 // creating cards
 
-export class Card {
+export default class Card {
     constructor(name, link, likes, postOwnerId, myId, cardId, {selector}) {
         this._title = name;
         this._image = link;
@@ -69,21 +77,25 @@ export class Card {
         if (this._likeButton.classList.contains('post__like-button_active')) {
             removeLikeFromServer(this._id)
                 .then((data) => {
-                    this._likeCounter.textContent = data.likes.length;
-                    this._likeButton.classList.remove('.post__like-button_active')
+                    likeCount(this._likeCounter, data.likes)
+                    toggleLikeActive(this._likeButton)
                 })
                 .catch((err) => console.log(err));
         } else {
             postLikeToServer(this._id)
                 .then((data) => {
-                    this._likeCounter.textContent = data.likes.length;
-                    this._likeButton.classList.add('.post__like-button_active')
+                    likeCount(this._likeCounter, data.likes)
+                    toggleLikeActive(this._likeButton)
                 })
         }
     }
 
 
     _likedByMe() {
-        return this._likes.some(() => this._id === this._ownerId);
+        this._likes.some(element => {
+            if (this._myId === element._id) {
+                this._likeButton.classList.add('.post__like-button_active')
+            }
+        })
     }
 }
