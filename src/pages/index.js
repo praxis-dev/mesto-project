@@ -54,7 +54,7 @@ export const testPopupWithImage = new PopupWithImage(pictureViewerPopup);
 
 export const testPicAdderPopup = new PopupWithForm(placeAdderPopup);
 
-testPicAdderPopup.confirmReception();
+testPicAdderPopup.confirmFormconstructor();
 
 // get profile and cards info from server
 
@@ -209,7 +209,7 @@ export function renderCard(
   postGrid.prepend(postElement);
 }
 
-function addPicFormSubmitHandler(evt, form) {
+export function addPicFormSubmitHandler(evt, form) {
   evt.preventDefault();
   displayLoading(form);
   api
@@ -231,7 +231,6 @@ function addPicFormSubmitHandler(evt, form) {
     .then(() => {
       testPicAdderPopup.close();
       postButton.classList.add("edit-window__submit_inactive");
-      picAdderFormElement.reset();
       profileFormValidator.blockSubmit();
     })
 

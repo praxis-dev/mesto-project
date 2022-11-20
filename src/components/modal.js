@@ -1,3 +1,5 @@
+import { addPicFormSubmitHandler } from "../pages";
+
 import { displayDefaultSubmitButtonText } from "../pages";
 
 import {
@@ -19,6 +21,8 @@ import {
   ESC_CODE,
   pictureViewerPicture,
   pictureViewerPopup,
+  placeLinkInput,
+  postButton,
 } from "./global";
 
 // popup general class
@@ -43,11 +47,11 @@ export class Popup {
     console.log("opened with oop!");
   };
 
-  close = () => {
+  close() {
     this._popupSelector.classList.remove("popup_active");
     document.removeEventListener("keydown", this._closeByEsc);
     console.log("closed with OOP!");
-  };
+  }
 
   _closeByEsc = (evt) => {
     console.log("oop close triggered!");
@@ -98,8 +102,32 @@ export class PopupWithImage extends Popup {
 }
 
 export class PopupWithForm extends Popup {
-  constructor(popupSelector) {
+  constructor(popupSelector, submitCallBack) {
     super(popupSelector);
+    this._form = popupSelector.querySelector(".edit-window__input-form");
+    this._inputs = popupSelector.querySelectorAll(".edit-window__input-string");
+    this._submit = popupSelector.querySelector(".edit-window__submit");
+    // this._submitCallback = submitCallback;
+    // this._submitButtonNormalText = this._submitButton.textContent; // text of normal state
+  }
+
+  confirmFormconstructor() {
+    console.log(this._form, this._inputs, this._submit);
+  }
+
+  close() {
+    super.close();
+    this._form.reset();
+    console.log("OOP close and reset");
+  }
+
+  _getInputValues(name) {
+    this._name = name;
+    this._link = link;
+  }
+
+  confirmPicNameLink() {
+    console.log(this._name, this._link);
   }
 }
 
