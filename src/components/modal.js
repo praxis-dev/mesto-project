@@ -140,12 +140,3 @@ export class PopupWithForm extends Popup {
     formSubmitButton.textContent = "Сохранить";
   }
 }
-
-// popup close modals
-
-function closeByEsc(evt) {
-  if (evt.key === ESC_CODE) {
-    const openedPopup = document.querySelector(".popup_active");
-    closePopup(openedPopup);
-  }
-}
