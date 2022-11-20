@@ -52,8 +52,40 @@ const testPopup = new Popup(profileUpdaterPopup);
 
 export const testPopupWithImage = new PopupWithImage(pictureViewerPopup);
 
-export const testPicAdderPopup = new PopupWithForm(placeAdderPopup);
+export const testPicAdderPopup = new PopupWithForm(placeAdderPopup, (evt) => {
+  evt.preventDefault();
+  displayLoading(this._form);
+  console.log("OOP OOP OOP");
+  api
+    .postCard(placeInput.value, placeLinkInput.value)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) =>
+      renderCard(
+        data.name,
+        data.link,
+        data.likes.length,
+        data.owner._id,
+        currentUser.id,
+        data._id,
+        likedByMe(data)
+      )
+    )
+    .then(() => {
+      testPicAdderPopup.close();
+      postButton.classList.add("edit-window__submit_inactive");
+      profileFormValidator.blockSubmit();
+    })
 
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      displayDefaultSubmitButtonText(form);
+    });
+});
+testPicAdderPopup.setEventlisteners();
 testPicAdderPopup.confirmFormconstructor();
 
 // get profile and cards info from server
@@ -91,7 +123,7 @@ api.getProfileInfo().then((res) => {
     });
 });
 
-//
+// update profile from server
 
 function updateProfileFromServer(dataName, dataAbout, dataAvatar, dataId) {
   userName.innerText = dataName;
@@ -209,38 +241,38 @@ export function renderCard(
   postGrid.prepend(postElement);
 }
 
-export function addPicFormSubmitHandler(evt, form) {
-  evt.preventDefault();
-  displayLoading(form);
-  api
-    .postCard(placeInput.value, placeLinkInput.value)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) =>
-      renderCard(
-        data.name,
-        data.link,
-        data.likes.length,
-        data.owner._id,
-        currentUser.id,
-        data._id,
-        likedByMe(data)
-      )
-    )
-    .then(() => {
-      testPicAdderPopup.close();
-      postButton.classList.add("edit-window__submit_inactive");
-      profileFormValidator.blockSubmit();
-    })
+// export function addPicFormSubmitHandler(evt, form) {
+//   evt.preventDefault();
+//   displayLoading(form);
+//   api
+//     .postCard(placeInput.value, placeLinkInput.value)
+//     .then((response) => {
+//       return response.json();
+//     })
+//     .then((data) =>
+//       renderCard(
+//         data.name,
+//         data.link,
+//         data.likes.length,
+//         data.owner._id,
+//         currentUser.id,
+//         data._id,
+//         likedByMe(data)
+//       )
+//     )
+//     .then(() => {
+//       testPicAdderPopup.close();
+//       postButton.classList.add("edit-window__submit_inactive");
+//       profileFormValidator.blockSubmit();
+//     })
 
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      displayDefaultSubmitButtonText(form);
-    });
-}
+//     .catch((err) => {
+//       console.log(err);
+//     })
+//     .finally(() => {
+//       displayDefaultSubmitButtonText(form);
+//     });
+// }
 
 // activate / deactivate likes
 
@@ -303,9 +335,9 @@ picAdderCloseButton.addEventListener("click", function handleClick(event) {
   testPicAdderPopup.close();
 });
 
-picAdderFormElement.addEventListener("submit", function handleClick(event) {
-  addPicFormSubmitHandler(event, picAdderFormElement);
-});
+// picAdderFormElement.addEventListener("submit", function handleClick(event) {
+//   addPicFormSubmitHandler(event, picAdderFormElement);
+// });
 
 // profile edit listeners
 

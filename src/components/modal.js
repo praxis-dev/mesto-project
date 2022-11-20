@@ -30,10 +30,13 @@ import {
 export class Popup {
   constructor(popupSelector) {
     this._popupSelector = popupSelector;
+    this._popupCloseButton = popupSelector.querySelector(
+      ".edit-window__close-button"
+    );
   }
 
   confirmReception() {
-    console.log(this._popupSelector);
+    console.log(this._popupCloseButton);
   }
   open = () => {
     this._popupSelector.classList.add("popup_active");
@@ -61,13 +64,12 @@ export class Popup {
     }
   };
 
-  setEventlisteners = (popupCloseButton) => {
-    console.log(popupCloseButton);
+  setEventlisteners() {
     console.log("oop listeners set");
-    popupCloseButton.addEventListener("click", () => {
+    this._popupCloseButton.addEventListener("click", () => {
       this.close();
     });
-  };
+  }
 }
 
 // picture viewer popup
@@ -104,11 +106,10 @@ export class PopupWithImage extends Popup {
 export class PopupWithForm extends Popup {
   constructor(popupSelector, submitCallBack) {
     super(popupSelector);
+    this._submitCallback = submitCallBack;
     this._form = popupSelector.querySelector(".edit-window__input-form");
     this._inputs = popupSelector.querySelectorAll(".edit-window__input-string");
     this._submit = popupSelector.querySelector(".edit-window__submit");
-    // this._submitCallback = submitCallback;
-    // this._submitButtonNormalText = this._submitButton.textContent; // text of normal state
   }
 
   confirmFormconstructor() {
@@ -121,13 +122,10 @@ export class PopupWithForm extends Popup {
     console.log("OOP close and reset");
   }
 
-  _getInputValues(name) {
-    this._name = name;
-    this._link = link;
-  }
-
-  confirmPicNameLink() {
-    console.log(this._name, this._link);
+  setEventlisteners() {
+    super.setEventlisteners();
+    console.log("it's upgraded setEventListeners popupWithForm");
+    this._form.addEventListener("submit", this._submitCallback);
   }
 }
 
