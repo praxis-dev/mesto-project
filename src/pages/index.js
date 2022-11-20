@@ -52,9 +52,9 @@ const testPopup = new Popup(profileUpdaterPopup);
 
 export const testPopupWithImage = new PopupWithImage(pictureViewerPopup);
 
-export const testPicAdderPopup = new PopupWithForm(placeAdderPopup, (evt) => {
+export const picAdderPopup = new PopupWithForm(placeAdderPopup, (evt) => {
   evt.preventDefault();
-  testPicAdderPopup.displayLoading();
+  picAdderPopup.displayLoading();
   console.log("OOP OOP OOP");
   api
     .postCard(placeInput.value, placeLinkInput.value)
@@ -73,7 +73,7 @@ export const testPicAdderPopup = new PopupWithForm(placeAdderPopup, (evt) => {
       )
     )
     .then(() => {
-      testPicAdderPopup.close();
+      picAdderPopup.close();
       postButton.classList.add("edit-window__submit_inactive");
       profileFormValidator.blockSubmit();
     })
@@ -82,10 +82,10 @@ export const testPicAdderPopup = new PopupWithForm(placeAdderPopup, (evt) => {
       console.log(err);
     })
     .finally(() => {
-      testPicAdderPopup.displayDefaultSubmitButtonText();
+      picAdderPopup.displayDefaultSubmitButtonText();
     });
 });
-testPicAdderPopup.setEventlisteners();
+picAdderPopup.setEventlisteners();
 
 // get profile and cards info from server
 
@@ -260,7 +260,7 @@ export function renderCard(
 //       )
 //     )
 //     .then(() => {
-//       testPicAdderPopup.close();
+//       picAdderPopup.close();
 //       postButton.classList.add("edit-window__submit_inactive");
 //       profileFormValidator.blockSubmit();
 //     })
@@ -327,11 +327,11 @@ avatarAdderFormElement.addEventListener("submit", function handleClick(event) {
 // add pic form listeners
 
 picAdderOpenButton.addEventListener("click", function handleClick(event) {
-  testPicAdderPopup.open();
+  picAdderPopup.open();
 });
 
 picAdderCloseButton.addEventListener("click", function handleClick(event) {
-  testPicAdderPopup.close();
+  picAdderPopup.close();
 });
 
 // picAdderFormElement.addEventListener("submit", function handleClick(event) {
