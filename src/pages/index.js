@@ -48,9 +48,12 @@ import { api, apiConfig } from "../components/api";
 
 // popup classes
 
-export const popupWithImage = new PopupWithImage(pictureViewerPopup);
+export const popupWithImage = new PopupWithImage(
+  pictureViewerPopup,
+  pictureViewerCloseButton
+);
 
-// popupWithImage.setEventlisteners();
+popupWithImage.setEventlisteners();
 
 export const picAdderPopup = new PopupWithForm(placeAdderPopup, (evt) => {
   evt.preventDefault();
@@ -265,12 +268,6 @@ export function activateLike(button, likes, cardId) {
       console.log(err);
     });
 }
-
-// viewing posts listeners
-
-// pictureViewerCloseButton.addEventListener("click", function handleClick(event) {
-//   popupWithImage.close();
-// });
 
 // change avatar listeners
 

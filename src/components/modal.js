@@ -75,11 +75,10 @@ export class Popup {
 // picture viewer popup
 
 export class PopupWithImage extends Popup {
-  constructor(pictureViewerPicture, link, name) {
+  constructor(pictureViewerPicture, popupCloseButton) {
     super(pictureViewerPicture);
     this._pictureViewerPicture = pictureViewerPicture;
-    this._link = link;
-    this._name = name;
+    this._popupCloseButton = popupCloseButton;
   }
 
   confirmImageParameters() {
@@ -87,7 +86,8 @@ export class PopupWithImage extends Popup {
       this._pictureViewerPicture.querySelector(".picture-viewer__pic").src,
       this._pictureViewerPicture.querySelector(".picture-viewer__pic").alt,
       this._pictureViewerPicture.querySelector(".picture-viewer__caption")
-        .textContent
+        .textContent,
+      this._popupCloseButton
     );
   }
 
