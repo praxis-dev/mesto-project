@@ -48,9 +48,9 @@ import { api, apiConfig } from "../components/api";
 
 // popup classes
 
-const testPopup = new Popup(profileUpdaterPopup);
-
 export const popupWithImage = new PopupWithImage(pictureViewerPopup);
+
+// popupWithImage.setEventlisteners();
 
 export const picAdderPopup = new PopupWithForm(placeAdderPopup, (evt) => {
   evt.preventDefault();
@@ -91,7 +91,7 @@ export const avatarUpdaterPopup = new PopupWithForm(
   avatarChangerPopup,
   (evt) => {
     evt.preventDefault();
-
+    avatarUpdaterPopup.displayLoading();
     api
       .patchAvatar(avatarInput.value)
       .then((response) => {
@@ -103,11 +103,37 @@ export const avatarUpdaterPopup = new PopupWithForm(
       .then(() => avatarUpdaterPopup.close())
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        avatarUpdaterPopup.displayDefaultSubmitButtonText();
       });
   }
 );
-
 avatarUpdaterPopup.setEventlisteners();
+
+export const profileChangerPopup = new PopupWithForm(
+  profileUpdaterPopup,
+  (evt) => {
+    evt.preventDefault();
+    profileChangerPopup.displayLoading(),
+      api
+        .patchProfile(nameInput.value, jobInput.value)
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          userName.textContent = data.name;
+          userJob.textContent = data.about;
+        })
+        .then(() => profileChangerPopup.close())
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => profileChangerPopup.displayDefaultSubmitButtonText());
+  }
+);
+
+profileChangerPopup.setEventlisteners();
 
 // get profile and cards info from server
 
@@ -187,43 +213,6 @@ addPicFormValidator.enableValidation();
 
 avatarAdderFormValidator.enableValidation();
 
-// popup update details
-
-function updateProfile(evt) {
-  evt.preventDefault();
-  displayLoading(profileUpdaterInputForm);
-  api
-    .patchProfile(nameInput.value, jobInput.value)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      userName.textContent = data.name;
-      userJob.textContent = data.about;
-    })
-    .then(() => testPopup.close())
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => displayDefaultSubmitButtonText(profileUpdaterInputForm));
-}
-
-// popup update avatar
-
-function updateAvatar(evt) {}
-
-// display loading status
-
-export function displayLoading(form) {
-  const formSubmitButton = form.querySelector('button[type="submit"]');
-  formSubmitButton.textContent = "Сохранение...";
-}
-
-export function displayDefaultSubmitButtonText(form) {
-  const formSubmitButton = form.querySelector('button[type="submit"]');
-  formSubmitButton.textContent = "Сохранить";
-}
-
 // add new card
 
 export function renderCard(
@@ -246,39 +235,6 @@ export function renderCard(
   );
   postGrid.prepend(postElement);
 }
-
-// export function addPicFormSubmitHandler(evt, form) {
-//   evt.preventDefault();
-//   displayLoading(form);
-//   api
-//     .postCard(placeInput.value, placeLinkInput.value)
-//     .then((response) => {
-//       return response.json();
-//     })
-//     .then((data) =>
-//       renderCard(
-//         data.name,
-//         data.link,
-//         data.likes.length,
-//         data.owner._id,
-//         currentUser.id,
-//         data._id,
-//         likedByMe(data)
-//       )
-//     )
-//     .then(() => {
-//       picAdderPopup.close();
-//       postButton.classList.add("edit-window__submit_inactive");
-//       profileFormValidator.blockSubmit();
-//     })
-
-//     .catch((err) => {
-//       console.log(err);
-//     })
-//     .finally(() => {
-//       displayDefaultSubmitButtonText(form);
-//     });
-// }
 
 // activate / deactivate likes
 
@@ -312,9 +268,9 @@ export function activateLike(button, likes, cardId) {
 
 // viewing posts listeners
 
-pictureViewerCloseButton.addEventListener("click", function handleClick(event) {
-  popupWithImage.close();
-});
+// pictureViewerCloseButton.addEventListener("click", function handleClick(event) {
+//   popupWithImage.close();
+// });
 
 // change avatar listeners
 
@@ -322,28 +278,11 @@ avatarAdderOpenButton.addEventListener("click", function handleClick(event) {
   avatarUpdaterPopup.open();
 });
 
-avatarAdderCloseButton.addEventListener("click", function handleClick(event) {
-  avatarUpdaterPopup.close();
-});
-
-// avatarAdderFormElement.addEventListener("submit", function handleClick(event) {
-//   updateAvatar(event);
-//   displayLoading(avatarAdderFormElement);
-// });
-
 // add pic form listeners
 
 picAdderOpenButton.addEventListener("click", function handleClick(event) {
   picAdderPopup.open();
 });
-
-picAdderCloseButton.addEventListener("click", function handleClick(event) {
-  picAdderPopup.close();
-});
-
-// picAdderFormElement.addEventListener("submit", function handleClick(event) {
-//   addPicFormSubmitHandler(event, picAdderFormElement);
-// });
 
 // profile edit listeners
 
@@ -352,24 +291,6 @@ profileUpdaterPopupOpenButton.addEventListener(
   function handleClick(event) {
     nameInput.value = userName.textContent;
     jobInput.value = userJob.innerText;
-    testPopup.open(profileUpdaterPopup, profileUpdaterInputForm);
+    profileChangerPopup.open(profileUpdaterPopup, profileUpdaterInputForm);
   }
 );
-
-testPopup.setEventlisteners(profileUpdaterPopupCloseButton);
-
-profileUpdaterInputForm.addEventListener("submit", updateProfile);
-
-// closing modals listeners
-
-function addOverlayListener() {
-  allPopups.forEach((popup) =>
-    popup.addEventListener("mousedown", function (evt) {
-      if (evt.target.classList.contains("popup")) {
-        closePopup(popup);
-      }
-    })
-  );
-}
-
-// addOverlayListener();

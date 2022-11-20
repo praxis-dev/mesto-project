@@ -141,16 +141,6 @@ export class PopupWithForm extends Popup {
   }
 }
 
-function openPopup(popup) {
-  popup.classList.add("popup_active");
-  document.addEventListener("keydown", closeByEsc);
-}
-
-function closePopup(popup) {
-  popup.classList.remove("popup_active");
-  document.removeEventListener("keydown", closeByEsc);
-}
-
 // popup close modals
 
 function closeByEsc(evt) {
@@ -159,5 +149,3 @@ function closeByEsc(evt) {
     closePopup(openedPopup);
   }
 }
-
-export { openPopup, closePopup, closeByEsc };
