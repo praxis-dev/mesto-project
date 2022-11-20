@@ -54,7 +54,7 @@ export const testPopupWithImage = new PopupWithImage(pictureViewerPopup);
 
 export const testPicAdderPopup = new PopupWithForm(placeAdderPopup, (evt) => {
   evt.preventDefault();
-  displayLoading(this._form);
+  testPicAdderPopup.displayLoading();
   console.log("OOP OOP OOP");
   api
     .postCard(placeInput.value, placeLinkInput.value)
@@ -82,11 +82,10 @@ export const testPicAdderPopup = new PopupWithForm(placeAdderPopup, (evt) => {
       console.log(err);
     })
     .finally(() => {
-      displayDefaultSubmitButtonText(form);
+      testPicAdderPopup.displayDefaultSubmitButtonText();
     });
 });
 testPicAdderPopup.setEventlisteners();
-testPicAdderPopup.confirmFormconstructor();
 
 // get profile and cards info from server
 

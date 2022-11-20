@@ -127,6 +127,18 @@ export class PopupWithForm extends Popup {
     console.log("it's upgraded setEventListeners popupWithForm");
     this._form.addEventListener("submit", this._submitCallback);
   }
+
+  displayLoading() {
+    console.log("OOP loading status triggered");
+    const formSubmitButton = this._form.querySelector('button[type="submit"]');
+    formSubmitButton.textContent = "Сохранение...";
+  }
+
+  displayDefaultSubmitButtonText() {
+    console.log("OOP loading status triggered");
+    const formSubmitButton = this._form.querySelector('button[type="submit"]');
+    formSubmitButton.textContent = "Сохранить";
+  }
 }
 
 function openPopup(popup) {
