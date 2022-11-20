@@ -1,4 +1,4 @@
-import { testPopupWithImage } from "../pages/index";
+import { popupWithImage } from "../pages/index";
 
 import { openPopup } from "./modal";
 import {
@@ -59,8 +59,8 @@ export function createCard(
   });
 
   postImage.addEventListener("click", (event) => {
-    testPopupWithImage.set(link, name);
-    testPopupWithImage.open();
+    popupWithImage.set(link, name);
+    popupWithImage.open();
   });
 
   return postElement;

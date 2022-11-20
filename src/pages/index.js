@@ -50,7 +50,7 @@ import { api, apiConfig } from "../components/api";
 
 const testPopup = new Popup(profileUpdaterPopup);
 
-export const testPopupWithImage = new PopupWithImage(pictureViewerPopup);
+export const popupWithImage = new PopupWithImage(pictureViewerPopup);
 
 export const picAdderPopup = new PopupWithForm(placeAdderPopup, (evt) => {
   evt.preventDefault();
@@ -306,7 +306,7 @@ export function activateLike(button, likes, cardId) {
 // viewing posts listeners
 
 pictureViewerCloseButton.addEventListener("click", function handleClick(event) {
-  testPopupWithImage.close();
+  popupWithImage.close();
 });
 
 // change avatar listeners
