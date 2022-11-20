@@ -87,6 +87,28 @@ export const picAdderPopup = new PopupWithForm(placeAdderPopup, (evt) => {
 });
 picAdderPopup.setEventlisteners();
 
+export const avatarUpdaterPopup = new PopupWithForm(
+  avatarChangerPopup,
+  (evt) => {
+    evt.preventDefault();
+
+    api
+      .patchAvatar(avatarInput.value)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        profileAvatar.src = data.avatar;
+      })
+      .then(() => avatarUpdaterPopup.close())
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+);
+
+avatarUpdaterPopup.setEventlisteners();
+
 // get profile and cards info from server
 
 api.getProfileInfo().then((res) => {
@@ -188,22 +210,7 @@ function updateProfile(evt) {
 
 // popup update avatar
 
-function updateAvatar(evt) {
-  evt.preventDefault();
-
-  api
-    .patchAvatar(avatarInput.value)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      profileAvatar.src = data.avatar;
-    })
-    .then(() => closePopup(avatarChangerPopup))
-    .catch((err) => {
-      console.log(err);
-    });
-}
+function updateAvatar(evt) {}
 
 // display loading status
 
@@ -312,17 +319,17 @@ pictureViewerCloseButton.addEventListener("click", function handleClick(event) {
 // change avatar listeners
 
 avatarAdderOpenButton.addEventListener("click", function handleClick(event) {
-  openPopup(avatarChangerPopup, avatarAdderFormElement);
+  avatarUpdaterPopup.open();
 });
 
 avatarAdderCloseButton.addEventListener("click", function handleClick(event) {
-  closePopup(avatarChangerPopup);
+  avatarUpdaterPopup.close();
 });
 
-avatarAdderFormElement.addEventListener("submit", function handleClick(event) {
-  updateAvatar(event);
-  displayLoading(avatarAdderFormElement);
-});
+// avatarAdderFormElement.addEventListener("submit", function handleClick(event) {
+//   updateAvatar(event);
+//   displayLoading(avatarAdderFormElement);
+// });
 
 // add pic form listeners
 
