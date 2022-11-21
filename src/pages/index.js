@@ -4,6 +4,8 @@ import "./styles.css";
 
 import { FormValidator, validationConfig } from "../components/validation";
 
+import { UserInfo } from "../components/userinfo";
+
 import {
   allPopups,
   postGrid,
@@ -118,69 +120,42 @@ export const profileChangerPopup = new PopupWithForm(
   profileUpdaterPopup,
   (evt) => {
     evt.preventDefault();
-    profileChangerPopup.displayLoading(),
-      api
-        .patchProfile(nameInput.value, jobInput.value)
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          userName.textContent = data.name;
-          userJob.textContent = data.about;
-        })
-        .then(() => profileChangerPopup.close())
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => profileChangerPopup.displayDefaultSubmitButtonText());
+    profileChangerPopup.displayLoading(), userInfo.setUserInfo();
   }
 );
 
 profileChangerPopup.setEventlisteners();
 
-// get profile and cards info from server
+///////////////////////////
 
-api.getProfileInfo().then((res) => {
-  return res
-    .json()
-    .then((data) => {
-      updateProfileFromServer(data.name, data.about, data.avatar, data._id);
-    })
-    .then(() => {
-      api
-        .getCards()
-        .then((res) => {
-          return res.json().then((data) => {
-            data.reverse().forEach((cardinfo) => {
-              renderCard(
-                cardinfo.name,
-                cardinfo.link,
-                cardinfo.likes.length,
-                cardinfo.owner._id,
-                currentUser.id,
-                cardinfo._id,
-                likedByMe(cardinfo)
-              );
-            });
-          });
-        })
-        .catch((err) => {
-          console.log(err);
+const userInfo = new UserInfo(nameInput, jobInput);
+
+///////////////////////////
+
+// get cards from server
+
+userInfo.getUserInfo().then(() => {
+  api
+    .getCards()
+    .then((res) => {
+      return res.json().then((data) => {
+        data.reverse().forEach((cardinfo) => {
+          renderCard(
+            cardinfo.name,
+            cardinfo.link,
+            cardinfo.likes.length,
+            cardinfo.owner._id,
+            currentUser.id,
+            cardinfo._id,
+            likedByMe(cardinfo)
+          );
         });
+      });
     })
     .catch((err) => {
       console.log(err);
     });
 });
-
-// update profile from server
-
-function updateProfileFromServer(dataName, dataAbout, dataAvatar, dataId) {
-  userName.innerText = dataName;
-  userJob.innerText = dataAbout;
-  profileAvatar.src = dataAvatar;
-  currentUser.id = dataId;
-}
 
 // delete card function for trash icon event listener in card creator function
 
