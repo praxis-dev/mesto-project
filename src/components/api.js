@@ -76,39 +76,29 @@ class Api {
   }
 
   postLikeToServer(cardId) {
-    let likes = [];
     return fetch(
       "https://nomoreparties.co/v1/" +
         `${cohortId}` +
         "/cards" +
         "/likes/" +
-        `${cardId}`,
+        `${id}`,
       {
         method: "PUT",
         headers: apiConfig.headers,
-        body: JSON.stringify({
-          _id: currentUser.id,
-          likes: [likes.push("1")],
-        }),
       }
     ).then(this._handleResponse);
   }
 
-  removeLikeFromServer(cardId) {
-    let likes = ["1"];
+  removeLikeFromServer(id) {
     return fetch(
       "https://nomoreparties.co/v1/" +
         `${cohortId}` +
         "/cards" +
         "/likes/" +
-        `${cardId}`,
+        `${id}`,
       {
         method: "DELETE",
         headers: apiConfig.headers,
-        body: JSON.stringify({
-          _id: currentUser.id,
-          likes: [likes.pop()],
-        }),
       }
     ).then(this._handleResponse);
   }
