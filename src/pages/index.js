@@ -37,7 +37,7 @@ import {
     currentUser,
 } from "../components/global";
 
-import {openPopup, closePopup} from "../components/modal";
+
 
 import Card from "../components/card";
 
@@ -186,7 +186,7 @@ avatarAdderFormValidator.enableValidation();
 
 export function renderCard(data) {
     const postElement = new Card(
-        name, link, likes, postOwnerId, myId, cardId, {selector: '#post-template'}, deactivateLike, activateLike, deleteTargetCard, openImagePopup
+       data, {selector: '#post-template'}, deactivateLike, activateLike, deleteTargetCard, openImagePopup
     ).generateCard();
     return postElement;
 }
@@ -235,7 +235,7 @@ function deleteTargetCard(id, event) {
 
 // fullimage popup
 function openImagePopup(name, link) {
-    popupWithImage.open(name, link )
+    popupWithImage.open(name, link)
 }
 // change avatar listeners
 

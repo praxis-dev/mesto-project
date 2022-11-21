@@ -8,13 +8,13 @@ import {
 // creating cards
 
 export default class Card {
-    constructor(name, link, likes, postOwnerId, myId, cardId, {selector}, deactivateLike, activateLike, deleteTargetCard, openImagePopup) {
-        this._title = name;
-        this._image = link;
-        this._likes = likes;
-        this._ownerId = postOwnerId;
+    constructor(data, {selector}, deactivateLike, activateLike, deleteTargetCard, openImagePopup) {
+        this._title = data.name;
+        this._image = data.link;
+        this._likes = data.likes;
+        this._ownerId = data.owner._id;
         this._myId = myId;
-        this._id = cardId;
+        this._id = data._id;
         this._selector = selector;
         this._deactivateLike = deactivateLike
         this._activateLike = activateLike;
