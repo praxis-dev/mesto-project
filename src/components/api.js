@@ -58,24 +58,21 @@ class Api {
       }),
     }).then(this._handleResponse);
   }
-  deleteCard(cardId) {
+  deleteCard(id) {
     return fetch(
       "https://nomoreparties.co/v1/" +
         `${cohortId}` +
         "/cards" +
         "/" +
-        `${cardId}`,
+        `${id}`,
       {
         method: "DELETE",
         headers: apiConfig.headers,
-        body: JSON.stringify({
-          _id: currentUser.id,
-        }),
       }
     ).then(this._handleResponse);
   }
 
-  postLikeToServer(cardId) {
+  postLikeToServer(id) {
     return fetch(
       "https://nomoreparties.co/v1/" +
         `${cohortId}` +

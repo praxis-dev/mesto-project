@@ -4,18 +4,11 @@ import {
 } from "../pages";
 
 
-const likeCount = (cardLikeCount, likes) => {
-    cardLikeCount.textContent = likes.length
-}
-const toggleLikeActive = (evt) => {
-    evt.classList.toggle('.post__like-button_active')
-}
-
 
 // creating cards
 
 export default class Card {
-    constructor(name, link, likes, postOwnerId, myId, cardId, {selector}, removeLikeFromServer, ) {
+    constructor(name, link, likes, postOwnerId, myId, cardId, {selector}, deactivateLike, activateLike, deleteTargetCard) {
         this._title = name;
         this._image = link;
         this._likes = likes;
@@ -23,8 +16,9 @@ export default class Card {
         this._myId = myId;
         this._id = cardId;
         this._selector = selector;
-        this._removeLike = removeLikeFromServer;
-        this._postLike = postLikeToServer;
+        this._deactivateLike = deactivateLike
+        this._activateLike = activateLike;
+        this._deleteTargetCard = deleteTargetCard
     }
 
     _getElement() {
@@ -57,31 +51,21 @@ export default class Card {
 
     _setEventListeners() {
         this._trashIcon.addEventListener("click", (event) => {
-            deleteTargetCard(this._id, event);
+            this._deleteTargetCard(this._id, event);
         })
         this._likeButton.addEventListener("click", () => {
             this._toggleLike()
         });
         this._imageElement.addEventListener("click", () => {
-            popupWithImage.set(this._title, this._image);
-            popupWithImage.open();
+            this._openImagePopup(this._title, this._image)
         });
     }
 
     _toggleLike() {
         if (this._likeButton.classList.contains('post__like-button_active')) {
-            this._removeLike(this._id)
-                .then((data) => {
-                    likeCount(this._likeCounter, data.likes)
-                    toggleLikeActive(this._likeButton)
-                })
-                .catch((err) => console.log(err));
+            this._activateLike(this._id, this._likeCounter, this._likes, this._likeButton)
         } else {
-            this._postLike(this._id)
-                .then((data) => {
-                    likeCount(this._likeCounter, data.likes)
-                    toggleLikeActive(this._likeButton)
-                })
+            this._deactivateLike(this._id, this._likeCounter, this._likes, this._likeButton)
         }
     }
 

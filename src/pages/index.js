@@ -42,8 +42,6 @@ import { openPopup, closePopup } from "../components/modal";
 import {
   createCard,
   likedByMe,
-  increaseLikes,
-  decreaseLikes,
 } from "../components/card";
 
 import { api, apiConfig } from "../components/api";
@@ -159,9 +157,9 @@ userInfo.getUserInfo().then(() => {
 
 // delete card function for trash icon event listener in card creator function
 
-export function deleteTargetCard(cardId, event) {
+export function deleteTargetCard(id, event) {
   api
-    .deleteCard(cardId)
+    .deleteCard(id)
     .then(() => {
       event.target.closest(".post").remove();
     })
@@ -215,34 +213,35 @@ export function renderCard(
 }
 
 // activate / deactivate likes
+ const likeCount = (cardLikeCount, likes) => {
+  cardLikeCount.textContent = likes.length
+}
+ const toggleLikeActive = (evt) => {
+  evt.classList.toggle('.post__like-button_active')
+}
 
-export function deactivateLike(button, likes, cardId) {
-  api
-    .removeLikeFromServer(cardId)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      increaseLikes(data, likes, button);
+export function deactivateLike(id, likeCounter, likes, likeButton) {
+  api.removeLikeFromServer(id)
+    .then(() => {
+      likeCount(likeCounter, likes)
+      toggleLikeActive(likeButton)
     })
     .catch((err) => {
       console.log(err);
     });
 }
 
-export function activateLike(button, likes, cardId) {
-  api
-    .postLikeToServer(cardId)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      decreaseLikes(data, likes, button);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+export function activateLike(id, likeCounter, likes, likeButton) {
+    api.postLikeToServer(id)
+        .then(() => {
+            likeCount(likeCounter, likes)
+            toggleLikeActive(likeButton)
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 }
+// fullimage popup
 
 // change avatar listeners
 
