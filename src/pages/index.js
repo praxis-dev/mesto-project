@@ -53,12 +53,6 @@ const cardList = new Section({
 
 // popup classes
 
-export const popupWithImage = new PopupWithImage(
-    pictureViewerPopup,
-    pictureViewerCloseButton
-);
-
-popupWithImage.setEventlisteners();
 
 export const picAdderPopup = new PopupWithForm(placeAdderPopup, (evt) => {
     evt.preventDefault();
@@ -138,22 +132,9 @@ const userInfo = new UserInfo(nameInput, jobInput);
 // get cards from server
 
 userInfo.getUserInfo().then(() => {
-    api
-        .getCards()
-        .then((res) => {
-            return res.json().then((data) => {
-                data.reverse().forEach((cardinfo) => {
-                    renderCard(
-                        cardinfo.name,
-                        cardinfo.link,
-                        cardinfo.likes.length,
-                        cardinfo.owner._id,
-                        currentUser.id,
-                        cardinfo._id,
-                        likedByMe(cardinfo)
-                    );
-                });
-            });
+    api.getCards()
+        .then(() => {
+            cardList.renderItems(cards.reverse());
         })
         .catch((err) => {
             console.log(err);
@@ -186,7 +167,7 @@ avatarAdderFormValidator.enableValidation();
 
 export function renderCard(data) {
     const postElement = new Card(
-       data, {selector: '#post-template'}, deactivateLike, activateLike, deleteTargetCard, openImagePopup
+        data, {selector: '#post-template'}, deactivateLike, activateLike, deleteTargetCard, openImagePopup
     ).generateCard();
     return postElement;
 }

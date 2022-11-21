@@ -8,7 +8,7 @@ import {
 // creating cards
 
 export default class Card {
-    constructor(data, {selector}, deactivateLike, activateLike, deleteTargetCard, openImagePopup) {
+    constructor(data, myId, {selector}, deactivateLike, activateLike, deleteTargetCard, openImagePopup) {
         this._title = data.name;
         this._image = data.link;
         this._likes = data.likes;
