@@ -3,8 +3,6 @@ import {
     deleteTargetCard,
 } from "../pages";
 
-
-
 // creating cards
 
 export default class Card {
