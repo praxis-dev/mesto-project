@@ -8,12 +8,7 @@ import {
   deactivateLike,
 } from "../pages";
 
-import {
-  postTemplate,
-  picAdderFormElement,
-  pictureViewerPopup,
-  currentUser,
-} from "./global";
+import { postTemplate, currentUser } from "./global";
 
 // creating cards
 
