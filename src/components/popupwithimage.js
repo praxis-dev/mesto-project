@@ -5,15 +5,17 @@ export class PopupWithImage extends Popup {
     super(pictureViewerPicture);
     this._pictureViewerPicture = pictureViewerPicture;
     this._popupCloseButton = popupCloseButton;
+    this._picture = this._pictureViewerPicture.querySelector(
+      ".picture-viewer__pic"
+    );
+    this._caption = this._pictureViewerPicture.querySelector(
+      ".picture-viewer__caption"
+    );
   }
 
   set(link, name) {
-    (this._pictureViewerPicture.querySelector(".picture-viewer__pic").src =
-      link),
-      (this._pictureViewerPicture.querySelector(".picture-viewer__pic").alt =
-        name),
-      (this._pictureViewerPicture.querySelector(
-        ".picture-viewer__caption"
-      ).textContent = name);
+    (this._picture.src = link),
+      (this._picture.alt = name),
+      (this._caption.textContent = name);
   }
 }
