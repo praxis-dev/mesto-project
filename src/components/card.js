@@ -29,7 +29,8 @@ export class Card {
 
     this._postElement = document
       .querySelector("#post-template")
-      .content.cloneNode(true);
+      .content.querySelector(".post")
+      .cloneNode(true);
     this._postImage = this._postElement.querySelector(".post__picture");
     this._postName = this._postElement.querySelector(".post__title");
     this._likeCounter = this._postElement.querySelector(".post__like-counter");
