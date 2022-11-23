@@ -91,7 +91,6 @@ export const picAdderPopup = new PopupWithForm(placeAdderPopup, (evt) => {
     .then((data) => section.addItem(data))
     .then(() => {
       picAdderPopup.close();
-      postButton.classList.add("edit-window__submit_inactive");
       profileFormValidator.blockSubmit();
     })
 
