@@ -1,8 +1,3 @@
-import { popupWithImage } from "../pages/index";
-import { api } from "./api";
-
-import { deleteTargetCard } from "../pages";
-
 import { currentUser } from "./global";
 
 // creating cards
@@ -16,7 +11,9 @@ export class Card {
     myId,
     cardId,
     isLikedByMe,
-    handleCardClick
+    handleCardClick,
+    api,
+    deleteTargetCard
   ) {
     this._name = name;
     this._link = link;
@@ -26,6 +23,8 @@ export class Card {
     this._cardId = cardId;
     this._isLikedByMe = isLikedByMe;
     this._handleCardClick = handleCardClick;
+    this._api = api;
+    this._deleteTargetCard = deleteTargetCard;
 
     this._postElement = document
       .querySelector("#post-template")
@@ -48,7 +47,7 @@ export class Card {
 
   _delete() {
     this._trashIcon.addEventListener("click", (event) => {
-      deleteTargetCard(this._cardId, event);
+      this._deleteTargetCard(this._cardId, event);
     });
 
     if (this._myId != this._postOwnerId) {
@@ -71,7 +70,7 @@ export class Card {
   }
 
   _deactivateLike(button, likes, cardId) {
-    api
+    this._api
       .removeLikeFromServer(cardId)
       .then((response) => {
         return response.json();
@@ -85,7 +84,7 @@ export class Card {
   }
 
   _activateLike(button, likes, cardId) {
-    api
+    this._api
       .postLikeToServer(cardId)
       .then((response) => {
         return response.json();

@@ -61,7 +61,9 @@ function renderer(cardinfo, container) {
     cardinfo._id,
     likedByMe(cardinfo),
     container,
-    handleCardClick
+    handleCardClick,
+    api,
+    deleteTargetCard
   );
 }
 
@@ -198,7 +200,9 @@ export function renderCard(
   cardId,
   isLikedByMe,
   container,
-  handleCardClick
+  handleCardClick,
+  api,
+  deleteTargetCard
 ) {
   const postElement = new Card(
     name,
@@ -208,7 +212,9 @@ export function renderCard(
     myId,
     cardId,
     isLikedByMe,
-    handleCardClick
+    handleCardClick,
+    api,
+    deleteTargetCard
   ).returnCard();
   container.prepend(postElement);
 }
