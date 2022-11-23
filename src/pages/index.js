@@ -6,12 +6,7 @@ import { FormValidator, validationConfig } from "../components/validation";
 
 import { UserInfo } from "../components/userinfo";
 
-import {
-  Card,
-  likedByMe,
-  increaseLikes,
-  decreaseLikes,
-} from "../components/card";
+import { Card, likedByMe } from "../components/card";
 
 import { Section } from "../components/section";
 
@@ -65,7 +60,8 @@ function renderer(cardinfo, container) {
     currentUser.id,
     cardinfo._id,
     likedByMe(cardinfo),
-    container
+    container,
+    handleCardClick
   );
 }
 
@@ -188,6 +184,11 @@ avatarAdderFormValidator.enableValidation();
 
 // add new card
 
+function handleCardClick(image, name) {
+  popupWithImage.set(image.src, name.textContent);
+  popupWithImage.open();
+}
+
 export function renderCard(
   name,
   link,
@@ -196,7 +197,8 @@ export function renderCard(
   myId,
   cardId,
   isLikedByMe,
-  container
+  container,
+  handleCardClick
 ) {
   const postElement = new Card(
     name,
@@ -205,39 +207,10 @@ export function renderCard(
     postOwnerId,
     myId,
     cardId,
-    isLikedByMe
+    isLikedByMe,
+    handleCardClick
   ).returnCard();
   container.prepend(postElement);
-}
-
-// activate / deactivate likes
-
-export function deactivateLike(button, likes, cardId) {
-  api
-    .removeLikeFromServer(cardId)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      increaseLikes(data, likes, button);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-}
-
-export function activateLike(button, likes, cardId) {
-  api
-    .postLikeToServer(cardId)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      decreaseLikes(data, likes, button);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
 }
 
 // change avatar listeners

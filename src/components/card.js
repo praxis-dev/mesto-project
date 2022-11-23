@@ -1,14 +1,9 @@
 import { popupWithImage } from "../pages/index";
+import { api } from "./api";
 
-import { openPopup } from "./popup";
-import {
-  setPictureViewer,
-  deleteTargetCard,
-  activateLike,
-  deactivateLike,
-} from "../pages";
+import { deleteTargetCard } from "../pages";
 
-import { postTemplate, currentUser } from "./global";
+import { currentUser } from "./global";
 
 // creating cards
 
@@ -40,19 +35,9 @@ export class Card {
     this._likeCounter = this._postElement.querySelector(".post__like-counter");
     this._likeButton = this._postElement.querySelector(".post__like-button");
     this._trashIcon = this._postElement.querySelector(".post__trash-icon");
-
-    let renderedCardId;
   }
 
   _build() {
-    // console.log(
-    //   this._postElement,
-    //   this._postImage,
-    //   this._postName.textContent,
-    //   this._likeCounter.textContent,
-    //   this._renderedCardId,
-    //   this._likeButton
-    // );
     this._postImage.src = this._link;
     this._postName.textContent = this._name;
     this._postImage.alt = this._name;
@@ -76,14 +61,59 @@ export class Card {
     }
   }
 
+  _likeCard(button, likes, cardId) {
+    if (this._likeButton.classList.contains("post__like-button_active")) {
+      this._deactivateLike(button, likes, cardId);
+    } else {
+      this._activateLike(button, likes, cardId);
+    }
+  }
+
+  _deactivateLike(button, likes, cardId) {
+    api
+      .removeLikeFromServer(cardId)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        this._increaseLikes(data, likes, button);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  _activateLike(button, likes, cardId) {
+    api
+      .postLikeToServer(cardId)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        this._decreaseLikes(data, likes, button);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  _increaseLikes(data, likes, button) {
+    likes.textContent = data.likes.length;
+    button.classList.remove("post__like-button_active");
+  }
+
+  _decreaseLikes(data, likes, button) {
+    likes.textContent = data.likes.length;
+    button.classList.add("post__like-button_active");
+  }
+
   _setEventListeners() {
     this._likeButton.addEventListener("click", () => {
-      likeCard(this._likeButton, this._likeCounter, this._renderedCardId);
+      this._likeCard(this._likeButton, this._likeCounter, this._renderedCardId);
     });
 
-    this._postImage.addEventListener("click", (event) => {
-      popupWithImage.set(this._postImage.src, this._postName.textContent);
-      popupWithImage.open();
+    this._postImage.addEventListener("click", () => {
+      this._handleCardClick(this._postImage, this._postName);
     });
   }
 
@@ -94,24 +124,6 @@ export class Card {
     this._setEventListeners();
     return this._postElement;
   }
-}
-
-function likeCard(button, likes, cardId) {
-  if (button.classList.contains("post__like-button_active")) {
-    deactivateLike(button, likes, cardId);
-  } else {
-    activateLike(button, likes, cardId);
-  }
-}
-
-export function increaseLikes(data, likes, button) {
-  likes.textContent = data.likes.length;
-  button.classList.remove("post__like-button_active");
-}
-
-export function decreaseLikes(data, likes, button) {
-  likes.textContent = data.likes.length;
-  button.classList.add("post__like-button_active");
 }
 
 export function likedByMe(card) {
