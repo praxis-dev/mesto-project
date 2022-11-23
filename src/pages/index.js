@@ -235,7 +235,7 @@ picAdderOpenButton.addEventListener("click", function handleClick(event) {
 
 profileUpdaterPopupOpenButton.addEventListener(
   "click",
-  function handleClick(event) {
+  () => {
     nameInput.value = userName.textContent;
     jobInput.value = userJob.innerText;
     profileChangerPopup.open(profileUpdaterPopup, profileUpdaterInputForm);
