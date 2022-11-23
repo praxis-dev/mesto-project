@@ -13,11 +13,6 @@ export class Popup {
   open = () => {
     this._popup.classList.add("popup_active");
     document.addEventListener("keydown", this._closeByEsc);
-    this._popup.addEventListener("mousedown", (evt) => {
-      if (evt.target.classList.contains("popup")) {
-        this.close();
-      }
-    });
   };
 
   close() {
@@ -35,7 +30,10 @@ export class Popup {
     this._popupCloseButton.addEventListener("click", () => {
       this.close();
     });
+    this._popup.addEventListener("mousedown", (evt) => {
+      if (evt.target.classList.contains("popup")) {
+        this.close();
+      }
+    });
   }
 }
-
-// picture viewer popup
