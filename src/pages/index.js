@@ -151,12 +151,15 @@ userInfo.getUserInfo().then(() => {
 });
 
 // delete card function for trash icon event listener in card creator function
+function removeElement(element) {
+  element.remove();
+}
 
-export function deleteTargetCard(cardId, event) {
+export function deleteTargetCard(cardId, element) {
   api
     .deleteCard(cardId)
     .then(() => {
-      event.target.closest(".post").remove();
+      removeElement(element)
     })
     .catch((err) => {
       console.log(err);
