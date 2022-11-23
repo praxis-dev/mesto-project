@@ -1,13 +1,25 @@
-import { Popup, PopupWithForm, PopupWithImage } from "../components/modal";
-
 import "./styles.css";
+
+import { api } from "../components/api";
 
 import { FormValidator, validationConfig } from "../components/validation";
 
 import { UserInfo } from "../components/userinfo";
 
 import {
-  allPopups,
+  Card,
+  likedByMe,
+  increaseLikes,
+  decreaseLikes,
+} from "../components/card";
+
+import { Section } from "../components/section";
+
+import { PopupWithImage } from "../components/popupwithimage";
+
+import { PopupWithForm } from "../components/popupwithform";
+
+import {
   postGrid,
   userName,
   userJob,
@@ -18,13 +30,10 @@ import {
   avatarInput,
   profileUpdaterPopup,
   profileUpdaterPopupOpenButton,
-  profileUpdaterPopupCloseButton,
   profileUpdaterInputForm,
   picAdderOpenButton,
-  picAdderCloseButton,
   pictureViewerCloseButton,
   avatarAdderOpenButton,
-  avatarAdderCloseButton,
   picAdderFormElement,
   avatarChangerPopup,
   pictureViewerPopup,
@@ -32,21 +41,33 @@ import {
   placeAdderPopup,
   profileAvatar,
   postButton,
-  pictureViewerPicture,
-  pictureViewerCaption,
   currentUser,
 } from "../components/global";
 
-import { openPopup, closePopup } from "../components/modal";
+// section
 
-import {
-  createCard,
-  likedByMe,
-  increaseLikes,
-  decreaseLikes,
-} from "../components/card";
+const cards = api.getCards();
 
-import { api, apiConfig } from "../components/api";
+const section = new Section(
+  {
+    cards,
+    renderer,
+  },
+  postGrid
+);
+
+function renderer(cardinfo, container) {
+  renderCard(
+    cardinfo.name,
+    cardinfo.link,
+    cardinfo.likes.length,
+    cardinfo.owner._id,
+    currentUser.id,
+    cardinfo._id,
+    likedByMe(cardinfo),
+    container
+  );
+}
 
 // popup classes
 
@@ -60,23 +81,12 @@ popupWithImage.setEventlisteners();
 export const picAdderPopup = new PopupWithForm(placeAdderPopup, (evt) => {
   evt.preventDefault();
   picAdderPopup.displayLoading();
-  console.log("OOP OOP OOP");
   api
     .postCard(placeInput.value, placeLinkInput.value)
     .then((response) => {
       return response.json();
     })
-    .then((data) =>
-      renderCard(
-        data.name,
-        data.link,
-        data.likes.length,
-        data.owner._id,
-        currentUser.id,
-        data._id,
-        likedByMe(data)
-      )
-    )
+    .then((data) => section.addItem(data))
     .then(() => {
       picAdderPopup.close();
       postButton.classList.add("edit-window__submit_inactive");
@@ -126,35 +136,14 @@ export const profileChangerPopup = new PopupWithForm(
 
 profileChangerPopup.setEventlisteners();
 
-///////////////////////////
+// user info
 
 const userInfo = new UserInfo(nameInput, jobInput);
-
-///////////////////////////
 
 // get cards from server
 
 userInfo.getUserInfo().then(() => {
-  api
-    .getCards()
-    .then((res) => {
-      return res.json().then((data) => {
-        data.reverse().forEach((cardinfo) => {
-          renderCard(
-            cardinfo.name,
-            cardinfo.link,
-            cardinfo.likes.length,
-            cardinfo.owner._id,
-            currentUser.id,
-            cardinfo._id,
-            likedByMe(cardinfo)
-          );
-        });
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  section.renderOnLoad();
 });
 
 // delete card function for trash icon event listener in card creator function
@@ -200,9 +189,10 @@ export function renderCard(
   postOwnerId,
   myId,
   cardId,
-  isLikedByMe
+  isLikedByMe,
+  container
 ) {
-  const postElement = createCard(
+  const postElement = new Card(
     name,
     link,
     likes,
@@ -210,8 +200,8 @@ export function renderCard(
     myId,
     cardId,
     isLikedByMe
-  );
-  postGrid.prepend(postElement);
+  ).returnCard();
+  container.prepend(postElement);
 }
 
 // activate / deactivate likes

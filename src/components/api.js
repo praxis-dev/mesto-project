@@ -114,7 +114,6 @@ class Api {
   }
 
   patchAvatar(avatarLink) {
-    console.log(avatarLink);
     return fetch(
       "https://nomoreparties.co/v1/" + `${cohortId}` + "/users/me/avatar",
       {

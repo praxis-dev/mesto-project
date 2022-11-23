@@ -10,10 +10,6 @@ export class UserInfo {
     this._jobInput = jobInput;
   }
 
-  confirmInputs() {
-    console.log(this._nameInput, this._jobInput);
-  }
-
   _updateProfileFromServer(dataName, dataAbout, dataAvatar, dataId) {
     userName.innerText = dataName;
     userJob.innerText = dataAbout;
