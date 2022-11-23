@@ -71,12 +71,16 @@ function renderer(cardinfo, container) {
 
 // popup classes
 
+// popup with image
+
 export const popupWithImage = new PopupWithImage(
   pictureViewerPopup,
   pictureViewerCloseButton
 );
 
 popupWithImage.setEventlisteners();
+
+//popup with form
 
 export const picAdderPopup = new PopupWithForm(placeAdderPopup, (evt) => {
   evt.preventDefault();
@@ -101,6 +105,8 @@ export const picAdderPopup = new PopupWithForm(placeAdderPopup, (evt) => {
     });
 });
 picAdderPopup.setEventlisteners();
+
+//avatar updater
 
 export const avatarUpdaterPopup = new PopupWithForm(
   avatarChangerPopup,
