@@ -154,25 +154,19 @@ export const profileChangerPopup = new PopupWithForm(
 profileChangerPopup.setEventlisteners();
 
 // user info
-const userInfo = new UserInfo(nameInput, jobInput);
 
-Promise.all([api.getProfileInfo(), api.getCards()]).then((data) => {
-  const [profileInfo, cards] = data;
+const data = await Promise.all([api.getProfileInfo(), api.getCards()]);
+const [profileInfo, InitialCards] = data;
+const userInfo = new UserInfo(nameInput, jobInput, profileInfo);
+const usrInfo = await userInfo.getUserInfo();
+const res = await usrInfo.json();
+const update = (res) => {
+  userInfo.updateProfile(res.name, res.about, res.avatar, res._id);
+};
 
-  const userInfo = new UserInfo(nameInput, jobInput, profileInfo);
-  userInfo.getUserInfo().then((res) => {
-    return res
-      .json()
-      .then((data) => {
-        userInfo.updateProfile(data.name, data.about, data.avatar, data._id);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
+update(res);
 
-  section.renderOnLoad();
-});
+section.renderOnLoad();
 
 // delete card function for trash icon event listener in card creator function
 function removeElement(element) {
@@ -260,8 +254,14 @@ picAdderOpenButton.addEventListener("click", function handleClick(event) {
 
 // profile edit listeners
 
-profileUpdaterPopupOpenButton.addEventListener("click", () => {
-  nameInput.value = userName.textContent;
-  jobInput.value = userJob.innerText;
+profileUpdaterPopupOpenButton.addEventListener("click", async () => {
+  const usrInfo = await api.getProfileInfo();
+  const res = await usrInfo.json();
+  const update = (res) => {
+    nameInput.value = res.name;
+    jobInput.value = res.about;
+  };
+  update(res);
+
   profileChangerPopup.open(profileUpdaterPopup, profileUpdaterInputForm);
 });

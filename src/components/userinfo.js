@@ -19,7 +19,6 @@ export class UserInfo {
   }
 
   async getUserInfo() {
-    console.log(this._profileInfo);
     return this._profileInfo;
   }
 
