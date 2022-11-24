@@ -243,7 +243,7 @@ export function renderCard(
     api,
     deleteTargetCard
   ).returnCard();
-  container.prepend(postElement);
+  section.prepend(postElement);
 }
 
 // change avatar listeners

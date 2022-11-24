@@ -32,7 +32,6 @@ export class PopupWithForm extends Popup {
   }
 
   _getInputValues() {
-    console.log("it's working");
     this._formValues = {};
     this._inputs.forEach((input) => {
       this._formValues[input.name] = input.value;

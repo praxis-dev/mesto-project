@@ -12,4 +12,8 @@ export class Section {
   addItem(cardInfo) {
     this._renderer(cardInfo, this._container);
   }
+
+  prepend(postElement) {
+    this._container.prepend(postElement);
+  }
 }
