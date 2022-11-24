@@ -164,12 +164,7 @@ Promise.all([api.getProfileInfo(), api.getCards()]).then((data) => {
     return res
       .json()
       .then((data) => {
-        userInfo.updateProfileFromServer(
-          data.name,
-          data.about,
-          data.avatar,
-          data._id
-        );
+        userInfo.updateProfile(data.name, data.about, data.avatar, data._id);
       })
       .catch((err) => {
         console.log(err);

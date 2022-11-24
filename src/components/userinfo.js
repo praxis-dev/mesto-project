@@ -11,7 +11,7 @@ export class UserInfo {
     this._profileInfo = profileInfo;
   }
 
-  updateProfileFromServer(dataName, dataAbout, dataAvatar, dataId) {
+  updateProfile(dataName, dataAbout, dataAvatar, dataId) {
     userName.innerText = dataName;
     userJob.innerText = dataAbout;
     profileAvatar.src = dataAvatar;
