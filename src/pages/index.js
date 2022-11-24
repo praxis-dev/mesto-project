@@ -115,6 +115,7 @@ export const picAdderPopup = new PopupWithForm(placeAdderPopup, (evt) => {
     });
 });
 picAdderPopup.setEventlisteners();
+picAdderPopup._getInputValues();
 
 //avatar updater
 

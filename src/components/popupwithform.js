@@ -28,4 +28,11 @@ export class PopupWithForm extends Popup {
     const formSubmitButton = this._form.querySelector('button[type="submit"]');
     formSubmitButton.textContent = "Сохранить";
   }
+
+  _getInputValues(values) {
+    console.log(this._inputs);
+    this._inputs.forEach((input) => {
+      input.value = values[input.name];
+    });
+  }
 }
