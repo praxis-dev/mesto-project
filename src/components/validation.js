@@ -56,6 +56,11 @@ export class FormValidator {
         this._toggleButtonState(inputList, buttonElement, _validationConfig);
       });
     });
+    this._form.addEventListener('reset', () => {
+      setTimeout(() => {
+        this._toggleButtonState(inputList, buttonElement, _validationConfig)
+      },0)
+    })
   }
 
   enableValidation() {

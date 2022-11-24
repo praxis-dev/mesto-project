@@ -46,8 +46,8 @@ export class Card {
   }
 
   _delete() {
-    this._trashIcon.addEventListener("click", (event) => {
-      this._deleteTargetCard(this._cardId, event);
+    this._trashIcon.addEventListener("click", () => {
+      this._deleteTargetCard(this._cardId, this._postElement);
     });
 
     if (this._myId != this._postOwnerId) {

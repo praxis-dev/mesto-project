@@ -104,7 +104,6 @@ export const picAdderPopup = new PopupWithForm(placeAdderPopup, (evt) => {
     .then((data) => section.addItem(data))
     .then(() => {
       picAdderPopup.close();
-      postButton.classList.add("edit-window__submit_inactive");
       profileFormValidator.blockSubmit();
     })
 
@@ -164,12 +163,15 @@ userInfo.getUserInfo().then(() => {
 });
 
 // delete card function for trash icon event listener in card creator function
+function removeElement(element) {
+  element.remove();
+}
 
-export function deleteTargetCard(cardId, event) {
+export function deleteTargetCard(cardId, element) {
   api
     .deleteCard(cardId)
     .then(() => {
-      event.target.closest(".post").remove();
+      removeElement(element)
     })
     .catch((err) => {
       console.log(err);
@@ -248,7 +250,7 @@ picAdderOpenButton.addEventListener("click", function handleClick(event) {
 
 profileUpdaterPopupOpenButton.addEventListener(
   "click",
-  function handleClick(event) {
+  () => {
     nameInput.value = userName.textContent;
     jobInput.value = userJob.innerText;
     profileChangerPopup.open(profileUpdaterPopup, profileUpdaterInputForm);
