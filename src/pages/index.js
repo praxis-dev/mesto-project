@@ -153,14 +153,39 @@ export const profileChangerPopup = new PopupWithForm(
 profileChangerPopup.setEventlisteners();
 
 // user info
-
 const userInfo = new UserInfo(nameInput, jobInput);
+
+////////////////////
+Promise.all([api.getProfileInfo(), api.getCards()]).then((data) => {
+  const [profileInfo, cards] = data;
+
+  const userInfo = new UserInfo(nameInput, jobInput, profileInfo);
+  userInfo.getUserInfo().then((res) => {
+    return res
+      .json()
+      .then((data) => {
+        userInfo.updateProfileFromServer(
+          data.name,
+          data.about,
+          data.avatar,
+          data._id
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+
+  section.renderOnLoad();
+});
+
+////////////////////
 
 // get cards from server
 
-userInfo.getUserInfo().then(() => {
-  section.renderOnLoad();
-});
+// userInfo.getUserInfo().then(() => {
+//   section.renderOnLoad();
+// });
 
 // delete card function for trash icon event listener in card creator function
 function removeElement(element) {
@@ -171,7 +196,7 @@ export function deleteTargetCard(cardId, element) {
   api
     .deleteCard(cardId)
     .then(() => {
-      removeElement(element)
+      removeElement(element);
     })
     .catch((err) => {
       console.log(err);
@@ -248,11 +273,8 @@ picAdderOpenButton.addEventListener("click", function handleClick(event) {
 
 // profile edit listeners
 
-profileUpdaterPopupOpenButton.addEventListener(
-  "click",
-  () => {
-    nameInput.value = userName.textContent;
-    jobInput.value = userJob.innerText;
-    profileChangerPopup.open(profileUpdaterPopup, profileUpdaterInputForm);
-  }
-);
+profileUpdaterPopupOpenButton.addEventListener("click", () => {
+  nameInput.value = userName.textContent;
+  jobInput.value = userJob.innerText;
+  profileChangerPopup.open(profileUpdaterPopup, profileUpdaterInputForm);
+});

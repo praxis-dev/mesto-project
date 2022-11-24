@@ -5,12 +5,13 @@ import { userName, userJob, profileAvatar, currentUser } from "./global";
 import { profileChangerPopup } from "../pages";
 
 export class UserInfo {
-  constructor(nameInput, jobInput) {
+  constructor(nameInput, jobInput, profileInfo) {
     this._nameInput = nameInput;
     this._jobInput = jobInput;
+    this._profileInfo = profileInfo;
   }
 
-  _updateProfileFromServer(dataName, dataAbout, dataAvatar, dataId) {
+  updateProfileFromServer(dataName, dataAbout, dataAvatar, dataId) {
     userName.innerText = dataName;
     userJob.innerText = dataAbout;
     profileAvatar.src = dataAvatar;
@@ -18,21 +19,8 @@ export class UserInfo {
   }
 
   async getUserInfo() {
-    api.getProfileInfo().then((res) => {
-      return res
-        .json()
-        .then((data) => {
-          this._updateProfileFromServer(
-            data.name,
-            data.about,
-            data.avatar,
-            data._id
-          );
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
+    console.log(this._profileInfo);
+    return this._profileInfo;
   }
 
   async setUserInfo() {
