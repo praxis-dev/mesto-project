@@ -155,7 +155,6 @@ profileChangerPopup.setEventlisteners();
 // user info
 const userInfo = new UserInfo(nameInput, jobInput);
 
-////////////////////
 Promise.all([api.getProfileInfo(), api.getCards()]).then((data) => {
   const [profileInfo, cards] = data;
 
@@ -173,14 +172,6 @@ Promise.all([api.getProfileInfo(), api.getCards()]).then((data) => {
 
   section.renderOnLoad();
 });
-
-////////////////////
-
-// get cards from server
-
-// userInfo.getUserInfo().then(() => {
-//   section.renderOnLoad();
-// });
 
 // delete card function for trash icon event listener in card creator function
 function removeElement(element) {
