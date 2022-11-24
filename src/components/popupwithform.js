@@ -16,7 +16,9 @@ export class PopupWithForm extends Popup {
 
   setEventlisteners() {
     super.setEventlisteners();
-    this._form.addEventListener("submit", this._submitCallback);
+    this._form.addEventListener("submit", (evt) => {
+      this._submitCallback(evt, this._getInputValues())
+    });
   }
 
   displayLoading() {
@@ -29,10 +31,11 @@ export class PopupWithForm extends Popup {
     formSubmitButton.textContent = "Сохранить";
   }
 
-  _getInputValues(values) {
-    console.log(this._inputs);
+  _getInputValues() {
+    this._formValues = {};
     this._inputs.forEach((input) => {
-      input.value = values[input.name];
+      this._formValues[input.name] = input.value
     });
+    return this._formValues;
   }
 }
