@@ -41,21 +41,6 @@ import {
 
 // section
 
-// function cards() {
-//   api
-//     .getCards()
-//     .then((res) => {
-//       return res.json().then((data) => {
-//         data.reverse().forEach((cardinfo) => {
-//           this._renderer(cardinfo, this._container);
-//         });
-//       });
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// }
-
 function renderer(cardinfo, container) {
   renderCard(
     cardinfo.name,
@@ -319,14 +304,8 @@ picAdderOpenButton.addEventListener("click", function handleClick(event) {
 
 // profile edit listeners
 
-profileUpdaterPopupOpenButton.addEventListener("click", async () => {
-  const usrInfo = await api.getProfileInfo();
-  const res = await usrInfo.json();
-  const update = (res) => {
-    nameInput.value = res.name;
-    jobInput.value = res.about;
-  };
-  update(res);
-
+profileUpdaterPopupOpenButton.addEventListener("click", function handleClick() {
+  nameInput.value = userName.innerText;
+  jobInput.value = userJob.innerText;
   profileChangerPopup.open(profileUpdaterPopup, profileUpdaterInputForm);
 });

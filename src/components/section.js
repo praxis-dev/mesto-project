@@ -6,7 +6,6 @@ export class Section {
   }
 
   renderOnLoad() {
-    console.log(this._cards);
     this._cards();
   }
 
