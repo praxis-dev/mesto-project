@@ -41,28 +41,20 @@ import {
 
 // section
 
-function cards() {
-  api
-    .getCards()
-    .then((res) => {
-      return res.json().then((data) => {
-        data.reverse().forEach((cardinfo) => {
-          this._renderer(cardinfo, this._container);
-        });
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-}
-
-const section = new Section(
-  {
-    cards,
-    renderer,
-  },
-  postGrid
-);
+// function cards() {
+//   api
+//     .getCards()
+//     .then((res) => {
+//       return res.json().then((data) => {
+//         data.reverse().forEach((cardinfo) => {
+//           this._renderer(cardinfo, this._container);
+//         });
+//       });
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// }
 
 function renderer(cardinfo, container) {
   renderCard(
@@ -175,7 +167,7 @@ function setUserDataToServerAndUpdateLocal(name, job) {
 }
 
 const data = await Promise.all([api.getProfileInfo(), api.getCards()]);
-const [profileInfo, InitialCards] = data;
+const [profileInfo, initialCards] = data;
 const userInfo = new UserInfo(
   nameInput,
   jobInput,
@@ -189,6 +181,22 @@ const update = (res) => {
 };
 
 update(res);
+
+const cardsData = await initialCards.json();
+
+function cards() {
+  cardsData.reverse().forEach((cardinfo) => {
+    this._renderer(cardinfo, this._container);
+  });
+}
+
+const section = new Section(
+  {
+    cards,
+    renderer,
+  },
+  postGrid
+);
 
 section.renderOnLoad();
 
