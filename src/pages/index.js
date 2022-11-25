@@ -76,7 +76,9 @@ function renderer(cardinfo, container) {
     container,
     handleCardClick,
     api,
-    deleteTargetCard
+    deleteTargetCard,
+    deactivateLike,
+    activateLike
   );
 }
 
@@ -155,9 +157,31 @@ profileChangerPopup.setEventlisteners();
 
 // user info
 
+function setUserDataToServerAndUpdateLocal(name, job) {
+  api
+    .patchProfile(name.value, job.value)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      userName.textContent = data.name;
+      userJob.textContent = data.about;
+    })
+    .then(() => profileChangerPopup.close())
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => profileChangerPopup.displayDefaultSubmitButtonText());
+}
+
 const data = await Promise.all([api.getProfileInfo(), api.getCards()]);
 const [profileInfo, InitialCards] = data;
-const userInfo = new UserInfo(nameInput, jobInput, profileInfo);
+const userInfo = new UserInfo(
+  nameInput,
+  jobInput,
+  profileInfo,
+  setUserDataToServerAndUpdateLocal
+);
 const usrInfo = await userInfo.getUserInfo();
 const res = await usrInfo.json();
 const update = (res) => {
@@ -169,6 +193,7 @@ update(res);
 section.renderOnLoad();
 
 // delete card function for trash icon event listener in card creator function
+
 function removeElement(element) {
   element.remove();
 }
@@ -207,6 +232,34 @@ avatarAdderFormValidator.enableValidation();
 
 // add new card
 
+function deactivateLike(button, likes, cardId) {
+  this._api
+    .removeLikeFromServer(cardId)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      this._increaseLikes(data, likes, button);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+function activateLike(button, likes, cardId) {
+  this._api
+    .postLikeToServer(cardId)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      this._decreaseLikes(data, likes, button);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
 function handleCardClick(image, name) {
   popupWithImage.set(image.src, name.textContent);
   popupWithImage.open();
@@ -223,7 +276,9 @@ export function renderCard(
   container,
   handleCardClick,
   api,
-  deleteTargetCard
+  deleteTargetCard,
+  deactivateLike,
+  activateLike
 ) {
   const postElement = new Card(
     name,
@@ -235,7 +290,9 @@ export function renderCard(
     isLikedByMe,
     handleCardClick,
     api,
-    deleteTargetCard
+    deleteTargetCard,
+    deactivateLike,
+    activateLike
   ).returnCard();
   section.prepend(postElement);
 }

@@ -5,10 +5,11 @@ import { userName, userJob, profileAvatar, currentUser } from "./global";
 import { profileChangerPopup } from "../pages";
 
 export class UserInfo {
-  constructor(nameInput, jobInput, profileInfo) {
+  constructor(nameInput, jobInput, profileInfo, setter) {
     this._nameInput = nameInput;
     this._jobInput = jobInput;
     this._profileInfo = profileInfo;
+    this._setter = setter;
   }
 
   updateProfile(dataName, dataAbout, dataAvatar, dataId) {
@@ -23,19 +24,6 @@ export class UserInfo {
   }
 
   async setUserInfo() {
-    api
-      .patchProfile(this._nameInput.value, this._jobInput.value)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        userName.textContent = data.name;
-        userJob.textContent = data.about;
-      })
-      .then(() => profileChangerPopup.close())
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => profileChangerPopup.displayDefaultSubmitButtonText());
+    this._setter(this._nameInput, this._jobInput);
   }
 }

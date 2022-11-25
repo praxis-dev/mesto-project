@@ -13,7 +13,9 @@ export class Card {
     isLikedByMe,
     handleCardClick,
     api,
-    deleteTargetCard
+    deleteTargetCard,
+    deactivateLike,
+    activateLike
   ) {
     this._name = name;
     this._link = link;
@@ -25,6 +27,8 @@ export class Card {
     this._handleCardClick = handleCardClick;
     this._api = api;
     this._deleteTargetCard = deleteTargetCard;
+    this._deactivateLike = deactivateLike;
+    this._activateLike = activateLike;
 
     this._postElement = document
       .querySelector("#post-template")
@@ -67,34 +71,6 @@ export class Card {
     } else {
       this._activateLike(button, likes, cardId);
     }
-  }
-
-  _deactivateLike(button, likes, cardId) {
-    this._api
-      .removeLikeFromServer(cardId)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        this._increaseLikes(data, likes, button);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  _activateLike(button, likes, cardId) {
-    this._api
-      .postLikeToServer(cardId)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        this._decreaseLikes(data, likes, button);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }
 
   _increaseLikes(data, likes, button) {
