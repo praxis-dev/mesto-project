@@ -6,7 +6,7 @@ import { FormValidator, validationConfig } from "../components/validation";
 
 import { UserInfo } from "../components/userinfo";
 
-import { Card, likedByMe } from "../components/card";
+import { Card } from "../components/card";
 
 import { Section } from "../components/section";
 
@@ -49,13 +49,13 @@ function renderer(cardinfo, container) {
     cardinfo.owner._id,
     currentUser.id,
     cardinfo._id,
-    likedByMe(cardinfo),
     container,
     handleCardClick,
     api,
     deleteTargetCard,
     deactivateLike,
-    activateLike
+    activateLike,
+    cardinfo.likes
   );
 }
 
@@ -262,13 +262,13 @@ export function renderCard(
   postOwnerId,
   myId,
   cardId,
-  isLikedByMe,
   container,
   handleCardClick,
   api,
   deleteTargetCard,
   deactivateLike,
-  activateLike
+  activateLike,
+  initialLikes
 ) {
   const postElement = new Card(
     name,
@@ -277,12 +277,12 @@ export function renderCard(
     postOwnerId,
     myId,
     cardId,
-    isLikedByMe,
     handleCardClick,
     api,
     deleteTargetCard,
     deactivateLike,
-    activateLike
+    activateLike,
+    initialLikes
   ).returnCard();
   section.prepend(postElement);
 }

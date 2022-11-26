@@ -10,12 +10,12 @@ export class Card {
     postOwnerId,
     myId,
     cardId,
-    isLikedByMe,
     handleCardClick,
     api,
     deleteTargetCard,
     deactivateLike,
-    activateLike
+    activateLike,
+    initialLikes
   ) {
     this._name = name;
     this._link = link;
@@ -23,12 +23,12 @@ export class Card {
     this._postOwnerId = postOwnerId;
     this._myId = myId;
     this._cardId = cardId;
-    this._isLikedByMe = isLikedByMe;
     this._handleCardClick = handleCardClick;
     this._api = api;
     this._deleteTargetCard = deleteTargetCard;
     this._deactivateLike = deactivateLike;
     this._activateLike = activateLike;
+    this._initialLikes = initialLikes;
 
     this._postElement = document
       .querySelector("#post-template")
@@ -56,12 +56,6 @@ export class Card {
 
     if (this._myId != this._postOwnerId) {
       this._trashIcon.style.visibility = "hidden";
-    }
-  }
-
-  _liked() {
-    if (this._isLikedByMe) {
-      this._likeButton.classList.add("post__like-button_active");
     }
   }
 
@@ -93,15 +87,17 @@ export class Card {
     });
   }
 
+  _likedByMe() {
+    if (this._initialLikes.some((like) => like._id === currentUser.id)) {
+      this._likeButton.classList.add("post__like-button_active");
+    }
+  }
+
   returnCard() {
     this._build();
-    this._liked();
+    this._likedByMe();
     this._delete();
     this._setEventListeners();
     return this._postElement;
   }
-}
-
-export function likedByMe(card) {
-  return card.likes.some((like) => like._id === currentUser.id);
 }
