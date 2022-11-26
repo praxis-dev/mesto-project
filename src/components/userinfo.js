@@ -19,11 +19,16 @@ export class UserInfo {
     currentUser.id = dataId;
   }
 
-  async getUserInfo() {
+  getUserInfo() {
     return this._profileInfo;
   }
 
   setUserInfo() {
     this._setter(this._nameInput, this._jobInput);
+  }
+
+  populateFormOnOpen() {
+    this._nameInput.value = userName.innerText;
+    this._jobInput.value = userJob.innerText;
   }
 }

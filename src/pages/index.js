@@ -135,10 +135,7 @@ function updateLocalProfile(name, job) {
   profileChangerPopup
     .setUserDataToServer(name, job)
     .then((data) => {
-      console.log(data);
       userInfo.updateProfile(data.name, data.about, data.avatar, data._id);
-      // userName.textContent = data.name;
-      // userJob.textContent = data.about;
     })
     .then(() => profileChangerPopup.close())
     .catch((err) => {
@@ -296,7 +293,6 @@ picAdderOpenButton.addEventListener("click", function handleClick(event) {
 // profile edit listeners
 
 profileUpdaterPopupOpenButton.addEventListener("click", function handleClick() {
-  nameInput.value = userName.innerText;
-  jobInput.value = userJob.innerText;
+  userInfo.populateFormOnOpen();
   profileChangerPopup.open(profileUpdaterPopup, profileUpdaterInputForm);
 });
