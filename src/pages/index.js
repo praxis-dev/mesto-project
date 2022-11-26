@@ -119,17 +119,21 @@ export const profileChangerPopup = new PopupWithForm(
   (evt) => {
     evt.preventDefault();
     profileChangerPopup.displayLoading(), userInfo.setUserInfo();
-  }
+  },
+  setUserDataToServer
 );
 
 profileChangerPopup.setEventlisteners();
 
 // user info
 
-function setUserDataToServerAndUpdateLocal(name, job) {
-  api
-    .patchProfile(name.value, job.value)
+function setUserDataToServer(name, job) {
+  return api.patchProfile(name.value, job.value);
+}
 
+function updateLocalProfile(name, job) {
+  profileChangerPopup
+    .setUserDataToServer(name, job)
     .then((data) => {
       userName.textContent = data.name;
       userJob.textContent = data.about;
@@ -147,7 +151,7 @@ const userInfo = new UserInfo(
   nameInput,
   jobInput,
   profileInfo,
-  setUserDataToServerAndUpdateLocal
+  updateLocalProfile
 );
 const res = await userInfo.getUserInfo();
 const update = (res) => {

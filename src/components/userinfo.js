@@ -23,7 +23,7 @@ export class UserInfo {
     return this._profileInfo;
   }
 
-  async setUserInfo() {
+  setUserInfo() {
     this._setter(this._nameInput, this._jobInput);
   }
 }
