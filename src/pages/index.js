@@ -161,7 +161,7 @@ update(res);
 
 const cardsData = await initialCards;
 
-function cards() {
+function renderInitialCards() {
   cardsData.reverse().forEach((cardinfo) => {
     this._renderer(cardinfo, this._container);
   });
@@ -169,7 +169,7 @@ function cards() {
 
 const section = new Section(
   {
-    cards,
+    renderInitialCards,
     renderer,
   },
   postGrid

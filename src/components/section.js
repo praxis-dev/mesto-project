@@ -1,6 +1,6 @@
 export class Section {
-  constructor({ cards, renderer }, container) {
-    this._cards = cards;
+  constructor({ renderInitialCards, renderer }, container) {
+    this._cards = renderInitialCards;
     this._renderer = renderer;
     this._container = container;
   }
