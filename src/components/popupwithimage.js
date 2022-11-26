@@ -1,10 +1,9 @@
 import { Popup } from "./popup";
 
 export class PopupWithImage extends Popup {
-  constructor(pictureViewerPicture, popupCloseButton) {
+  constructor(pictureViewerPicture) {
     super(pictureViewerPicture);
     this._pictureViewerPicture = pictureViewerPicture;
-    this._popupCloseButton = popupCloseButton;
     this._picture = this._pictureViewerPicture.querySelector(
       ".picture-viewer__pic"
     );

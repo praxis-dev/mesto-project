@@ -63,10 +63,7 @@ function renderer(cardinfo, container) {
 
 // popup with image
 
-export const popupWithImage = new PopupWithImage(
-  pictureViewerPopup,
-  pictureViewerCloseButton
-);
+export const popupWithImage = new PopupWithImage(pictureViewerPopup);
 
 popupWithImage.setEventlisteners();
 
