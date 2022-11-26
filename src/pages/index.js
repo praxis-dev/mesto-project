@@ -99,9 +99,7 @@ export const avatarUpdaterPopup = new PopupWithForm(
     avatarUpdaterPopup.displayLoading();
     api
       .patchAvatar(avatarInput.value)
-      .then((response) => {
-        return response.json();
-      })
+
       .then((data) => {
         profileAvatar.src = data.avatar;
       })
@@ -131,9 +129,7 @@ profileChangerPopup.setEventlisteners();
 function setUserDataToServerAndUpdateLocal(name, job) {
   api
     .patchProfile(name.value, job.value)
-    .then((response) => {
-      return response.json();
-    })
+
     .then((data) => {
       userName.textContent = data.name;
       userJob.textContent = data.about;
@@ -153,15 +149,14 @@ const userInfo = new UserInfo(
   profileInfo,
   setUserDataToServerAndUpdateLocal
 );
-const usrInfo = await userInfo.getUserInfo();
-const res = await usrInfo.json();
+const res = await userInfo.getUserInfo();
 const update = (res) => {
   userInfo.updateProfile(res.name, res.about, res.avatar, res._id);
 };
 
 update(res);
 
-const cardsData = await initialCards.json();
+const cardsData = await initialCards;
 
 function cards() {
   cardsData.reverse().forEach((cardinfo) => {
@@ -222,9 +217,7 @@ avatarAdderFormValidator.enableValidation();
 function deactivateLike(button, likes, cardId) {
   this._api
     .removeLikeFromServer(cardId)
-    .then((response) => {
-      return response.json();
-    })
+
     .then((data) => {
       this._increaseLikes(data, likes, button);
     })
@@ -236,9 +229,7 @@ function deactivateLike(button, likes, cardId) {
 function activateLike(button, likes, cardId) {
   this._api
     .postLikeToServer(cardId)
-    .then((response) => {
-      return response.json();
-    })
+
     .then((data) => {
       this._decreaseLikes(data, likes, button);
     })

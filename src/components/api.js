@@ -18,7 +18,7 @@ class Api {
 
   _handleResponse(res) {
     if (res.ok) {
-      return res;
+      return res.json();
     }
     return Promise.reject(`Ошибка: ${res.status}`);
   }
@@ -56,11 +56,7 @@ class Api {
         name: name,
         link: link,
       }),
-    })
-      .then(this._handleResponse)
-      .then((response) => {
-        return response.json();
-      });
+    }).then(this._handleResponse);
   }
   deleteCard(cardId) {
     return fetch(
