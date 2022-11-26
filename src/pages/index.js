@@ -74,9 +74,6 @@ export const picAdderPopup = new PopupWithForm(placeAdderPopup, (evt) => {
   picAdderPopup.displayLoading();
   api
     .postCard(placeInput.value, placeLinkInput.value)
-    .then((response) => {
-      return response.json();
-    })
     .then((data) => section.addItem(data))
     .then(() => {
       picAdderPopup.close();

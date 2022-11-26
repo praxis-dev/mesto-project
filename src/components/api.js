@@ -56,7 +56,11 @@ class Api {
         name: name,
         link: link,
       }),
-    }).then(this._handleResponse);
+    })
+      .then(this._handleResponse)
+      .then((response) => {
+        return response.json();
+      });
   }
   deleteCard(cardId) {
     return fetch(
