@@ -135,8 +135,10 @@ function updateLocalProfile(name, job) {
   profileChangerPopup
     .setUserDataToServer(name, job)
     .then((data) => {
-      userName.textContent = data.name;
-      userJob.textContent = data.about;
+      console.log(data);
+      userInfo.updateProfile(data.name, data.about, data.avatar, data._id);
+      // userName.textContent = data.name;
+      // userJob.textContent = data.about;
     })
     .then(() => profileChangerPopup.close())
     .catch((err) => {
