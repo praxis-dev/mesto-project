@@ -144,7 +144,13 @@ function updateLocalProfile(name, job) {
     .finally(() => profileChangerPopup.displayDefaultSubmitButtonText());
 }
 
-const data = await Promise.all([api.getProfileInfo(), api.getCards()]);
+// Promise all and initial profile update starter cards rendering
+
+const data = await Promise.all([api.getProfileInfo(), api.getCards()]).catch(
+  (err) => {
+    console.log(err);
+  }
+);
 const [profileInfo, initialCards] = data;
 const userInfo = new UserInfo(
   nameInput,
@@ -152,21 +158,19 @@ const userInfo = new UserInfo(
   profileInfo,
   updateLocalProfile
 );
-const res = await userInfo.getUserInfo();
-const update = (res) => {
-  userInfo.updateProfile(res.name, res.about, res.avatar, res._id);
-};
-
-update(res);
+userInfo.updateProfile(
+  profileInfo.name,
+  profileInfo.about,
+  profileInfo.avatar,
+  profileInfo._id
+);
 
 const cardsData = await initialCards;
-
 function renderInitialCards() {
   cardsData.reverse().forEach((cardinfo) => {
     this._renderer(cardinfo, this._container);
   });
 }
-
 const section = new Section(
   {
     renderInitialCards,
@@ -174,7 +178,6 @@ const section = new Section(
   },
   postGrid
 );
-
 section.renderOnLoad();
 
 // delete card function for trash icon event listener in card creator function
