@@ -19,10 +19,6 @@ export class UserInfo {
     currentUser.id = dataId;
   }
 
-  getUserInfo() {
-    return this._profileInfo;
-  }
-
   setUserInfo() {
     this._setter(this._nameInput, this._jobInput);
   }
