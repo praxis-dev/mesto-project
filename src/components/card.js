@@ -51,12 +51,16 @@ export class Card {
 
   _delete() {
     this._trashIcon.addEventListener("click", () => {
-      this._deleteTargetCard(this._cardId, this._postElement);
+      this._deleteTargetCard(this._cardId);
     });
 
     if (this._myId != this._postOwnerId) {
       this._trashIcon.style.visibility = "hidden";
     }
+  }
+
+  _removeFromDom() {
+    this._postElement.remove();
   }
 
   _likeCard(button, likes, cardId) {

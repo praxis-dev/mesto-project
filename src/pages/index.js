@@ -182,15 +182,11 @@ section.renderOnLoad();
 
 // delete card function for trash icon event listener in card creator function
 
-function removeElement(element) {
-  element.remove();
-}
-
-export function deleteTargetCard(cardId, element) {
+export function deleteTargetCard(cardId) {
   api
     .deleteCard(cardId)
     .then(() => {
-      removeElement(element);
+      this._removeFromDom();
     })
     .catch((err) => {
       console.log(err);
