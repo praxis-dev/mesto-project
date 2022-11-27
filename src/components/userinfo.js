@@ -1,8 +1,4 @@
-import { api } from "./api";
-
 import { userName, userJob, profileAvatar, currentUser } from "./global";
-
-import { profileChangerPopup } from "../pages";
 
 export class UserInfo {
   constructor(nameInput, jobInput, profileInfo, setter) {
