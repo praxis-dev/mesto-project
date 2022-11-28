@@ -194,7 +194,9 @@ Promise.all([api.getProfileInfo(), api.getCards()])
     profileChangerPopup.setEventlisteners();
 
     function setUserDataToServer(name, job) {
-      return api.patchProfile(name.value, job.value);
+      return api.patchProfile(name.value, job.value).catch((err) => {
+        console.log(err);
+      });
     }
 
     function updateLocalProfile(name, job) {
