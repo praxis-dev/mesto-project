@@ -84,7 +84,7 @@ Promise.all([api.getProfileInfo(), api.getCards()])
     const cardsData = initialCards;
     function renderInitialCards() {
       cardsData.reverse().forEach((cardinfo) => {
-        this._renderer(cardinfo, this._container);
+        this.renderer(cardinfo, this._container);
       });
     }
     const section = new Section(
