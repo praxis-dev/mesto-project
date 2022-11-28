@@ -176,7 +176,7 @@ Promise.all([api.getProfileInfo(), api.getCards()])
         const { userName, userJob } = userInfo.returnNameAndJobLocally();
         nameInput.value = userName.innerText;
         jobInput.value = userJob.innerText;
-        profileChangerPopup.open(profileUpdaterPopup, profileUpdaterInputForm);
+        profileChangerPopup.open();
       }
     );
 
