@@ -1,10 +1,9 @@
 import { Popup } from "./popup";
 
 export class PopupWithForm extends Popup {
-  constructor(popupSelector, submitCallBack, serverUserDataUpdater) {
+  constructor(popupSelector, submitCallBack) {
     super(popupSelector);
     this._submitCallback = submitCallBack;
-    this._serverUserDataUpdater = serverUserDataUpdater;
     this._form = popupSelector.querySelector(".edit-window__input-form");
     this._inputs = popupSelector.querySelectorAll(".edit-window__input-string");
     this._submit = popupSelector.querySelector(".edit-window__submit");
@@ -38,9 +37,5 @@ export class PopupWithForm extends Popup {
       this._formValues[input.name] = input.value;
     });
     return this._formValues;
-  }
-
-  setUserDataToServer(name, job) {
-    return this._serverUserDataUpdater(name, job);
   }
 }

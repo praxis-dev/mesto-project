@@ -188,8 +188,7 @@ Promise.all([api.getProfileInfo(), api.getCards()])
         evt.preventDefault();
         profileChangerPopup.displayLoading(),
           updateLocalProfile(nameInput, jobInput);
-      },
-      setUserDataToServer
+      }
     );
 
     profileChangerPopup.setEventlisteners();
@@ -199,8 +198,7 @@ Promise.all([api.getProfileInfo(), api.getCards()])
     }
 
     function updateLocalProfile(name, job) {
-      profileChangerPopup
-        .setUserDataToServer(name, job)
+      setUserDataToServer(name, job)
         .then((data) => {
           userInfo.updateProfile(data.name, data.about, data.avatar, data._id);
         })
