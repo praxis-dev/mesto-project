@@ -19,8 +19,7 @@ export class UserInfo {
     this._setter(this._nameInput, this._jobInput);
   }
 
-  populateFormOnOpen() {
-    this._nameInput.value = userName.innerText;
-    this._jobInput.value = userJob.innerText;
+  returnNameAndJobLocally() {
+    return { userName, userJob };
   }
 }

@@ -178,7 +178,9 @@ Promise.all([api.getProfileInfo(), api.getCards()])
     profileUpdaterPopupOpenButton.addEventListener(
       "click",
       function handleClick() {
-        userInfo.populateFormOnOpen();
+        const { userName, userJob } = userInfo.returnNameAndJobLocally();
+        nameInput.value = userName.innerText;
+        jobInput.value = userJob.innerText;
         profileChangerPopup.open(profileUpdaterPopup, profileUpdaterInputForm);
       }
     );
