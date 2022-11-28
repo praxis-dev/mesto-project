@@ -137,9 +137,9 @@ Promise.all([api.getProfileInfo(), api.getCards()])
         .finally(() => {
           picAdderPopup.displayDefaultSubmitButtonText();
         });
+      picAdderPopup._getInputValues();
     });
     picAdderPopup.setEventlisteners();
-    picAdderPopup.getInputValues();
 
     // add pic form listeners
 
@@ -165,15 +165,14 @@ Promise.all([api.getProfileInfo(), api.getCards()])
       profileUpdaterPopup,
       (evt) => {
         evt.preventDefault();
-        profileChangerPopup.displayLoading(),
-          setUserDataToServer(nameInput, jobInput);
+        const inputValues = profileChangerPopup._getInputValues();
+        profileChangerPopup.displayLoading(), setUserDataToServer(inputValues);
       }
     );
 
     profileChangerPopup.setEventlisteners();
 
-    function setUserDataToServer() {
-      const inputValues = profileChangerPopup.getInputValues();
+    function setUserDataToServer(inputValues) {
       return api
         .patchProfile(
           inputValues["profile-name"],
