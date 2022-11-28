@@ -160,7 +160,7 @@ Promise.all([api.getProfileInfo(), api.getCards()])
         });
     });
     picAdderPopup.setEventlisteners();
-    picAdderPopup._getInputValues();
+    picAdderPopup.getInputValues();
 
     // add pic form listeners
 
@@ -193,10 +193,16 @@ Promise.all([api.getProfileInfo(), api.getCards()])
 
     profileChangerPopup.setEventlisteners();
 
-    function setUserDataToServer(name, job) {
-      return api.patchProfile(name.value, job.value).catch((err) => {
-        console.log(err);
-      });
+    function setUserDataToServer() {
+      const inputValues = profileChangerPopup.getInputValues();
+      return api
+        .patchProfile(
+          inputValues["profile-name"],
+          inputValues["profile-subtitle"]
+        )
+        .catch((err) => {
+          console.log(err);
+        });
     }
 
     function updateLocalProfile(name, job) {
