@@ -14,6 +14,11 @@ export class UserInfo {
     currentUser.id = dataId;
   }
 
+  updateAvatar() {
+    console.log("test");
+    // profileAvatar.src = data.avatar;
+  }
+
   returnNameAndJobLocally() {
     return { userName, userJob };
   }

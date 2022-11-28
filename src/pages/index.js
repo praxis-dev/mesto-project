@@ -41,27 +41,6 @@ const popupWithImage = new PopupWithImage(pictureViewerPopup);
 
 popupWithImage.setEventlisteners();
 
-//avatar updater
-
-const avatarUpdaterPopup = new PopupWithForm(avatarChangerPopup, (evt) => {
-  evt.preventDefault();
-  avatarUpdaterPopup.displayLoading();
-  api
-    .patchAvatar(avatarInput.value)
-
-    .then((data) => {
-      profileAvatar.src = data.avatar;
-    })
-    .then(() => avatarUpdaterPopup.close())
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      avatarUpdaterPopup.displayDefaultSubmitButtonText();
-    });
-});
-avatarUpdaterPopup.setEventlisteners();
-
 // Promise all and initial profile update starter cards rendering
 
 Promise.all([api.getProfileInfo(), api.getCards()])
@@ -210,6 +189,36 @@ Promise.all([api.getProfileInfo(), api.getCards()])
         })
         .finally(() => profileChangerPopup.displayDefaultSubmitButtonText());
     }
+
+    //avatar updater
+
+    const avatarUpdaterPopup = new PopupWithForm(avatarChangerPopup, (evt) => {
+      evt.preventDefault();
+      avatarUpdaterPopup.displayLoading();
+      api
+        .patchAvatar(avatarInput.value)
+
+        .then((data) => {
+          userInfo.updateProfile(data.name, data.about, data.avatar, data._id);
+        })
+        .then(() => avatarUpdaterPopup.close())
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          avatarUpdaterPopup.displayDefaultSubmitButtonText();
+        });
+    });
+    avatarUpdaterPopup.setEventlisteners();
+
+    // change avatar listeners
+
+    avatarAdderOpenButton.addEventListener(
+      "click",
+      function handleClick(event) {
+        avatarUpdaterPopup.open();
+      }
+    );
   })
   .catch((err) => {
     console.log(err);
@@ -279,9 +288,3 @@ function handleCardClick(image, name) {
   popupWithImage.set(image.src, name.textContent);
   popupWithImage.open();
 }
-
-// change avatar listeners
-
-avatarAdderOpenButton.addEventListener("click", function handleClick(event) {
-  avatarUpdaterPopup.open();
-});
