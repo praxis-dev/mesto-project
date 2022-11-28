@@ -68,12 +68,7 @@ Promise.all([api.getProfileInfo(), api.getCards()])
   .then((data) => {
     const [profileInfo, initialCards] = data;
 
-    const userInfo = new UserInfo(
-      nameInput,
-      jobInput,
-      profileInfo,
-      updateLocalProfile
-    );
+    const userInfo = new UserInfo(nameInput, jobInput, profileInfo);
     userInfo.updateProfile(
       profileInfo.name,
       profileInfo.about,
@@ -191,7 +186,8 @@ Promise.all([api.getProfileInfo(), api.getCards()])
       profileUpdaterPopup,
       (evt) => {
         evt.preventDefault();
-        profileChangerPopup.displayLoading(), userInfo.setUserInfo();
+        profileChangerPopup.displayLoading(),
+          updateLocalProfile(nameInput, jobInput);
       },
       setUserDataToServer
     );
