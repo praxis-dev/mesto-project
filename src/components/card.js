@@ -51,7 +51,7 @@ export class Card {
 
   _delete() {
     this._trashIcon.addEventListener("click", () => {
-      this._deleteTargetCard(this._cardId);
+      this._deleteTargetCard(this._cardId, this._postElement);
     });
 
     if (this._myId != this._postOwnerId) {
@@ -59,7 +59,7 @@ export class Card {
     }
   }
 
-  _removeFromDom() {
+  removeFromDom() {
     this._postElement.remove();
   }
 
@@ -71,12 +71,12 @@ export class Card {
     }
   }
 
-  _increaseLikes(data, likes, button) {
+  increaseLikes(data, likes, button) {
     likes.textContent = data.likes.length;
     button.classList.remove("post__like-button_active");
   }
 
-  _decreaseLikes(data, likes, button) {
+  decreaseLikes(data, likes, button) {
     likes.textContent = data.likes.length;
     button.classList.add("post__like-button_active");
   }

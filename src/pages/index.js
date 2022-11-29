@@ -231,11 +231,11 @@ Promise.all([api.getProfileInfo(), api.getCards()])
 
 // delete card function for trash icon event listener in card creator function
 
-function deleteTargetCard(cardId) {
+function deleteTargetCard(cardId, postElement) {
   api
     .deleteCard(cardId)
     .then(() => {
-      this._removeFromDom();
+      postElement.remove();
     })
     .catch((err) => {
       console.log(err);
@@ -270,7 +270,7 @@ function deactivateLike(button, likes, cardId) {
     .removeLikeFromServer(cardId)
 
     .then((data) => {
-      this._increaseLikes(data, likes, button);
+      this.increaseLikes(data, likes, button);
     })
     .catch((err) => {
       console.log(err);
@@ -282,7 +282,7 @@ function activateLike(button, likes, cardId) {
     .postLikeToServer(cardId)
 
     .then((data) => {
-      this._decreaseLikes(data, likes, button);
+      this.decreaseLikes(data, likes, button);
     })
     .catch((err) => {
       console.log(err);
