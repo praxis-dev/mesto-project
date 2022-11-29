@@ -120,11 +120,11 @@ Promise.all([api.getProfileInfo(), api.getCards()])
 
     //popup with form
 
-    const picAdderPopup = new PopupWithForm(placeAdderPopup, (evt) => {
+    const picAdderPopup = new PopupWithForm(placeAdderPopup, (evt, place) => {
       evt.preventDefault();
       picAdderPopup.displayLoading();
       api
-        .postCard(placeInput.value, placeLinkInput.value)
+        .postCard(place["place-name"], place["place-link"])
         .then((data) => section.addItem(data))
         .then(() => {
           picAdderPopup.close();
@@ -137,7 +137,6 @@ Promise.all([api.getProfileInfo(), api.getCards()])
         .finally(() => {
           picAdderPopup.displayDefaultSubmitButtonText();
         });
-      picAdderPopup._getInputValues();
     });
     picAdderPopup.setEventlisteners();
 
@@ -163,9 +162,8 @@ Promise.all([api.getProfileInfo(), api.getCards()])
 
     const profileChangerPopup = new PopupWithForm(
       profileUpdaterPopup,
-      (evt) => {
+      (evt, inputValues) => {
         evt.preventDefault();
-        const inputValues = profileChangerPopup._getInputValues();
         profileChangerPopup.displayLoading(), setUserDataToServer(inputValues);
       }
     );
@@ -191,23 +189,31 @@ Promise.all([api.getProfileInfo(), api.getCards()])
 
     //avatar updater
 
-    const avatarUpdaterPopup = new PopupWithForm(avatarChangerPopup, (evt) => {
-      evt.preventDefault();
-      avatarUpdaterPopup.displayLoading();
-      api
-        .patchAvatar(avatarInput.value)
+    const avatarUpdaterPopup = new PopupWithForm(
+      avatarChangerPopup,
+      (evt, avatarInput) => {
+        evt.preventDefault();
+        avatarUpdaterPopup.displayLoading();
+        api
+          .patchAvatar(avatarInput["avatar-link"])
 
-        .then((data) => {
-          userInfo.updateProfile(data.name, data.about, data.avatar, data._id);
-        })
-        .then(() => avatarUpdaterPopup.close())
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          avatarUpdaterPopup.displayDefaultSubmitButtonText();
-        });
-    });
+          .then((data) => {
+            userInfo.updateProfile(
+              data.name,
+              data.about,
+              data.avatar,
+              data._id
+            );
+          })
+          .then(() => avatarUpdaterPopup.close())
+          .catch((err) => {
+            console.log(err);
+          })
+          .finally(() => {
+            avatarUpdaterPopup.displayDefaultSubmitButtonText();
+          });
+      }
+    );
     avatarUpdaterPopup.setEventlisteners();
 
     // change avatar listeners
