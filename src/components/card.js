@@ -63,11 +63,11 @@ export class Card {
     this._postElement.remove();
   }
 
-  _likeCard(button, likes, cardId) {
+  _likeCard(button, likes, cardId, post) {
     if (this._likeButton.classList.contains("post__like-button_active")) {
-      this._deactivateLike(button, likes, cardId);
+      this._deactivateLike(button, likes, cardId, post);
     } else {
-      this._activateLike(button, likes, cardId);
+      this._activateLike(button, likes, cardId, post);
     }
   }
 
@@ -83,7 +83,12 @@ export class Card {
 
   _setEventListeners() {
     this._likeButton.addEventListener("click", () => {
-      this._likeCard(this._likeButton, this._likeCounter, this._renderedCardId);
+      this._likeCard(
+        this._likeButton,
+        this._likeCounter,
+        this._renderedCardId,
+        this
+      );
     });
 
     this._postImage.addEventListener("click", () => {

@@ -265,24 +265,22 @@ avatarAdderFormValidator.enableValidation();
 
 // add new card
 
-function deactivateLike(button, likes, cardId) {
+function deactivateLike(button, likes, cardId, cardInstance) {
   this._api
     .removeLikeFromServer(cardId)
-
     .then((data) => {
-      this.increaseLikes(data, likes, button);
+      cardInstance.increaseLikes(data, likes, button);
     })
     .catch((err) => {
       console.log(err);
     });
 }
 
-function activateLike(button, likes, cardId) {
+function activateLike(button, likes, cardId, cardInstance) {
   this._api
     .postLikeToServer(cardId)
-
     .then((data) => {
-      this.decreaseLikes(data, likes, button);
+      cardInstance.decreaseLikes(data, likes, button);
     })
     .catch((err) => {
       console.log(err);
