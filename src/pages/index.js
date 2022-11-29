@@ -152,8 +152,8 @@ Promise.all([api.getProfileInfo(), api.getCards()])
       "click",
       function handleClick() {
         const { userName, userJob } = userInfo.returnNameAndJobLocally();
-        nameInput.value = userName.innerText;
-        jobInput.value = userJob.innerText;
+        nameInput.value = userName;
+        jobInput.value = userJob;
         profileChangerPopup.open();
       }
     );
